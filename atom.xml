@@ -65,15 +65,15 @@
     <link href="http://sh1k4ku.github.io/2021/07/26/Test/"/>
     <id>http://sh1k4ku.github.io/2021/07/26/Test/</id>
     <published>2021-07-26T09:43:59.903Z</published>
-    <updated>2021-07-26T11:56:42.967Z</updated>
+    <updated>2021-08-12T02:49:59.948Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="test"><a href="#test" class="headerlink" title="test"></a>test</h1><p>I’m sh1k4ku</p>]]></content>
+    <content type="html"><![CDATA[<span id="more"></span><h1 id="Hello-Hexo"><a href="#Hello-Hexo" class="headerlink" title="Hello Hexo"></a>Hello Hexo</h1><p>I’m sh1k4ku</p><p>回忆前几个月，自4月进入401后，大大小小也打了不少比赛，大部分的题都是没有解出的，每次自己也会很自责，但似乎又无能为力。</p><p>一开始的习惯不好，没有在赛后即使复现，当时想着之后学到一定程度了自然会做了，导致进步缓慢。</p><p>不久前才意识到这是大错特错的，所以开了此blog，欲改变自己的懒惰，不要拖队里师傅们的后腿。</p>]]></content>
     
     
       
       
-    <summary type="html">&lt;h1 id=&quot;test&quot;&gt;&lt;a href=&quot;#test&quot; class=&quot;headerlink&quot; title=&quot;test&quot;&gt;&lt;/a&gt;test&lt;/h1&gt;&lt;p&gt;I’m sh1k4ku&lt;/p&gt;
-</summary>
+    <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
+&lt;h1 id=&quot;Hello-Hexo&quot;&gt;&lt;a href=&quot;#Hello-Hexo&quot; class=&quot;headerlink&quot; title=&quot;Hello Hexo&quot;&gt;&lt;/a&gt;Hello Hexo&lt;/h1&gt;&lt;p&gt;I’m sh1k4ku&lt;/p</summary>
       
     
     
@@ -81,7 +81,7 @@
     <category term="hexo" scheme="http://sh1k4ku.github.io/categories/hexo/"/>
     
     
-    <category term="-hexo" scheme="http://sh1k4ku.github.io/tags/hexo/"/>
+    <category term="-hex" scheme="http://sh1k4ku.github.io/tags/hex/"/>
     
   </entry>
   
