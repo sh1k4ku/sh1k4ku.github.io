@@ -6,7 +6,7 @@
   <link href="http://sh1k4ku.github.io/atom.xml" rel="self"/>
   
   <link href="http://sh1k4ku.github.io/"/>
-  <updated>2021-08-21T14:49:03.440Z</updated>
+  <updated>2021-08-23T06:45:37.907Z</updated>
   <id>http://sh1k4ku.github.io/</id>
   
   <author>
@@ -21,19 +21,23 @@
     <link href="http://sh1k4ku.github.io/2021/08/21/%E7%A5%A5%E4%BA%91%E6%9D%AF/"/>
     <id>http://sh1k4ku.github.io/2021/08/21/%E7%A5%A5%E4%BA%91%E6%9D%AF/</id>
     <published>2021-08-21T04:19:38.000Z</published>
-    <updated>2021-08-21T14:49:03.440Z</updated>
+    <updated>2021-08-23T06:45:37.907Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Guess"><a href="#Guess" class="headerlink" title="Guess"></a>Guess</h1><script type="math/tex; mode=display">c=g^mr^nmodn^2</script><h1 id="myRSA"><a href="#myRSA" class="headerlink" title="myRSA"></a>myRSA</h1><p>encry:</p><script type="math/tex; mode=display">x=p^2(p+3q-1)+q^2(q+3p-1)\\y=2pq+p+q\\z\\c=m^e\; mod\;n\\∴xc+yc+z=[(p+q)^3-(p-q)^2+(p+q)]c+z\\∵ n=pq\\∴上式=[(p+q)^3-(p+q)^2+(p+q)+4n]c+z\\令p+q=a\\∴=(a^3-a^2+a+4n)c+z</script>]]></content>
+    <content type="html"><![CDATA[<p>还要再努点力。</p><span id="more"></span><h1 id="Guess"><a href="#Guess" class="headerlink" title="Guess"></a>Guess</h1><script type="math/tex; mode=display">c=g^mr^nmodn^2</script><h1 id="myRSA"><a href="#myRSA" class="headerlink" title="myRSA"></a>myRSA</h1><p>encry:</p><script type="math/tex; mode=display">x=p^2(p+3q-1)+q^2(q+3p-1)\\y=2pq+p+q\\z\\c=m^e\; mod\;n\\∴xc+yc+z=[(p+q)^3-(p-q)^2+(p+q)]c+z\\∵ n=pq\\∴上式=[(p+q)^3-(p+q)^2+(p+q)+4n]c+z\\令p+q=a\\∴=(a^3-a^2+a+4n)c+z</script><h1 id="Random-RSA"><a href="#Random-RSA" class="headerlink" title="Random_RSA"></a>Random_RSA</h1><h1 id="share-secret"><a href="#share-secret" class="headerlink" title="share secret"></a>share secret</h1>]]></content>
     
     
-      
-      
-    <summary type="html">&lt;h1 id=&quot;Guess&quot;&gt;&lt;a href=&quot;#Guess&quot; class=&quot;headerlink&quot; title=&quot;Guess&quot;&gt;&lt;/a&gt;Guess&lt;/h1&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;
-c=g^mr^nmodn^2&lt;/script</summary>
-      
+    <summary type="html">&lt;p&gt;还要再努点力。&lt;/p&gt;</summary>
     
     
     
+    <category term="CTF" scheme="http://sh1k4ku.github.io/categories/CTF/"/>
+    
+    
+    <category term="RSA" scheme="http://sh1k4ku.github.io/tags/RSA/"/>
+    
+    <category term="random" scheme="http://sh1k4ku.github.io/tags/random/"/>
+    
+    <category term="paillier" scheme="http://sh1k4ku.github.io/tags/paillier/"/>
     
   </entry>
   
