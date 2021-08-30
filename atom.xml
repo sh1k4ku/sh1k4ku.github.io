@@ -6,7 +6,7 @@
   <link href="http://sh1k4ku.github.io/atom.xml" rel="self"/>
   
   <link href="http://sh1k4ku.github.io/"/>
-  <updated>2021-08-30T15:07:47.993Z</updated>
+  <updated>2021-08-30T15:51:22.743Z</updated>
   <id>http://sh1k4ku.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://sh1k4ku.github.io/2021/08/30/ECC/"/>
     <id>http://sh1k4ku.github.io/2021/08/30/ECC/</id>
     <published>2021-08-30T08:14:06.000Z</published>
-    <updated>2021-08-30T15:07:47.993Z</updated>
+    <updated>2021-08-30T15:51:22.743Z</updated>
     
-    <content type="html"><![CDATA[<p>抄点ECC笔记</p><span id="more"></span><h1 id="ECC"><a href="#ECC" class="headerlink" title="ECC"></a>ECC</h1><p>定义：ECC 全称为椭圆曲线加密，EllipseCurve Cryptography，是一种基于椭圆曲线数学的公钥密码。与传统的基于大质数因子分解困难性的加密方法不同，ECC 依赖于解决椭圆曲线离散对数问题的困难性。它的优势主要在于相对于其它方法，它可以在使用较短密钥长度的同时保持相同的密码强度。目前椭圆曲线主要采用的有限域有:</p><ol><li>以素数为模的整数域 GF(p)，通常在通用处理器上更为有效。</li><li>特征为 2 的伽罗华域 GF（2^m），可以设计专门的硬件。</li></ol><p>（from CTF Wiki）</p>]]></content>
+    <content type="html"><![CDATA[<p>抄点ECC笔记</p><span id="more"></span><h1 id="ECC"><a href="#ECC" class="headerlink" title="ECC"></a>ECC</h1><p>定义：ECC 全称为椭圆曲线加密，EllipseCurve Cryptography，是一种基于椭圆曲线数学的公钥密码。与传统的基于大质数因子分解困难性的加密方法不同，ECC 依赖于解决椭圆曲线离散对数问题的困难性。它的优势主要在于相对于其它方法，它可以在使用较短密钥长度的同时保持相同的密码强度。目前椭圆曲线主要采用的有限域有:</p><ol><li>以素数为模的整数域 GF(p)，通常在通用处理器上更为有效。</li><li>特征为 2 的伽罗华域 GF（2^m），可以设计专门的硬件。</li></ol><p>（from CTF Wiki）</p><h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>定义式：<script type="math/tex">y^2+axy+by=x^3+cx^2+dx+e</script>，其中的所有系数都是在某个有限域GF(p)中的元素，p是一个大素数；</p><p>最常用的方程为：<script type="math/tex">y^2=x^3+ax+b</script>，需要满足条件<script type="math/tex">4a^3+27b^2\;mod\; p \neq 0</script></p><p>该定义要求曲线是非奇异的，意味着曲线不会自我相交或没有顶点。</p><h2 id="群操作"><a href="#群操作" class="headerlink" title="群操作"></a>群操作</h2><p>假设用加法符号“+”表示它的群操作，事实上，E(Fp)对于运算+构成一个阿贝尔群（交换群，满足逆元存在，封闭性等），存在无穷远点O</p><h3 id="逆元"><a href="#逆元" class="headerlink" title="逆元"></a>逆元</h3><p>定义群元素P的逆元-P，则P+(-P)=O</p><script type="math/tex; mode=display">若P=(x_p,y_p)\;\;\;则-P=(x_p,p-y_p)</script><h3 id="数乘"><a href="#数乘" class="headerlink" title="数乘"></a>数乘</h3><script type="math/tex; mode=display">定义Q=kP，可以看作k个P相加得到Q    \\若O=tP,则称P的阶是t</script><h3 id="相异点相加"><a href="#相异点相加" class="headerlink" title="相异点相加"></a>相异点相加</h3><script type="math/tex; mode=display">P(x_1,y_1),Q(x_2,y_2),R(x_3,y_3)\;\;P+Q=R</script><p><img src="../images/ECC/image-20210830232330614.png" alt="image-20210830232330614"></p><script type="math/tex; mode=display">x_3=(\frac{y_2-y_1}{x_2-x_1})^2-x_1-x_2\;mod\;p\\y_3=\frac{y_2-y_1}{x_2-x_1}(x_1-x_3)-y_1\;mod\;p</script><h3 id="相同点相加"><a href="#相同点相加" class="headerlink" title="相同点相加"></a>相同点相加</h3><p><img src="../images/ECC/image-20210830232742821.png" alt="image-20210830232742821"></p><script type="math/tex; mode=display">x_3=(\frac{3x_1^2+a}{2y_1})^2-x_1-x_2\;mod\;p\\y_3=\frac{3x_1^2+a}{2y_1}(x_1-x_3)-y_1\;mod\;p</script><h2 id="加解密"><a href="#加解密" class="headerlink" title="加解密"></a>加解密</h2><h3 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h3><p>B向A发送m，其中m已经被编码为椭圆曲线上的点：</p><ol><li>查询A的公钥<script type="math/tex">E_q(a,b),q,P,G，其中P=kG。k为私钥</script>。</li><li>在<script type="math/tex">（1，n）</script>内选择随机数r（其中n为G的阶数）。</li><li>根据A的公钥计算<script type="math/tex">(x_1,y_1)=rG</script>。</li><li>计算<script type="math/tex">(x_2,y_2)=kP</script>。如果为O，则从第二步重新开始。</li><li>计算<script type="math/tex">C=m+(x_2,y_2)</script>。</li><li>将<script type="math/tex">(x_1,y_1)和C</script>发送给A</li></ol><h3 id="解密"><a href="#解密" class="headerlink" title="解密"></a>解密</h3><script type="math/tex; mode=display">m=C-(x_2,y_2)=C-kP=C-rkG=C-k(x_1,y_1)</script>]]></content>
     
     
     <summary type="html">&lt;p&gt;抄点ECC笔记&lt;/p&gt;</summary>
