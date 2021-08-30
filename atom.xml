@@ -6,7 +6,7 @@
   <link href="http://sh1k4ku.github.io/atom.xml" rel="self"/>
   
   <link href="http://sh1k4ku.github.io/"/>
-  <updated>2021-08-30T08:14:34.223Z</updated>
+  <updated>2021-08-30T15:07:47.993Z</updated>
   <id>http://sh1k4ku.github.io/</id>
   
   <author>
@@ -21,8 +21,12 @@
     <link href="http://sh1k4ku.github.io/2021/08/30/ECC/"/>
     <id>http://sh1k4ku.github.io/2021/08/30/ECC/</id>
     <published>2021-08-30T08:14:06.000Z</published>
-    <updated>2021-08-30T08:14:34.223Z</updated>
+    <updated>2021-08-30T15:07:47.993Z</updated>
     
+    <content type="html"><![CDATA[<p>抄点ECC笔记</p><span id="more"></span><h1 id="ECC"><a href="#ECC" class="headerlink" title="ECC"></a>ECC</h1><p>定义：ECC 全称为椭圆曲线加密，EllipseCurve Cryptography，是一种基于椭圆曲线数学的公钥密码。与传统的基于大质数因子分解困难性的加密方法不同，ECC 依赖于解决椭圆曲线离散对数问题的困难性。它的优势主要在于相对于其它方法，它可以在使用较短密钥长度的同时保持相同的密码强度。目前椭圆曲线主要采用的有限域有:</p><ol><li>以素数为模的整数域 GF(p)，通常在通用处理器上更为有效。</li><li>特征为 2 的伽罗华域 GF（2^m），可以设计专门的硬件。</li></ol><p>（from CTF Wiki）</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;抄点ECC笔记&lt;/p&gt;</summary>
     
     
     
