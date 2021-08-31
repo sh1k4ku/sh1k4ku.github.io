@@ -21,23 +21,20 @@
     var CONFIG = {"hostname":"sh1k4ku.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="抄点ECC笔记">
+  <meta name="description" content="基本定义在群 G 中，g 为 G 的生成元，也就是说群 G 中每一个元素都可以写成 y&#x3D;g^k，我们称 k 为 y 在群 G 中的对数，记作 k&#x3D;log_yg。  设 m≥1，(a,m)&#x3D;1 ，使得 a^d≡1(mod\;m)  成立的最小正整数 d\\ 称为 a 对模 m 的指数或者阶，我们一般将其记为 \delta_m(a) 。 当  δ_m(a)&#x3D;φ(m) 时，称 a 是模 m 的原根，简称">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ECC">
-<meta property="og:url" content="http://sh1k4ku.github.io/2021/08/30/ECC/index.html">
+<meta property="og:title" content="离散对数">
+<meta property="og:url" content="http://sh1k4ku.github.io/2021/08/31/%E7%A6%BB%E6%95%A3%E5%AF%B9%E6%95%B0/index.html">
 <meta property="og:site_name" content="sh1k4ku&#39;s blog">
-<meta property="og:description" content="抄点ECC笔记">
+<meta property="og:description" content="基本定义在群 G 中，g 为 G 的生成元，也就是说群 G 中每一个元素都可以写成 y&#x3D;g^k，我们称 k 为 y 在群 G 中的对数，记作 k&#x3D;log_yg。  设 m≥1，(a,m)&#x3D;1 ，使得 a^d≡1(mod\;m)  成立的最小正整数 d\\ 称为 a 对模 m 的指数或者阶，我们一般将其记为 \delta_m(a) 。 当  δ_m(a)&#x3D;φ(m) 时，称 a 是模 m 的原根，简称">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://sh1k4ku.github.io/images/ECC/1.png">
-<meta property="og:image" content="http://sh1k4ku.github.io/images/ECC/2.png">
-<meta property="article:published_time" content="2021-08-30T08:14:06.000Z">
-<meta property="article:modified_time" content="2021-08-30T15:56:59.318Z">
+<meta property="article:published_time" content="2021-08-31T03:57:16.000Z">
+<meta property="article:modified_time" content="2021-08-31T03:58:55.148Z">
 <meta property="article:author" content="sh1k4ku">
-<meta property="article:tag" content="ECC">
+<meta property="article:tag" content="离散对数">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://sh1k4ku.github.io/images/ECC/1.png">
 
-<link rel="canonical" href="http://sh1k4ku.github.io/2021/08/30/ECC/">
+<link rel="canonical" href="http://sh1k4ku.github.io/2021/08/31/%E7%A6%BB%E6%95%A3%E5%AF%B9%E6%95%B0/">
 
 
 <script id="page-configurations">
@@ -50,7 +47,7 @@
   };
 </script>
 
-  <title>ECC | sh1k4ku's blog</title>
+  <title>离散对数 | sh1k4ku's blog</title>
   
 
 
@@ -164,7 +161,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://sh1k4ku.github.io/2021/08/30/ECC/">
+    <link itemprop="mainEntityOfPage" href="http://sh1k4ku.github.io/2021/08/31/%E7%A6%BB%E6%95%A3%E5%AF%B9%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/zed.jpg">
@@ -177,7 +174,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          ECC
+          离散对数
         </h1>
 
         <div class="post-meta">
@@ -188,7 +185,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-08-30 16:14:06 / 修改时间：23:56:59" itemprop="dateCreated datePublished" datetime="2021-08-30T16:14:06+08:00">2021-08-30</time>
+              <time title="创建时间：2021-08-31 11:57:16 / 修改时间：11:58:55" itemprop="dateCreated datePublished" datetime="2021-08-31T11:57:16+08:00">2021-08-31</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -206,7 +203,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>994</span>
+              <span>819</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -225,40 +222,66 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>抄点ECC笔记</p>
-<span id="more"></span>
-<h1 id="ECC"><a href="#ECC" class="headerlink" title="ECC"></a>ECC</h1><p>定义：ECC 全称为椭圆曲线加密，EllipseCurve Cryptography，是一种基于椭圆曲线数学的公钥密码。与传统的基于大质数因子分解困难性的加密方法不同，ECC 依赖于解决椭圆曲线离散对数问题的困难性。它的优势主要在于相对于其它方法，它可以在使用较短密钥长度的同时保持相同的密码强度。目前椭圆曲线主要采用的有限域有:</p>
+        <h1 id="基本定义"><a href="#基本定义" class="headerlink" title="基本定义"></a>基本定义</h1><p>在群 G 中，g 为 G 的生成元，也就是说群 G 中每一个元素都可以写成 <script type="math/tex">y=g^k</script>，我们称 k 为 y 在群 G 中的对数，记作 <script type="math/tex">k=log_yg</script>。</p>
+<script type="math/tex; mode=display">
+设 m≥1，(a,m)=1 ，使得 a^d≡1(mod\;m)
+ 成立的最小正整数 d\\ 称为 a 对模 m 的指数或者阶，我们一般将其记为 \delta_m(a)
+。</script><script type="math/tex; mode=display">
+当 
+δ_m(a)=φ(m)
+时，称 a 是模 m 的原根，简称 m 的原根。</script><h1 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h1><script type="math/tex; mode=display">
+使得 
+a
+^d
+≡
+1
+(
+mod\;
+m
+)
+ 成立的最小正整数 
+d
+ ，满足
+d
+∣
+φ
+(
+m
+)
+。</script><script type="math/tex; mode=display">
+模 
+m
+ 剩余系存在原根的充要条件是 
+m
+=
+2
+,
+4
+,
+p^
+α
+,
+2
+p^
+α
+ ，其中 
+p
+ 为奇素数， 
+α
+ 为正整数。</script><h1 id="离散对数问题"><a href="#离散对数问题" class="headerlink" title="离散对数问题"></a>离散对数问题</h1><h2 id="爆破"><a href="#爆破" class="headerlink" title="爆破"></a>爆破</h2><p>给定<script type="math/tex">y≡g^x\;mod\;p</script>，可以暴力枚举x来求解。（误</p>
+<h1 id="BSGS"><a href="#BSGS" class="headerlink" title="BSGS"></a>BSGS</h1><p>全称是Baby-step giant-step，也叫小步大步法，使用了中间相遇的思想。</p>
+<p>令<script type="math/tex">x=im+j，其中m=[\sqrt n]</script>，i和j都在0到m的范围内</p>
+<p>因此<script type="math/tex">y=g^x=g^{im+j}</script></p>
+<p>变换得<script type="math/tex">y(g^{-m})^i=g^j</script></p>
+<p>之后我们就可以枚举所所有的j计算，并存在一i个集合S中，然后我们再次枚举i计算<script type="math/tex">y(g^{-m})^i</script>,只要发现计算的结果在S中则说明完成碰撞，得到了i和j。</p>
+<p>BSGS是一个时间与空间的折中的方式，我们将一个 <script type="math/tex">O(n)</script>的时间复杂度，<script type="math/tex">O(1)</script> 空间复杂度的算法转换为了一个<script type="math/tex">O(\sqrt n)</script> 的时间复杂度和<script type="math/tex">O(\sqrt n)</script> 的空间复杂度的算法。</p>
+<p>其中</p>
 <ol>
-<li>以素数为模的整数域 GF(p)，通常在通用处理器上更为有效。</li>
-<li>特征为 2 的伽罗华域 GF（2^m），可以设计专门的硬件。</li>
+<li>j每次增加表示“baby-step”</li>
+<li>i每次增加表示”giant-step”</li>
 </ol>
-<p>（from CTF Wiki）</p>
-<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>定义式：<script type="math/tex">y^2+axy+by=x^3+cx^2+dx+e</script>，其中的所有系数都是在某个有限域GF(p)中的元素，p是一个大素数；</p>
-<p>最常用的方程为：<script type="math/tex">y^2=x^3+ax+b</script>，需要满足条件<script type="math/tex">4a^3+27b^2\;mod\; p \neq 0</script></p>
-<p>该定义要求曲线是非奇异的，意味着曲线不会自我相交或没有顶点。</p>
-<h2 id="群操作"><a href="#群操作" class="headerlink" title="群操作"></a>群操作</h2><p>假设用加法符号“+”表示它的群操作，事实上，E(Fp)对于运算+构成一个阿贝尔群（交换群，满足逆元存在，封闭性等），存在无穷远点O</p>
-<h3 id="逆元"><a href="#逆元" class="headerlink" title="逆元"></a>逆元</h3><p>定义群元素P的逆元-P，则P+(-P)=O</p>
-<script type="math/tex; mode=display">
-若P=(x_p,y_p)\;\;\;
-则-P=(x_p,p-y_p)</script><h3 id="数乘"><a href="#数乘" class="headerlink" title="数乘"></a>数乘</h3><script type="math/tex; mode=display">
-定义Q=kP，可以看作k个P相加得到Q    \\
-若O=tP,则称P的阶是t</script><h3 id="相异点相加"><a href="#相异点相加" class="headerlink" title="相异点相加"></a>相异点相加</h3><script type="math/tex; mode=display">P(x_1,y_1),Q(x_2,y_2),R(x_3,y_3)\;\;P+Q=R</script><p><img src="/images/ECC/1.png" alt></p>
-<script type="math/tex; mode=display">
-x_3=(\frac{y_2-y_1}{x_2-x_1})^2-x_1-x_2\;mod\;p\\
-y_3=\frac{y_2-y_1}{x_2-x_1}(x_1-x_3)-y_1\;mod\;p</script><h3 id="相同点相加"><a href="#相同点相加" class="headerlink" title="相同点相加"></a>相同点相加</h3><p><img src="/images/ECC/2.png" alt></p>
-<script type="math/tex; mode=display">
-x_3=(\frac{3x_1^2+a}{2y_1})^2-x_1-x_2\;mod\;p\\
-y_3=\frac{3x_1^2+a}{2y_1}(x_1-x_3)-y_1\;mod\;p</script><h2 id="加解密"><a href="#加解密" class="headerlink" title="加解密"></a>加解密</h2><h3 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h3><p>B向A发送m，其中m已经被编码为椭圆曲线上的点：</p>
-<ol>
-<li>查询A的公钥<script type="math/tex">E_q(a,b),q,P,G，其中P=kG。k为私钥</script>。</li>
-<li>在<script type="math/tex">（1，n）</script>内选择随机数r（其中n为G的阶数）。</li>
-<li>根据A的公钥计算<script type="math/tex">(x_1,y_1)=rG</script>。</li>
-<li>计算<script type="math/tex">(x_2,y_2)=kP</script>。如果为O，则从第二步重新开始。</li>
-<li>计算<script type="math/tex">C=m+(x_2,y_2)</script>。</li>
-<li>将<script type="math/tex">(x_1,y_1)和C</script>发送给A</li>
-</ol>
-<h3 id="解密"><a href="#解密" class="headerlink" title="解密"></a>解密</h3><script type="math/tex; mode=display">
-m=C-(x_2,y_2)=C-kP=C-rkG=C-k(x_1,y_1)</script>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bsgs</span>(<span class="params">g,y,p,bound</span>):</span></span><br><span class="line">    m=gmpy2.iroot(bound,<span class="number">2</span>)[<span class="number">0</span>]</span><br><span class="line">    S=&#123;<span class="built_in">pow</span>(g,j,p):j <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(m)&#125;</span><br><span class="line">    gs=<span class="built_in">pow</span>(g,-m,p)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m)：</span><br><span class="line">    	<span class="keyword">if</span> y <span class="keyword">in</span> S:</span><br><span class="line">            <span class="keyword">return</span> i*m+S[y]</span><br><span class="line">        y=y * gs %p</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">g=</span><br><span class="line">y=</span><br><span class="line">p=</span><br><span class="line">bound=</span><br><span class="line">x=bsgs(g,y,p,bound)</span><br></pre></td></tr></table></figure>
+
     </div>
 
     
@@ -267,7 +290,7 @@ m=C-(x_2,y_2)=C-kP=C-rkG=C-k(x_1,y_1)</script>
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/ECC/" rel="tag"><i class="fa fa-tag"></i></a>
+              <a href="/tags/%E7%A6%BB%E6%95%A3%E5%AF%B9%E6%95%B0/" rel="tag"><i class="fa fa-tag"></i></a>
           </div>
 
         
@@ -276,13 +299,10 @@ m=C-(x_2,y_2)=C-kP=C-rkG=C-k(x_1,y_1)</script>
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/08/21/%E7%A5%A5%E4%BA%91%E6%9D%AF/" rel="prev" title="祥云杯">
-      <i class="fa fa-chevron-left"></i> 祥云杯
+    <a href="/2021/08/30/ECC/" rel="prev" title="ECC">
+      <i class="fa fa-chevron-left"></i> ECC
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/08/31/%E7%A6%BB%E6%95%A3%E5%AF%B9%E6%95%B0/" rel="next" title="离散对数">
-      离散对数 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -341,7 +361,7 @@ m=C-(x_2,y_2)=C-kP=C-rkG=C-k(x_1,y_1)</script>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ECC"><span class="nav-number">1.</span> <span class="nav-text">ECC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80"><span class="nav-number">1.1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BE%A4%E6%93%8D%E4%BD%9C"><span class="nav-number">1.2.</span> <span class="nav-text">群操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%86%E5%85%83"><span class="nav-number">1.2.1.</span> <span class="nav-text">逆元</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E4%B9%98"><span class="nav-number">1.2.2.</span> <span class="nav-text">数乘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%BC%82%E7%82%B9%E7%9B%B8%E5%8A%A0"><span class="nav-number">1.2.3.</span> <span class="nav-text">相异点相加</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%90%8C%E7%82%B9%E7%9B%B8%E5%8A%A0"><span class="nav-number">1.2.4.</span> <span class="nav-text">相同点相加</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E8%A7%A3%E5%AF%86"><span class="nav-number">1.3.</span> <span class="nav-text">加解密</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E5%AF%86"><span class="nav-number">1.3.1.</span> <span class="nav-text">加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%AF%86"><span class="nav-number">1.3.2.</span> <span class="nav-text">解密</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%AE%9A%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">基本定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%A7%E8%B4%A8"><span class="nav-number">2.</span> <span class="nav-text">性质</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A6%BB%E6%95%A3%E5%AF%B9%E6%95%B0%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">离散对数问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%88%86%E7%A0%B4"><span class="nav-number">3.1.</span> <span class="nav-text">爆破</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BSGS"><span class="nav-number">4.</span> <span class="nav-text">BSGS</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
