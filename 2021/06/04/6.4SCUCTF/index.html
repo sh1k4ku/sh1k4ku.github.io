@@ -21,19 +21,21 @@
     var CONFIG = {"hostname":"sh1k4ku.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="title: SCUCTFdate: 2021-6-4 15:40:24categories: [CTF, Crypto] tags: [randcrack, coppersmith] 用以前的的博客测试一下">
+  <meta name="description" content="用以前的的博客测试一下">
 <meta property="og:type" content="article">
-<meta property="og:title" content="sh1k4ku&#39;s blog">
-<meta property="og:url" content="http://sh1k4ku.github.io/2021/07/27/6.4SCUCTF/index.html">
+<meta property="og:title" content="SCUCTF">
+<meta property="og:url" content="http://sh1k4ku.github.io/2021/06/04/6.4SCUCTF/index.html">
 <meta property="og:site_name" content="sh1k4ku&#39;s blog">
-<meta property="og:description" content="title: SCUCTFdate: 2021-6-4 15:40:24categories: [CTF, Crypto] tags: [randcrack, coppersmith] 用以前的的博客测试一下">
+<meta property="og:description" content="用以前的的博客测试一下">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-07-27T03:59:12.690Z">
-<meta property="article:modified_time" content="2021-08-30T08:10:48.492Z">
+<meta property="article:published_time" content="2021-06-04T07:40:24.000Z">
+<meta property="article:modified_time" content="2021-09-02T10:37:10.047Z">
 <meta property="article:author" content="sh1k4ku">
+<meta property="article:tag" content="randcrack">
+<meta property="article:tag" content="coppersmith">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://sh1k4ku.github.io/2021/07/27/6.4SCUCTF/">
+<link rel="canonical" href="http://sh1k4ku.github.io/2021/06/04/6.4SCUCTF/">
 
 
 <script id="page-configurations">
@@ -46,7 +48,7 @@
   };
 </script>
 
-  <title> | sh1k4ku's blog</title>
+  <title>SCUCTF | sh1k4ku's blog</title>
   
 
 
@@ -160,7 +162,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://sh1k4ku.github.io/2021/07/27/6.4SCUCTF/">
+    <link itemprop="mainEntityOfPage" href="http://sh1k4ku.github.io/2021/06/04/6.4SCUCTF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/zed.jpg">
@@ -173,7 +175,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
+          SCUCTF
         </h1>
 
         <div class="post-meta">
@@ -183,15 +185,28 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-07-27 11:59:12" itemprop="dateCreated datePublished" datetime="2021-07-27T11:59:12+08:00">2021-07-27</time>
+              <time title="创建时间：2021-06-04 15:40:24" itemprop="dateCreated datePublished" datetime="2021-06-04T15:40:24+08:00">2021-06-04</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-30 16:10:48" itemprop="dateModified" datetime="2021-08-30T16:10:48+08:00">2021-08-30</time>
+                <time title="修改时间：2021-09-02 18:37:10" itemprop="dateModified" datetime="2021-09-02T18:37:10+08:00">2021-09-02</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/" itemprop="url" rel="index"><span itemprop="name">CTF</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/Crypto/" itemprop="url" rel="index"><span itemprop="name">Crypto</span></a>
+                </span>
+            </span>
 
           <br>
             <span class="post-meta-item" title="本文字数">
@@ -199,7 +214,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>4k</span>
+              <span>3.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -218,10 +233,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <hr>
-<p>title: SCUCTF<br>date: 2021-6-4 15:40:24<br>categories: [CTF, Crypto]</p>
-<p>tags: [randcrack, coppersmith]</p>
-<p>用以前的的博客测试一下</p>
+        <p>用以前的的博客测试一下</p>
 <span id="more"></span>
 <h1 id="贝斯手"><a href="#贝斯手" class="headerlink" title="贝斯手"></a>贝斯手</h1><p>题目暗示了是base家族，先后使用base64 32 long_to_bytes 85和58解密即可获得flag</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> base64 <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> base58</span><br><span class="line"></span><br><span class="line">cipher=<span class="string">&#x27;R1EzVElOQlRHSTNVSU5aVUdRNERNTlpWR0UyREVOS0dHWTJES01aVUlZMkRHTkJSR1JCVE9OUlhHNDNFSU5CWUdSRERNUUpXR00yVElOQlNHUTNUTU1aV0dBMkRPTkJSR1laVE9OSldHQTNES01SV0dZMkRLTVJXSU0zRE9OSlFHVTRETVJCVUdRWlVHTVpVR1VaVE9SQlhJUTJETz09PQ==&#x27;</span></span><br><span class="line"></span><br><span class="line">res=b64decode(cipher)</span><br><span class="line"></span><br><span class="line">res=b32decode(res)</span><br><span class="line"></span><br><span class="line">res=long_to_bytes(<span class="built_in">int</span>(res,<span class="number">16</span>))</span><br><span class="line"></span><br><span class="line">res=b85decode(res)</span><br><span class="line"></span><br><span class="line">res=base58.b58decode(res)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(res)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -240,19 +252,20 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/randcrack/" rel="tag"><i class="fa fa-tag"></i></a>
+              <a href="/tags/coppersmith/" rel="tag"><i class="fa fa-tag"></i></a>
+          </div>
 
         
 
 
         
     <div class="post-nav">
+      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2021/07/26/Test/" rel="prev" title="Hello Hexo">
-      <i class="fa fa-chevron-left"></i> Hello Hexo
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/07/27/lattice-learning/" rel="next" title="lattice_learning">
-      lattice_learning <i class="fa fa-chevron-right"></i>
+    <a href="/2021/07/26/Test/" rel="next" title="Hello Hexo">
+      Hello Hexo <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -335,13 +348,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
