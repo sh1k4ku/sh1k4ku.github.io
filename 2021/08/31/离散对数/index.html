@@ -28,11 +28,13 @@
 <meta property="og:site_name" content="sh1k4ku&#39;s blog">
 <meta property="og:description" content="离散对数(Discretelogarithm,简称DL)是一种基于同余运算和原根的一种对数运算。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/%E7%A6%BB%E6%95%A3%E5%AF%B9%E6%95%B0/image-20210906171507054.png">
 <meta property="article:published_time" content="2021-08-31T03:57:16.000Z">
-<meta property="article:modified_time" content="2021-08-31T12:15:54.041Z">
+<meta property="article:modified_time" content="2021-09-06T09:19:07.790Z">
 <meta property="article:author" content="sh1k4ku">
 <meta property="article:tag" content="离散对数">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://sh1k4ku.github.io/images/%E7%A6%BB%E6%95%A3%E5%AF%B9%E6%95%B0/image-20210906171507054.png">
 
 <link rel="canonical" href="http://sh1k4ku.github.io/2021/08/31/%E7%A6%BB%E6%95%A3%E5%AF%B9%E6%95%B0/">
 
@@ -183,10 +185,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-08-31 11:57:16 / 修改时间：20:15:54" itemprop="dateCreated datePublished" datetime="2021-08-31T11:57:16+08:00">2021-08-31</time>
+              <time title="创建时间：2021-08-31 11:57:16" itemprop="dateCreated datePublished" datetime="2021-08-31T11:57:16+08:00">2021-08-31</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-06 17:19:07" itemprop="dateModified" datetime="2021-09-06T17:19:07+08:00">2021-09-06</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -203,7 +211,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>999</span>
+              <span>1.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -271,7 +279,7 @@ p
  为奇素数， 
 α
  为正整数。</script><h1 id="离散对数问题"><a href="#离散对数问题" class="headerlink" title="离散对数问题"></a>离散对数问题</h1><h2 id="爆破"><a href="#爆破" class="headerlink" title="爆破"></a>爆破</h2><p>给定<script type="math/tex">y≡g^x\;mod\;p</script>，<del>不</del>可以暴力枚举x来求解。（误</p>
-<h1 id="BSGS"><a href="#BSGS" class="headerlink" title="BSGS"></a>BSGS</h1><p>全称是Baby-step giant-step，也叫小步大步法，使用了中间相遇的思想。</p>
+<h2 id="BSGS"><a href="#BSGS" class="headerlink" title="BSGS"></a>BSGS</h2><p>全称是Baby-step giant-step，也叫小步大步法，使用了中间相遇的思想。</p>
 <p>令<script type="math/tex">x=im+j，其中m=[\sqrt n]</script>，i和j都在0到m的范围内</p>
 <p>因此<script type="math/tex">y=g^x=g^{im+j}</script></p>
 <p>变换得<script type="math/tex">y(g^{-m})^i=g^j</script></p>
@@ -286,6 +294,13 @@ p
 <p>sagemath内置函数：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Sage</span></span><br><span class="line">bsgs(g,y,bounds,operation)</span><br></pre></td></tr></table></figure>
 <h2 id="Pollard‘s-Rho-algorithm"><a href="#Pollard‘s-Rho-algorithm" class="headerlink" title="Pollard‘s Rho algorithm"></a>Pollard‘s Rho algorithm</h2><p>Pollard’s Rho 算法是一个非常有趣又容易理解的整数因子分解算法，原本用于分解RSA体系中的n，后来又应用于离散对数问题。</p>
+<h1 id="加密算法"><a href="#加密算法" class="headerlink" title="加密算法"></a>加密算法</h1><h2 id="Elgamal-PKC"><a href="#Elgamal-PKC" class="headerlink" title="Elgamal PKC"></a>Elgamal PKC</h2><p>老规矩，Alice传消息给Bob：</p>
+<script type="math/tex; mode=display">
+公开：大质数p和F^*_p下的生成元g\\
+1.Alice随机选择一个密钥a，计算A=g^a\;mod\;p,并将公钥A传给Bob（g和p其实也是公钥）\\
+2.Bob生成随机数k，计算c_1=g^k\;mod\;p,c_2=mA^k\;mod\;p\\
+3.Alice还原m：
+(c^a)^{-1}*c_2=(g^{ak})^{-1}*m(A^k)=(g^{ak})^{-1}*mg^{ak}=m\;mod\;p</script><p><img src="/images/%E7%A6%BB%E6%95%A3%E5%AF%B9%E6%95%B0/image-20210906171507054.png" alt="image-20210906171507054"></p>
 
     </div>
 
@@ -366,7 +381,7 @@ p
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%AE%9A%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">基本定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%A7%E8%B4%A8"><span class="nav-number">2.</span> <span class="nav-text">性质</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A6%BB%E6%95%A3%E5%AF%B9%E6%95%B0%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">离散对数问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%88%86%E7%A0%B4"><span class="nav-number">3.1.</span> <span class="nav-text">爆破</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BSGS"><span class="nav-number">4.</span> <span class="nav-text">BSGS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Pollard%E2%80%98s-Rho-algorithm"><span class="nav-number">4.1.</span> <span class="nav-text">Pollard‘s Rho algorithm</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%AE%9A%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">基本定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%A7%E8%B4%A8"><span class="nav-number">2.</span> <span class="nav-text">性质</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A6%BB%E6%95%A3%E5%AF%B9%E6%95%B0%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">离散对数问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%88%86%E7%A0%B4"><span class="nav-number">3.1.</span> <span class="nav-text">爆破</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BSGS"><span class="nav-number">3.2.</span> <span class="nav-text">BSGS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pollard%E2%80%98s-Rho-algorithm"><span class="nav-number">3.3.</span> <span class="nav-text">Pollard‘s Rho algorithm</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">加密算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Elgamal-PKC"><span class="nav-number">4.1.</span> <span class="nav-text">Elgamal PKC</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -453,7 +468,7 @@ p
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">28 分钟</span>
+    <span title="站点阅读时长">29 分钟</span>
 </div>
 
         
