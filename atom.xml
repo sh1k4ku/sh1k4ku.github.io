@@ -6,7 +6,7 @@
   <link href="http://sh1k4ku.github.io/atom.xml" rel="self"/>
   
   <link href="http://sh1k4ku.github.io/"/>
-  <updated>2021-09-13T10:03:45.079Z</updated>
+  <updated>2021-09-20T15:40:01.384Z</updated>
   <id>http://sh1k4ku.github.io/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>life</title>
+    <link href="http://sh1k4ku.github.io/2021/09/20/life/"/>
+    <id>http://sh1k4ku.github.io/2021/09/20/life/</id>
+    <published>2021-09-20T15:29:54.000Z</published>
+    <updated>2021-09-20T15:40:01.384Z</updated>
+    
+    <content type="html"><![CDATA[<p>一些点滴</p><span id="more"></span><p>前言：为什么不发在朋友圈或空间呢，因为列表里某些存在的确不适合公开表露自己的真实世界，随便记点吧，反正也没人看。</p><p>2021-09-20：算起来的话，最近一周都特别倒霉，淋昏的头脑，丢失的书本，饭菜中的虫，落选的资格，甚至赶走了自己最亲密的人。哎，每一件都令人烦闷。大二唯一的感受就是忙不过来，生活目前一团糟，并且没有看到好转的趋势，希望能好起来吧。</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;一些点滴&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="life" scheme="http://sh1k4ku.github.io/categories/life/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>羊城杯</title>
