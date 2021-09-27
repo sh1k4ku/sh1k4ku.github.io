@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script type="text/javascript" src="/js/dytitle.js"></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"sh1k4ku.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="赛后问了别的师傅复盘一下，好的东西需要记录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="天翼杯">
+<meta property="og:url" content="http://sh1k4ku.github.io/2021/09/27/%E5%A4%A9%E7%BF%BC%E6%9D%AF/index.html">
+<meta property="og:site_name" content="sh1k4ku&#39;s blog">
+<meta property="og:description" content="赛后问了别的师傅复盘一下，好的东西需要记录">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-09-27T05:58:38.000Z">
+<meta property="article:modified_time" content="2021-09-27T08:22:10.961Z">
+<meta property="article:author" content="sh1k4ku">
+<meta property="article:tag" content="randcrack">
+<meta property="article:tag" content="coppersmith">
+<meta property="article:tag" content="Tea">
+<meta property="article:tag" content="Feistel">
+<meta property="article:tag" content="Oracle">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://sh1k4ku.github.io/2021/09/27/%E5%A4%A9%E7%BF%BC%E6%9D%AF/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>天翼杯 | sh1k4ku's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="sh1k4ku's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">sh1k4ku's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录我的学习之路</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://sh1k4ku.github.io/2021/09/27/%E5%A4%A9%E7%BF%BC%E6%9D%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/zed.jpg">
+      <meta itemprop="name" content="sh1k4ku">
+      <meta itemprop="description" content="会当凌绝顶">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sh1k4ku's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          天翼杯
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-27 13:58:38 / 修改时间：16:22:10" itemprop="dateCreated datePublished" datetime="2021-09-27T13:58:38+08:00">2021-09-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/" itemprop="url" rel="index"><span itemprop="name">CTF</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>赛后问了别的师傅复盘一下，好的东西需要记录</p>
+<span id="more"></span>
+<h1 id="babypack"><a href="#babypack" class="headerlink" title="babypack"></a>babypack</h1><p>这一题真牛啊，考了很多考点，而且没有很偏的，很考验能力。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> getrandbits, randint</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> getPrime</span><br><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> reduce</span><br><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> flag</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> signal</span><br><span class="line"></span><br><span class="line">signal.alarm(<span class="number">90</span>)</span><br><span class="line"></span><br><span class="line">N = <span class="number">512</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">egcd</span>(<span class="params">a, b</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="number">0</span> == b:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>, <span class="number">0</span>, a</span><br><span class="line">    x, y, q = egcd(b, a % b)</span><br><span class="line">    x, y = y, (x - a // b * y)</span><br><span class="line">    <span class="keyword">return</span> x, y, q</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">chinese_remainder</span>(<span class="params">pairs</span>):</span></span><br><span class="line">    mod_list, remainder_list = [p[<span class="number">0</span>] <span class="keyword">for</span> p <span class="keyword">in</span> pairs], [p[<span class="number">1</span>] <span class="keyword">for</span> p <span class="keyword">in</span> pairs]</span><br><span class="line">    mod_product = reduce(<span class="keyword">lambda</span> x, y: x * y, mod_list)</span><br><span class="line">    mi_list = [mod_product//x <span class="keyword">for</span> x <span class="keyword">in</span> mod_list]</span><br><span class="line">    mi_inverse = [egcd(mi_list[i], mod_list[i])[<span class="number">0</span>] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(mi_list))]</span><br><span class="line">    x = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(remainder_list)):</span><br><span class="line">        x += mi_list[i] * mi_inverse[i] * remainder_list[i]</span><br><span class="line">        x %= mod_product</span><br><span class="line">    <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">keygen</span>():</span></span><br><span class="line">    U = [getrandbits(N)<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(N)]</span><br><span class="line">    V = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">        v = U[i] - <span class="built_in">pow</span>(<span class="number">2</span>, N-i-<span class="number">1</span>)</span><br><span class="line">        V.append(v)</span><br><span class="line"></span><br><span class="line">    s1 = <span class="built_in">sum</span>(U)</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        p = getPrime(s1.bit_length() + <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">if</span> p &gt; s1:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    s1 = <span class="number">0</span></span><br><span class="line">    s2 = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> V:</span><br><span class="line">        <span class="keyword">if</span> i &lt; <span class="number">0</span>:</span><br><span class="line">            s2 += i</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            s1 += i</span><br><span class="line"></span><br><span class="line">    tmp = <span class="built_in">max</span>(s1, -s2)</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        q = getPrime(tmp.bit_length() + <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">if</span> q &gt; tmp:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    A = []</span><br><span class="line">    <span class="keyword">for</span> i, j <span class="keyword">in</span> <span class="built_in">zip</span>(U, V):</span><br><span class="line">        A.append(chinese_remainder([(p, i), (q, j)]))</span><br><span class="line">    <span class="keyword">return</span> A, U, V, p, q</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">check</span>(<span class="params">m, n</span>):</span><span class="comment">#比较高位</span></span><br><span class="line">    mbin = <span class="built_in">bin</span>(m)[<span class="number">2</span>:]</span><br><span class="line">    nbin = <span class="built_in">bin</span>(n)[<span class="number">2</span>:]</span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i, j <span class="keyword">in</span> <span class="built_in">zip</span>(mbin, nbin):</span><br><span class="line">        <span class="keyword">if</span> i == j:</span><br><span class="line">            count += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> count</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encrypt</span>(<span class="params">msg, pub</span>):</span><span class="comment">#背包加密</span></span><br><span class="line">    s = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i, j <span class="keyword">in</span> <span class="built_in">zip</span>(msg, pub):</span><br><span class="line">        s += i * j</span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">A, U, V, p, q = keygen()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">n = p * q</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;your pubkey:&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(A)</span><br><span class="line"><span class="built_in">print</span>(U[<span class="number">0</span>] + V[<span class="number">0</span>])</span><br><span class="line"><span class="built_in">print</span>(U[<span class="number">0</span>] * V[<span class="number">0</span>])</span><br><span class="line">Menu = <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">1.hint</span></span><br><span class="line"><span class="string">2.get flag&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">500</span>):</span><br><span class="line">    <span class="built_in">print</span>(Menu)</span><br><span class="line">    op = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;&gt;&quot;</span>).strip())</span><br><span class="line">    <span class="keyword">if</span> op == <span class="number">1</span>:</span><br><span class="line">        m = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;&gt;&quot;</span>).strip())</span><br><span class="line">        <span class="built_in">print</span>(check(m, n))</span><br><span class="line">    <span class="keyword">elif</span> op == <span class="number">2</span>:</span><br><span class="line">        msg = [randint(<span class="number">0</span>, <span class="number">1</span>) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(N)]</span><br><span class="line">        ct = encrypt(msg, A)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;secret:&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(ct)</span><br><span class="line">        secret = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;&gt;&quot;</span>).strip())</span><br><span class="line">        ans = <span class="built_in">int</span>(<span class="string">&quot;&quot;</span>.join(<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">str</span>, msg))), <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">if</span> ans == secret:</span><br><span class="line">            <span class="built_in">print</span>(flag)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;wrong&quot;</span>)</span><br><span class="line">            sys.exit(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        sys.exit(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="分析代码"><a href="#分析代码" class="headerlink" title="分析代码"></a>分析代码</h2><ul>
+<li>首先使用getrandbits函数生成512个512比特的列表U，再生成列表V，有<script type="math/tex">V_i=U_i-2^{511-i}</script></li>
+<li>然后生成p,q，两个大概都是520位上下</li>
+<li>使用CRT生成A，满足</li>
+</ul>
+<script type="math/tex; mode=display">
+A_i=U_i\;mod\;p\\
+A_i=V_i\;mod\;q</script><ul>
+<li>最后用randint(0, 1)生成01背包msg与A合成得到ct，最后我们要传入的结果就是仅含0和1的msg</li>
+</ul>
+<p>这一题我们有的能拿到的数据有:<script type="math/tex">A,U_0+V_0,U_0*V_0,ct</script></p>
+<p>我们在这一题能与oracle进行一个交互，传入一个数x，oracle将比较x和n二进制的较高位，并返回位相等的个数。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>首先看到01背包很难不想到造格子，但是实际操作后发现512阶的矩阵连造都造不出来。并且，再仔细想，就算分解n拿到pq，接着拿到UV，对求解01的msg没有任何帮助，所以放弃造格子这一套。</p>
+<p>观察到msg是用512次randint(0, 1)生成的，再加上前面生成U时用的是getrandbits，这两个函数的算法逻辑都是MT19937，这种伪随机数生成是可以破解的，只需要624个32比特的数。又由A和UV存在同余关系，如果拿到pq就能拿到UV，所以接下来要思考如何factor。</p>
+<p>本题给出了<script type="math/tex">A,U_0+V_0,U_0*V_0</script>，我们很容易能够拿到单独的<script type="math/tex">U_0、V_0</script></p>
+<p>由UV和A的关系h我们可以知道：</p>
+<script type="math/tex; mode=display">
+p|A_0-U_0\\
+q|A_0-v_0\\
+∴n=pq|(A_0-U_0)(A_0-v_0)</script><p>观察到，右边是已知条件，n待求，我们可以获取n的高多少多少位！</p>
+<p>因此可以转换到Coppersmith Method已知p高位的情况！！</p>
+<p>但是，由于我们最多只能和Oracle交互500次，由生成可知n大概为1040位，如果每次只爆一位，我们最多只能获得500位，这个条件是不足以使用coppersmith的。</p>
+<p>这里就很考验智商了，我们可以采取一次爆破两位的方法，那么3次内就一定能爆破出两位，所以相当于0.75次爆破一位，那么前499次交互就能获取n的前499*3/2位，这足够用来求解了。这里需要知道n一共有多少位（因为要知道n缺失了多少低位），所以还是需要测试才知道n的位数范围，算是个小细节</p>
+<p>之后使用gcd就能够分解出p和q，接下来就能求得U和V，然后使用调包randcrack破解MT19937。这里也有个小细节，由于randcrack只能预测连续的伪随机数，所以得取U最后624个32位数据，也比较麻烦。</p>
+<p>代码可以参考春哥写的：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/413319231">春乎</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>回顾一下整个流程：n高位——copper——gcd——randcrack，算是比较综合的一道题了，但是每一个单独的板块都是常规题（怎么有种做高考题的感觉，比较有意思</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/randcrack/" rel="tag"><i class="fa fa-tag"></i></a>
+              <a href="/tags/coppersmith/" rel="tag"><i class="fa fa-tag"></i></a>
+              <a href="/tags/Tea/" rel="tag"><i class="fa fa-tag"></i></a>
+              <a href="/tags/Feistel/" rel="tag"><i class="fa fa-tag"></i></a>
+              <a href="/tags/Oracle/" rel="tag"><i class="fa fa-tag"></i></a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/09/20/life/" rel="prev" title="life">
+      <i class="fa fa-chevron-left"></i> life
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#babypack"><span class="nav-number">1.</span> <span class="nav-text">babypack</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E4%BB%A3%E7%A0%81"><span class="nav-number">1.1.</span> <span class="nav-text">分析代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">1.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.3.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="sh1k4ku"
+      src="/images/zed.jpg">
+  <p class="site-author-name" itemprop="name">sh1k4ku</p>
+  <div class="site-description" itemprop="description">会当凌绝顶</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sh1k4ku" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sh1k4ku" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1615197422@qq.com" title="E-Mail → mailto:1615197422@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/shikaku_" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;shikaku_" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa-heartbeat"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sh1k4ku</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">56k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">51 分钟</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='250' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+   if (typeof MathJax === 'undefined') {
+       window.MathJax = {
+         loader: {
+         source: {
+           '[tex]/amsCd': '[tex]/amscd',
+           '[tex]/AMScd': '[tex]/amscd'
+         }
+       },
+       tex: {
+         inlineMath: {'[+]': [['$', '$']]},
+         tags: 'ams'
+       },
+       options: {
+         renderActions: {
+           findScript: [10, doc => {
+             document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+               const display = !!node.type.match(/; *mode=display/);
+               const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+               const text = document.createTextNode('');
+               node.parentNode.replaceChild(text, node);
+               math.start = {node: text, delim: '', n: 0};
+               math.end = {node: text, delim: '', n: 0};
+               doc.math.push(math);
+             });
+           }, '', false],
+           insertedScript: [200, () => {
+         document.querySelectorAll('mjx-container').forEach(node => {
+           let target = node.parentNode;
+           if (target.nodeName.toLowerCase() === 'li') {
+             target.parentNode.classList.add('has-jax');
+           }
+         });
+       }, '', false]
+     }
+   }
+ };
+	
+
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/fireworks.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":true},"log":false});</script></body>
+</html>
