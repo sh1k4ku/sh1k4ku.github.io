@@ -30,7 +30,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://sh1k4ku.github.io/images/%E7%A6%BB%E6%95%A3%E5%AF%B9%E6%95%B0/image-20210906171507054.png">
 <meta property="article:published_time" content="2021-08-31T03:57:16.000Z">
-<meta property="article:modified_time" content="2021-09-06T09:19:07.790Z">
+<meta property="article:modified_time" content="2021-10-11T08:44:11.100Z">
 <meta property="article:author" content="sh1k4ku">
 <meta property="article:tag" content="离散对数">
 <meta name="twitter:card" content="summary">
@@ -193,7 +193,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-06 17:19:07" itemprop="dateModified" datetime="2021-09-06T17:19:07+08:00">2021-09-06</time>
+                <time title="修改时间：2021-10-11 16:44:11" itemprop="dateModified" datetime="2021-10-11T16:44:11+08:00">2021-10-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -292,7 +292,7 @@ p
 </ol>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bsgs</span>(<span class="params">g,y,p,bound</span>):</span></span><br><span class="line">    m=gmpy2.iroot(bound,<span class="number">2</span>)[<span class="number">0</span>]</span><br><span class="line">    S=&#123;<span class="built_in">pow</span>(g,j,p):j <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(m)&#125;</span><br><span class="line">    gs=<span class="built_in">pow</span>(g,-m,p)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m)：</span><br><span class="line">    	<span class="keyword">if</span> y <span class="keyword">in</span> S:</span><br><span class="line">            <span class="keyword">return</span> i*m+S[y]</span><br><span class="line">        y=y * gs %p</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">g=</span><br><span class="line">y=</span><br><span class="line">p=</span><br><span class="line">bound=</span><br><span class="line">x=bsgs(g,y,p,bound)</span><br></pre></td></tr></table></figure>
 <p>sagemath内置函数：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Sage</span></span><br><span class="line">bsgs(g,y,bounds,operation)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#python</span></span><br><span class="line">bsgs(g,y,bounds,operation)</span><br></pre></td></tr></table></figure>
 <h2 id="Pollard‘s-Rho-algorithm"><a href="#Pollard‘s-Rho-algorithm" class="headerlink" title="Pollard‘s Rho algorithm"></a>Pollard‘s Rho algorithm</h2><p>Pollard’s Rho 算法是一个非常有趣又容易理解的整数因子分解算法，原本用于分解RSA体系中的n，后来又应用于离散对数问题。</p>
 <h1 id="加密算法"><a href="#加密算法" class="headerlink" title="加密算法"></a>加密算法</h1><h2 id="Elgamal-PKC"><a href="#Elgamal-PKC" class="headerlink" title="Elgamal PKC"></a>Elgamal PKC</h2><p>老规矩，Alice传消息给Bob：</p>
 <script type="math/tex; mode=display">
@@ -471,7 +471,7 @@ p
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">56 分钟</span>
+    <span title="站点阅读时长">57 分钟</span>
 </div>
 
         
