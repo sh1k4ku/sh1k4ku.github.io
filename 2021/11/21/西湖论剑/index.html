@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script type="text/javascript" src="/js/dytitle.js"></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"sh1k4ku.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="题目还不错，难度梯度有点大，出了三道，后面三道难的都不会做 面向WP学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="西湖论剑">
+<meta property="og:url" content="http://sh1k4ku.github.io/2021/11/21/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/index.html">
+<meta property="og:site_name" content="sh1k4ku&#39;s blog">
+<meta property="og:description" content="题目还不错，难度梯度有点大，出了三道，后面三道难的都不会做 面向WP学习">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/2FJ5@Z%7BW%5DZ91X1FN6IO2CV.png">
+<meta property="article:published_time" content="2021-11-21T11:49:53.000Z">
+<meta property="article:modified_time" content="2021-11-21T12:05:43.777Z">
+<meta property="article:author" content="sh1k4ku">
+<meta property="article:tag" content="Pell Equation">
+<meta property="article:tag" content="DSA">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://sh1k4ku.github.io/images/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/2FJ5@Z%7BW%5DZ91X1FN6IO2CV.png">
+
+<link rel="canonical" href="http://sh1k4ku.github.io/2021/11/21/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>西湖论剑 | sh1k4ku's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="sh1k4ku's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">sh1k4ku's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录我的学习之路</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://sh1k4ku.github.io/2021/11/21/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/zed.jpg">
+      <meta itemprop="name" content="sh1k4ku">
+      <meta itemprop="description" content="会当凌绝顶">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sh1k4ku's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          西湖论剑
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-11-21 19:49:53 / 修改时间：20:05:43" itemprop="dateCreated datePublished" datetime="2021-11-21T19:49:53+08:00">2021-11-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/" itemprop="url" rel="index"><span itemprop="name">CTF</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>19k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>17 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>题目还不错，难度梯度有点大，出了三道，后面三道难的都不会做</p>
+<p>面向WP学习</p>
+<span id="more"></span>
+<h1 id="unknown-dsa"><a href="#unknown-dsa" class="headerlink" title="unknown_dsa"></a>unknown_dsa</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> DSA</span><br><span class="line"><span class="keyword">from</span> Crypto.Hash <span class="keyword">import</span> SHA</span><br><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> invert,powmod</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> flag,m1,m2,ul,vl,wl</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encrypt</span>():</span></span><br><span class="line">    key = DSA.generate(<span class="built_in">int</span>(<span class="number">1024</span>))</span><br><span class="line">    q = key.q</span><br><span class="line">    p = key.p</span><br><span class="line">    g = key.g</span><br><span class="line">    x1 = bytes_to_long(flag[:<span class="built_in">len</span>(flag)//<span class="number">2</span>])</span><br><span class="line">    x2 = bytes_to_long(flag[<span class="built_in">len</span>(flag)//<span class="number">2</span>:])</span><br><span class="line">    <span class="keyword">assert</span> x1&lt;q <span class="keyword">and</span> x2&lt;q</span><br><span class="line">    t = powmod(g, p*q-(p+q), p*q)</span><br><span class="line">    hm1 = bytes_to_long(SHA.new(m1).digest())</span><br><span class="line">    hm2 = bytes_to_long(SHA.new(m2).digest())</span><br><span class="line">    k = random.randint(<span class="number">1</span>, q-<span class="number">1</span>)</span><br><span class="line">    r1 = powmod(g, k, p) % q</span><br><span class="line">    s1 = (hm1 + x1*r1) * invert(k, q) % q</span><br><span class="line">    s2 = (hm2 + x1*r1) * invert(k, q) % q</span><br><span class="line">    r2 = powmod(g, x1, p) % q</span><br><span class="line">    s3 = (hm1 + x2*r2) * invert(k, q) % q</span><br><span class="line">    <span class="built_in">print</span>(p*q, (p-<span class="number">1</span>)//q, t, sep=<span class="string">&#x27;, &#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(r1, s1, s2, sep=<span class="string">&#x27;, &#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(r2, s3, sep=<span class="string">&#x27;, &#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(ul)):</span><br><span class="line">        <span class="keyword">assert</span> ul[i]**<span class="number">2</span> - wl[i]* vl[i]**<span class="number">2</span>==<span class="number">1</span></span><br><span class="line">    e = <span class="number">7</span></span><br><span class="line">    cl1 = [<span class="built_in">int</span>(powmod(bytes_to_long(m1), e, x)) <span class="keyword">for</span> x <span class="keyword">in</span> ul]</span><br><span class="line">    cl2 = [<span class="built_in">int</span>(powmod(bytes_to_long(m2), e, y)) <span class="keyword">for</span> y <span class="keyword">in</span> vl]</span><br><span class="line">    <span class="built_in">print</span>(wl, cl1, cl2, sep=<span class="string">&#x27;, &#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    encrypt()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">[3912956711, 4013184893, 3260747771], [2852589223779928796266540600421678790889067284911682578924216186052590393595645322161563386615512475256726384365091711034449682791268994623758937752874750918200961888997082477100811025721898720783666868623498246219677221106227660895519058631965055790709130207760704, 21115849906180139656310664607458425637670520081983248258984166026222898753505008904136688820075720411004158264138659762101873588583686473388951744733936769732617279649797085152057880233721961, 301899179092185964785847705166950181255677272294377823045011205035318463496682788289651177635341894308537787449148199583490117059526971759804426977947952721266880757177055335088777693134693713345640206540670123872210178680306100865355059146219281124303460105424], [148052450029409767056623510365366602228778431569288407577131980435074529632715014971133452626021226944632282479312378667353792117133452069972334169386837227285924011187035671874758901028719505163887789382835770664218045743465222788859258272826217869877607314144, 1643631850318055151946938381389671039738824953272816402371095118047179758846703070931850238668262625444826564833452294807110544441537830199752050040697440948146092723713661125309994275256, 10949587016016795940445976198460149258144635366996455598605244743540728764635947061037779912661207322820180541114179612916018317600403816027703391110922112311910900034442340387304006761589708943814396303183085858356961537279163175384848010568152485779372842]</span></span><br><span class="line"><span class="string">85198615386075607567070020969981777827671873654631200472078241980737834438897900146248840279191139156416537108399682874370629888207334506237040017838313558911275073904148451540255705818477581182866269413018263079858680221647341680762989080418039972704759003343616652475438155806858735982352930771244880990190318526933267455248913782297991685041187565140859, 106239950213206316301683907545763916336055243955706210944736472425965200103461421781804731678430116333702099777855279469137219165293725500887590280355973107580745212368937514070059991848948031718253804694621821734957604838125210951711527151265000736896607029198, 60132176395922896902518845244051065417143507550519860211077965501783315971109433544482411208238485135554065241864956361676878220342500208011089383751225437417049893725546176799417188875972677293680033005399883113531193705353404892141811493415079755456185858889801456386910892239869732805273879281094613329645326287205736614546311143635580051444446576104548</span></span><br><span class="line"><span class="string">498841194617327650445431051685964174399227739376, 376599166921876118994132185660203151983500670896, 187705159843973102963593151204361139335048329243</span></span><br><span class="line"><span class="string">620827881415493136309071302986914844220776856282, 674735360250004315267988424435741132047607535029</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>dsa部分是最基本的形式，就差H(m1)和H(m2)</p>
+<p>m1和m2经过三次RSA加密，但模数未知</p>
+<p>模数由佩尔方程解出，再用低指数广播可拿到m^7，开根即可</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> fractions <span class="keyword">import</span> gcd</span><br><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> invert,powmod,iroot</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> DSA</span><br><span class="line"><span class="keyword">from</span> Crypto.Hash <span class="keyword">import</span> SHA</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">n,k,t = <span class="number">85198615386075607567070020969981777827671873654631200472078241980737834438897900146248840279191139156416537108399682874370629888207334506237040017838313558911275073904148451540255705818477581182866269413018263079858680221647341680762989080418039972704759003343616652475438155806858735982352930771244880990190318526933267455248913782297991685041187565140859</span>, <span class="number">106239950213206316301683907545763916336055243955706210944736472425965200103461421781804731678430116333702099777855279469137219165293725500887590280355973107580745212368937514070059991848948031718253804694621821734957604838125210951711527151265000736896607029198</span>, <span class="number">60132176395922896902518845244051065417143507550519860211077965501783315971109433544482411208238485135554065241864956361676878220342500208011089383751225437417049893725546176799417188875972677293680033005399883113531193705353404892141811493415079755456185858889801456386910892239869732805273879281094613329645326287205736614546311143635580051444446576104548</span></span><br><span class="line">wl, cl1, cl2 =[<span class="number">3912956711</span>, <span class="number">4013184893</span>, <span class="number">3260747771</span>], [<span class="number">2852589223779928796266540600421678790889067284911682578924216186052590393595645322161563386615512475256726384365091711034449682791268994623758937752874750918200961888997082477100811025721898720783666868623498246219677221106227660895519058631965055790709130207760704</span>, <span class="number">21115849906180139656310664607458425637670520081983248258984166026222898753505008904136688820075720411004158264138659762101873588583686473388951744733936769732617279649797085152057880233721961</span>, <span class="number">301899179092185964785847705166950181255677272294377823045011205035318463496682788289651177635341894308537787449148199583490117059526971759804426977947952721266880757177055335088777693134693713345640206540670123872210178680306100865355059146219281124303460105424</span>], [<span class="number">148052450029409767056623510365366602228778431569288407577131980435074529632715014971133452626021226944632282479312378667353792117133452069972334169386837227285924011187035671874758901028719505163887789382835770664218045743465222788859258272826217869877607314144</span>, <span class="number">1643631850318055151946938381389671039738824953272816402371095118047179758846703070931850238668262625444826564833452294807110544441537830199752050040697440948146092723713661125309994275256</span>, <span class="number">10949587016016795940445976198460149258144635366996455598605244743540728764635947061037779912661207322820180541114179612916018317600403816027703391110922112311910900034442340387304006761589708943814396303183085858356961537279163175384848010568152485779372842</span>]</span><br><span class="line"></span><br><span class="line">q = <span class="number">895513916279543445314258868563331268261201605181</span></span><br><span class="line">p = k*q + <span class="number">1</span></span><br><span class="line">g = <span class="number">8065494126227608731057119338486910291529176576096612311734285061607284964658737003594964324046804258074712614189778906098614765392123515385260406254416427321997510822217750260108595410657401</span></span><br><span class="line"></span><br><span class="line">r1, s1, s2  = <span class="number">498841194617327650445431051685964174399227739376</span>, <span class="number">376599166921876118994132185660203151983500670896</span>, <span class="number">187705159843973102963593151204361139335048329243</span></span><br><span class="line">r2, s3 = <span class="number">620827881415493136309071302986914844220776856282</span>, <span class="number">674735360250004315267988424435741132047607535029</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solve_pell</span>(<span class="params">N, numTry = <span class="number">1000</span></span>):</span></span><br><span class="line">    cf= continued_fraction(sqrt(N))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(numTry):</span><br><span class="line">        denom = cf.denominator(i)</span><br><span class="line">        numer = cf.numerator(i)</span><br><span class="line">        <span class="keyword">if</span> numer^<span class="number">2</span>-N*denom^<span class="number">2</span> == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> numer,denom</span><br><span class="line"></span><br><span class="line">e = <span class="number">7</span></span><br><span class="line">ul = []</span><br><span class="line">vl = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(wl)):</span><br><span class="line">    uli,vli = solve_pell(wl[i])</span><br><span class="line">    ul.append(uli)</span><br><span class="line">    vl.append(vli)</span><br><span class="line">    <span class="built_in">print</span>(uli**<span class="number">2</span> - wl[i]* vli**<span class="number">2</span>==<span class="number">1</span>)</span><br><span class="line">m1 = crt(cl1,ul)</span><br><span class="line">m2 = crt(cl2,vl)</span><br><span class="line">m1 = iroot(m1,<span class="number">7</span>)[<span class="number">0</span>]</span><br><span class="line">m2 = iroot(m2,<span class="number">7</span>)[<span class="number">0</span>]</span><br><span class="line">m1 = long_to_bytes(m1)</span><br><span class="line">m2 = long_to_bytes(m2)</span><br><span class="line">hm1 = bytes_to_long(SHA.new(m1).digest())</span><br><span class="line">hm2 = bytes_to_long(SHA.new(m2).digest())</span><br><span class="line"></span><br><span class="line">k = (hm1-hm2) * invert(s1-s2,q) % q</span><br><span class="line">x = (s1*k-hm1) * invert(r1,q) %q</span><br><span class="line">x1 = long_to_bytes(x)</span><br><span class="line"></span><br><span class="line">x2 = (s3*k-hm1) * invert(r2,q) %q</span><br><span class="line">x2 = long_to_bytes(x2)</span><br><span class="line"><span class="built_in">print</span>(x1+x2)</span><br><span class="line"><span class="comment">#b&#x27;DASCTF&#123;f11bad18f529750fe52c56eed85d001b&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+<h1 id="hardrsa"><a href="#hardrsa" class="headerlink" title="hardrsa"></a>hardrsa</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> flag</span><br><span class="line"></span><br><span class="line">p = getPrime(<span class="number">512</span>)</span><br><span class="line">q = getPrime(<span class="number">512</span>)</span><br><span class="line">n = p**<span class="number">4</span>*q</span><br><span class="line"></span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">phi = gmpy2.lcm(p - <span class="number">1</span>, q - <span class="number">1</span>)</span><br><span class="line">d = gmpy2.invert(e, phi)</span><br><span class="line">dp = d % (p - <span class="number">1</span>)</span><br><span class="line">m = bytes_to_long(flag)</span><br><span class="line">c = <span class="built_in">pow</span>(m, e, n)</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;dp = &quot;</span> + <span class="built_in">str</span>(dp))</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;c = &quot;</span> + <span class="built_in">str</span>(c))</span><br><span class="line"></span><br><span class="line">y = <span class="number">449703347709287328982446812318870158230369688625894307953604074502413258045265502496365998383562119915565080518077360839705004058211784369656486678307007348691991136610142919372779782779111507129101110674559235388392082113417306002050124215904803026894400155194275424834577942500150410440057660679460918645357376095613079720172148302097893734034788458122333816759162605888879531594217661921547293164281934920669935417080156833072528358511807757748554348615957977663784762124746554638152693469580761002437793837094101338408017407251986116589240523625340964025531357446706263871843489143068620501020284421781243879675292060268876353250854369189182926055204229002568224846436918153245720514450234433170717311083868591477186061896282790880850797471658321324127334704438430354844770131980049668516350774939625369909869906362174015628078258039638111064842324979997867746404806457329528690722757322373158670827203350590809390932986616805533168714686834174965211242863201076482127152571774960580915318022303418111346406295217571564155573765371519749325922145875128395909112254242027512400564855444101325427710643212690768272048881411988830011985059218048684311349415764441760364762942692722834850287985399559042457470942580456516395188637916303814055777357738894264037988945951468416861647204658893837753361851667573185920779272635885127149348845064478121843462789367112698673780005436144393573832498203659056909233757206537514290993810628872250841862059672570704733990716282248839</span></span><br><span class="line"></span><br><span class="line">g = <span class="number">2</span></span><br><span class="line">x = <span class="number">2019</span>*p**<span class="number">2</span> + <span class="number">2020</span>*p**<span class="number">3</span> + <span class="number">2021</span>*p**<span class="number">4</span></span><br><span class="line">c1 = <span class="built_in">pow</span>(g, x, y)</span><br><span class="line"><span class="built_in">print</span>( <span class="string">&quot;c1 = &quot;</span> + <span class="built_in">str</span>(c1))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># dp = 379476973158146550831004952747643994439940435656483772269013081580532539640189020020958796514224150837680366977747272291881285391919167077726836326564473</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># c = 57248258945927387673579467348106118747034381190703777861409527336272914559699490353325906672956273559867941402281438670652710909532261303394045079629146156340801932254839021574139943933451924062888426726353230757284582863993227592703323133265180414382062132580526658205716218046366247653881764658891315592607194355733209493239611216193118424602510964102026998674323685134796018596817393268106583737153516632969041693280725297929277751136040546830230533898514659714717213371619853137272515967067008805521051613107141555788516894223654851277785393355178114230929014037436770678131148140398384394716456450269539065009396311996040422853740049508500540281488171285233445744799680022307180452210793913614131646875949698079917313572873073033804639877699884489290120302696697425</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># c1 = 78100131461872285613426244322737502147219485108799130975202429638042859488136933783498210914335741940761656137516033926418975363734194661031678516857040723532055448695928820624094400481464950181126638456234669814982411270985650209245687765595483738876975572521276963149542659187680075917322308512163904423297381635532771690434016589132876171283596320435623376283425228536157726781524870348614983116408815088257609788517986810622505961538812889953185684256469540369809863103948326444090715161351198229163190130903661874631020304481842715086104243998808382859633753938512915886223513449238733721777977175430329717970940440862059204518224126792822912141479260791232312544748301412636222498841676742208390622353022668320809201312724936862167350709823581870722831329406359010293121019764160016316259432749291142448874259446854582307626758650151607770478334719317941727680935243820313144829826081955539778570565232935463201135110049861204432285060029237229518297291679114165265808862862827211193711159152992427133176177796045981572758903474465179346029811563765283254777813433339892058322013228964103304946743888213068397672540863260883314665492088793554775674610994639537263588276076992907735153702002001005383321442974097626786699895993544581572457476437853778794888945238622869401634353220344790419326516836146140706852577748364903349138246106379954647002557091131475669295997196484548199507335421499556985949139162639560622973283109342746186994609598854386966520638338999059</span></span><br></pre></td></tr></table></figure>
+<p>y-1光滑，可用离散对数解出x，然后Z3 Solver解出p，接着就是已知dp，p的模型，很容易就能做出来</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line">y = <span class="number">449703347709287328982446812318870158230369688625894307953604074502413258045265502496365998383562119915565080518077360839705004058211784369656486678307007348691991136610142919372779782779111507129101110674559235388392082113417306002050124215904803026894400155194275424834577942500150410440057660679460918645357376095613079720172148302097893734034788458122333816759162605888879531594217661921547293164281934920669935417080156833072528358511807757748554348615957977663784762124746554638152693469580761002437793837094101338408017407251986116589240523625340964025531357446706263871843489143068620501020284421781243879675292060268876353250854369189182926055204229002568224846436918153245720514450234433170717311083868591477186061896282790880850797471658321324127334704438430354844770131980049668516350774939625369909869906362174015628078258039638111064842324979997867746404806457329528690722757322373158670827203350590809390932986616805533168714686834174965211242863201076482127152571774960580915318022303418111346406295217571564155573765371519749325922145875128395909112254242027512400564855444101325427710643212690768272048881411988830011985059218048684311349415764441760364762942692722834850287985399559042457470942580456516395188637916303814055777357738894264037988945951468416861647204658893837753361851667573185920779272635885127149348845064478121843462789367112698673780005436144393573832498203659056909233757206537514290993810628872250841862059672570704733990716282248839</span></span><br><span class="line">c1 = <span class="number">78100131461872285613426244322737502147219485108799130975202429638042859488136933783498210914335741940761656137516033926418975363734194661031678516857040723532055448695928820624094400481464950181126638456234669814982411270985650209245687765595483738876975572521276963149542659187680075917322308512163904423297381635532771690434016589132876171283596320435623376283425228536157726781524870348614983116408815088257609788517986810622505961538812889953185684256469540369809863103948326444090715161351198229163190130903661874631020304481842715086104243998808382859633753938512915886223513449238733721777977175430329717970940440862059204518224126792822912141479260791232312544748301412636222498841676742208390622353022668320809201312724936862167350709823581870722831329406359010293121019764160016316259432749291142448874259446854582307626758650151607770478334719317941727680935243820313144829826081955539778570565232935463201135110049861204432285060029237229518297291679114165265808862862827211193711159152992427133176177796045981572758903474465179346029811563765283254777813433339892058322013228964103304946743888213068397672540863260883314665492088793554775674610994639537263588276076992907735153702002001005383321442974097626786699895993544581572457476437853778794888945238622869401634353220344790419326516836146140706852577748364903349138246106379954647002557091131475669295997196484548199507335421499556985949139162639560622973283109342746186994609598854386966520638338999059</span></span><br><span class="line">g = <span class="number">2</span></span><br><span class="line">p = <span class="number">12131601165788024635030034921084070470053842112984866821070395281728468805072716002494427632757418621194662541766157553264889658892783635499016425528807741</span></span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">c = <span class="number">57248258945927387673579467348106118747034381190703777861409527336272914559699490353325906672956273559867941402281438670652710909532261303394045079629146156340801932254839021574139943933451924062888426726353230757284582863993227592703323133265180414382062132580526658205716218046366247653881764658891315592607194355733209493239611216193118424602510964102026998674323685134796018596817393268106583737153516632969041693280725297929277751136040546830230533898514659714717213371619853137272515967067008805521051613107141555788516894223654851277785393355178114230929014037436770678131148140398384394716456450269539065009396311996040422853740049508500540281488171285233445744799680022307180452210793913614131646875949698079917313572873073033804639877699884489290120302696697425</span></span><br><span class="line">dp = <span class="number">379476973158146550831004952747643994439940435656483772269013081580532539640189020020958796514224150837680366977747272291881285391919167077726836326564473</span></span><br><span class="line">b = <span class="number">4</span></span><br><span class="line"></span><br><span class="line">mp1 = <span class="built_in">pow</span>(c, dp, p)</span><br><span class="line">mp = <span class="built_in">pow</span>(c, dp - <span class="number">1</span>, p)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, b - <span class="number">2</span>):</span><br><span class="line">	x = <span class="built_in">pow</span>(c - <span class="built_in">pow</span>(mp1, e), <span class="number">1</span>, p**(i + <span class="number">1</span>))</span><br><span class="line">	y = <span class="built_in">pow</span>(x * mp * (gmpy2.invert(e, p)), <span class="number">1</span>, p**(i + <span class="number">1</span>))</span><br><span class="line">	mp1 = mp1 + y</span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(mp1))</span><br><span class="line"><span class="comment">#b&#x27;DASCTF&#123;98d923h4344e3bf72f8775xy65tvftv5&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+<h1 id="密码人集合"><a href="#密码人集合" class="headerlink" title="密码人集合"></a>密码人集合</h1><p>yysy，前一部分给我看湿了，密码人平时还挺孤独的。</p>
+<p><img src="/images/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91/2FJ5@Z%7BW%5DZ91X1FN6IO2CV.png" alt="img"></p>
+<p>泪目</p>
+<p>就做题而言不算困难，在网上抄个数独脚本就能出了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random </span><br><span class="line"><span class="keyword">import</span> sys  </span><br><span class="line">sys.setrecursionlimit(<span class="number">100000</span>) <span class="comment"># 发现python默认的递归深度是很有限的</span></span><br><span class="line">                              <span class="comment">#（默认是1000），因此当递归深度超过999的</span></span><br><span class="line">                              <span class="comment"># 样子，就会引发这样的一个异常。</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_next</span>(<span class="params">m, x, y</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot; 功能：获得下一个空白格在数独中的坐标。       </span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">for</span> next_y <span class="keyword">in</span> <span class="built_in">range</span>(y+<span class="number">1</span>, <span class="number">9</span>):  <span class="comment"># 下一个空白格和当前格在一行的情况</span></span><br><span class="line">        <span class="keyword">if</span> m[x][next_y] == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> x, next_y</span><br><span class="line">    <span class="keyword">for</span> next_x <span class="keyword">in</span> <span class="built_in">range</span>(x+<span class="number">1</span>, <span class="number">9</span>):  <span class="comment"># 下一个空白格和当前格不在一行的情况</span></span><br><span class="line">        <span class="keyword">for</span> next_y <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">9</span>):</span><br><span class="line">            <span class="keyword">if</span> m[next_x][next_y] == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> next_x, next_y</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>, -<span class="number">1</span>               <span class="comment"># 若不存在下一个空白格，则返回 -1，-1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">value</span>(<span class="params">m, x, y</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot; 功能：返回符合&quot;每个横排和竖排以及</span></span><br><span class="line"><span class="string">              九宫格内无相同数字&quot;这个条件的有效值。</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span> </span><br><span class="line">    i, j = x//<span class="number">3</span>, y//<span class="number">3</span></span><br><span class="line">    grid = [m[i*<span class="number">3</span>+r][j*<span class="number">3</span>+c] <span class="keyword">for</span> r <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>) <span class="keyword">for</span> c <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>)]</span><br><span class="line">    v = <span class="built_in">set</span>([x <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">10</span>)]) - <span class="built_in">set</span>(grid) - <span class="built_in">set</span>(m[x]) - \</span><br><span class="line">        <span class="built_in">set</span>(<span class="built_in">list</span>(<span class="built_in">zip</span>(*m))[y])    </span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">list</span>(v)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">start_pos</span>(<span class="params">m</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot; 功能：返回第一个空白格的位置坐标&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>):</span><br><span class="line">        <span class="keyword">for</span> y <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>):</span><br><span class="line">            <span class="keyword">if</span> m[x][y] == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> x, y</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">False</span>, <span class="literal">False</span>  <span class="comment"># 若数独已完成，则返回 False, False</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">try_sudoku</span>(<span class="params">m, x, y</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot; 功能：试着填写数独 &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">for</span> v <span class="keyword">in</span> value(m, x, y):</span><br><span class="line">        m[x][y] = v</span><br><span class="line">        next_x, next_y = get_next(m, x, y)</span><br><span class="line">        <span class="keyword">if</span> next_y == -<span class="number">1</span>: <span class="comment"># 如果无下一个空白格</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            end = try_sudoku(m, next_x, next_y) <span class="comment"># 递归</span></span><br><span class="line">            <span class="keyword">if</span> end:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">            m[x][y] = <span class="number">0</span> <span class="comment"># 在递归的过程中，如果数独没有解开，</span></span><br><span class="line">                        <span class="comment"># 则回溯到上一个空白格</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sudoku</span>(<span class="params">m</span>):</span>        </span><br><span class="line">    x, y = start_pos(m)</span><br><span class="line">    try_sudoku(m, x, y)</span><br><span class="line">    <span class="built_in">print</span>(m)     </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    m = m = [</span><br><span class="line">        [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">        [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">        [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">        [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">        [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">        [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">        [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">        [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">        [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    ]</span><br><span class="line">    sudoku(m)</span><br><span class="line">    a=[[<span class="number">9</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">6</span>], [<span class="number">6</span>, <span class="number">2</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">4</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">9</span>, <span class="number">3</span>, <span class="number">2</span>], [<span class="number">7</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">8</span>], [<span class="number">2</span>, <span class="number">8</span>, <span class="number">5</span>, <span class="number">9</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">3</span>], [<span class="number">3</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">1</span>, <span class="number">8</span>, <span class="number">7</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">9</span>], [<span class="number">5</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">1</span>], [<span class="number">8</span>, <span class="number">7</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">5</span>], [<span class="number">1</span>, <span class="number">3</span>, <span class="number">9</span>, <span class="number">2</span>, </span><br><span class="line"><span class="number">5</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">7</span>]]</span><br><span class="line">    my_dic= &#123;<span class="number">1</span>:<span class="string">&#x27;我&#x27;</span>, <span class="number">2</span>:<span class="string">&#x27;要&#x27;</span>,<span class="number">3</span>:<span class="string">&#x27;拿&#x27;</span>,<span class="number">4</span>:<span class="string">&#x27;西&#x27;</span>,<span class="number">5</span>:<span class="string">&#x27;湖&#x27;</span>,<span class="number">6</span>:<span class="string">&#x27;论&#x27;</span>,<span class="number">7</span>:<span class="string">&#x27;剑&#x27;</span>,<span class="number">8</span>:<span class="string">&#x27;第&#x27;</span>,<span class="number">9</span>:<span class="string">&#x27;一&#x27;</span>&#125;</span><br><span class="line">    re=<span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>):</span><br><span class="line">            <span class="built_in">print</span>(my_dic[a[i][j]],end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;m = [</span></span><br><span class="line"><span class="string">        [0, 0, 0, 0, 0, 0, 0, 0, 0],</span></span><br><span class="line"><span class="string">        [0, 0, 0, 0, 0, 0, 0, 0, 0],</span></span><br><span class="line"><span class="string">        [0, 0, 0, 0, 0, 0, 0, 0, 0],</span></span><br><span class="line"><span class="string">        [0, 0, 0, 0, 0, 0, 0, 0, 0],</span></span><br><span class="line"><span class="string">        [0, 0, 0, 0, 0, 0, 0, 0, 0],</span></span><br><span class="line"><span class="string">        [0, 0, 0, 0, 0, 0, 0, 0, 0],</span></span><br><span class="line"><span class="string">        [0, 0, 0, 0, 0, 0, 0, 0, 0],</span></span><br><span class="line"><span class="string">        [0, 0, 0, 0, 0, 0, 0, 0, 0],</span></span><br><span class="line"><span class="string">        [0, 0, 0, 0, 0, 0, 0, 0, 0]</span></span><br><span class="line"><span class="string">    ]&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+<h1 id="随便写点"><a href="#随便写点" class="headerlink" title="随便写点"></a>随便写点</h1><p>维纳压根没看。。</p>
+<p>curve那题发现add（）是可逆的，一开始估计和祥云杯那题有点类似，但是不知道该怎么解出e啊，折磨，后来发现add（G）的规律，只能知道e%4 = 1，不知道有没有用。</p>
+<p>nfsr那题bob找了几个脚本都没跑出来，因为这次mask是64byte的，应该是要用快速相关攻击？</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Pell-Equation/" rel="tag"><i class="fa fa-tag"></i></a>
+              <a href="/tags/DSA/" rel="tag"><i class="fa fa-tag"></i></a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/09/learning-with-errors/" rel="prev" title="learning with errors">
+      <i class="fa fa-chevron-left"></i> learning with errors
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#unknown-dsa"><span class="nav-number">1.</span> <span class="nav-text">unknown_dsa</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hardrsa"><span class="nav-number">2.</span> <span class="nav-text">hardrsa</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%86%E7%A0%81%E4%BA%BA%E9%9B%86%E5%90%88"><span class="nav-number">3.</span> <span class="nav-text">密码人集合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9A%8F%E4%BE%BF%E5%86%99%E7%82%B9"><span class="nav-number">4.</span> <span class="nav-text">随便写点</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="sh1k4ku"
+      src="/images/zed.jpg">
+  <p class="site-author-name" itemprop="name">sh1k4ku</p>
+  <div class="site-description" itemprop="description">会当凌绝顶</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sh1k4ku" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sh1k4ku" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1615197422@qq.com" title="E-Mail → mailto:1615197422@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/shikaku_" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;shikaku_" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa-heartbeat"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sh1k4ku</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">91k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:22</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='250' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+   if (typeof MathJax === 'undefined') {
+       window.MathJax = {
+         loader: {
+         source: {
+           '[tex]/amsCd': '[tex]/amscd',
+           '[tex]/AMScd': '[tex]/amscd'
+         }
+       },
+       tex: {
+         inlineMath: {'[+]': [['$', '$']]},
+         tags: 'ams'
+       },
+       options: {
+         renderActions: {
+           findScript: [10, doc => {
+             document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+               const display = !!node.type.match(/; *mode=display/);
+               const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+               const text = document.createTextNode('');
+               node.parentNode.replaceChild(text, node);
+               math.start = {node: text, delim: '', n: 0};
+               math.end = {node: text, delim: '', n: 0};
+               doc.math.push(math);
+             });
+           }, '', false],
+           insertedScript: [200, () => {
+         document.querySelectorAll('mjx-container').forEach(node => {
+           let target = node.parentNode;
+           if (target.nodeName.toLowerCase() === 'li') {
+             target.parentNode.classList.add('has-jax');
+           }
+         });
+       }, '', false]
+     }
+   }
+ };
+	
+
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/fireworks.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":true},"log":false});</script></body>
+</html>
