@@ -29,7 +29,7 @@
 <meta property="og:description" content="题不难，要查找信息and稳住心态">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-06-26T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-06-28T08:41:53.321Z">
+<meta property="article:modified_time" content="2022-06-28T08:43:26.601Z">
 <meta property="article:author" content="sh1k4ku">
 <meta property="article:tag" content="RSA">
 <meta property="article:tag" content="ECC">
@@ -48,7 +48,7 @@
   };
 </script>
 
-  <title>分区赛 | sh1k4ku's blog</title><meta name="robots" content="noindex">
+  <title>分区赛 | sh1k4ku's blog</title>
   
 
 
@@ -197,7 +197,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-06-28 16:41:53" itemprop="dateModified" datetime="2022-06-28T16:41:53+08:00">2022-06-28</time>
+                <time title="修改时间：2022-06-28 16:43:26" itemprop="dateModified" datetime="2022-06-28T16:43:26+08:00">2022-06-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -242,7 +242,7 @@
 <p>因为环境问题最后在队友电脑上出的—</p>
 <h1 id="RSA"><a href="#RSA" class="headerlink" title="RSA"></a>RSA</h1><p>送分</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> md5</span><br><span class="line"></span><br><span class="line">lcm = <span class="number">4292158730589770192682795435047249488185453170529228019750042608688907718268448193363838203887391025871515871000364259326343790645215256385842265899206372365402431198699714374850409466996627163968391249416054093529090485677808301343590811445080871279796162536469847469761747058736980603093722710824453312207182881241846080117790728778291633761198069016865260030288832065807438020772711645648333908622890343009942617559434851450007195025869850769670769715654662127278293639938359741401336592219730356884542179574372134014927006215640945952229142436595334916765255426954857520777553915330597952622785359222832224632624</span></span><br><span class="line">c = <span class="number">4288727484183191191687364666620023549392656794153112764357730676861570386983002380982803054964588111708662498647767438881892355599604826306427809017097724346976778230464708540600157055782723189971534549543664668430013171469625043063261219462210251726207552819381767396148632877168530609902046293626355744288863460554297860696918890189350721960355460410677203131993419723440382095665713164422367291153108363066159712951217816814873413423853338021627653555202253351957999686659021298525147460016557904084617528199284448056532965033560516083489693334373695545423561715471204868795248569806148395196572046378679014697206</span></span><br><span class="line">N  = <span class="number">17168634922359080770731181740188997952741812682116912079000170434755630873073792773455352815549564103486063484001457037305375162580861025543369063596825489461609724794798857499401637867986508655873564997664216374116361942711233205374363245780323485119184650145879389879046988234947922412374890843297813248828996855478005656041814919367820336728271583686844991928889831691815821365423570311291064846736832327637944358854661523107817781673029406341843040857813841671405147146887291204140157388049394514390098066284975682117038362207142272098796924412602725857521665773622056312191400612944442008222587867782281556388669</span></span><br><span class="line">E = <span class="number">65537</span></span><br><span class="line">d = gmpy2.invert(E, lcm)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;flag&#123;&#x27;</span> + md5(long_to_bytes(<span class="built_in">pow</span>(c,d,N))).hexdigest() + <span class="string">&#x27;&#125;&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<!-- flag of hidden posts -->
+
     </div>
 
     
@@ -259,6 +259,13 @@
 
 
         
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/05/17/%E3%80%8A%E4%B8%80%E7%A7%92%E9%92%9F%E3%80%8B%E8%A7%82%E5%90%8E%E6%84%9F/" rel="prev" title="《一秒钟》观后感">
+      <i class="fa fa-chevron-left"></i> 《一秒钟》观后感
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
       </footer>
     
   </article>
@@ -332,7 +339,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -397,13 +404,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">98k</span>
+    <span title="站点总字数">103k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:29</span>
+    <span title="站点阅读时长">1:34</span>
 </div>
 
         
