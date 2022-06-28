@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script type="text/javascript" src="/js/dytitle.js"></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"sh1k4ku.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="题不难，要查找信息and稳住心态">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分区赛">
+<meta property="og:url" content="http://sh1k4ku.github.io/2022/06/27/%E5%88%86%E5%8C%BA%E8%B5%9B/index.html">
+<meta property="og:site_name" content="sh1k4ku&#39;s blog">
+<meta property="og:description" content="题不难，要查找信息and稳住心态">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-26T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-06-28T08:30:46.700Z">
+<meta property="article:author" content="sh1k4ku">
+<meta property="article:tag" content="RSA">
+<meta property="article:tag" content="ECC">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://sh1k4ku.github.io/2022/06/27/%E5%88%86%E5%8C%BA%E8%B5%9B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>分区赛 | sh1k4ku's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="sh1k4ku's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">sh1k4ku's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录我的学习之路</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links/" rel="section"><i class="leaf fa-fw"></i>友链</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://sh1k4ku.github.io/2022/06/27/%E5%88%86%E5%8C%BA%E8%B5%9B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/zed.jpg">
+      <meta itemprop="name" content="sh1k4ku">
+      <meta itemprop="description" content="会当凌绝顶">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sh1k4ku's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          分区赛
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-06-27 00:00:00" itemprop="dateCreated datePublished" datetime="2022-06-27T00:00:00+08:00">2022-06-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-06-28 16:30:46" itemprop="dateModified" datetime="2022-06-28T16:30:46+08:00">2022-06-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/" itemprop="url" rel="index"><span itemprop="name">CTF</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>题不难，要查找信息and稳住心态</p>
+<span id="more"></span>
+<h1 id="dual"><a href="#dual" class="headerlink" title="dual"></a>dual</h1><p>前一部分是要用xy求椭圆曲线的生成参数；</p>
+<p>后一部分是NSA的后门，是一个随机数发生器，用一系列貌似随机的数和椭圆上的点做乘积，最后输出低240位作为每一轮的结果。因为P, Q是固定的，椭圆曲线的参数也是固定的，P、Q之间必然存在一个线性关系，那么就用这个线性关系去预测下一次的结果。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br></pre></td><td class="code"><pre><span class="line">from pwn import *</span><br><span class="line">from Crypto.Util.number import *</span><br><span class="line">from sys import stdout</span><br><span class="line">from fastecdsa.curve import P256</span><br><span class="line">from fastecdsa.point import Point</span><br><span class="line">from Crypto.Cipher import AES</span><br><span class="line">from tqdm import trange</span><br><span class="line"></span><br><span class="line">VERBOSE = True</span><br><span class="line"></span><br><span class="line">G = P256.G</span><br><span class="line"></span><br><span class="line">def pad(s):</span><br><span class="line">    return s + (16 - len(s) % 16) * b&quot;\x00&quot;</span><br><span class="line"></span><br><span class="line">class PRNG:</span><br><span class="line">    def __init__(self, e, seed):</span><br><span class="line">        self.state = seed</span><br><span class="line">        self.Q = e * G</span><br><span class="line">        self.P = G</span><br><span class="line">        self.mask = 2**240 - 1</span><br><span class="line">        </span><br><span class="line">    def gen(self):</span><br><span class="line">        new_point = self.state * self.P</span><br><span class="line">        r = new_point.x</span><br><span class="line">        self.state = r</span><br><span class="line">        ret = r * self.Q</span><br><span class="line">        return ret.x &amp; self.mask</span><br><span class="line"></span><br><span class="line">def p256_mod_sqrt(c):</span><br><span class="line">    p = 0xffffffff00000001000000000000000000000000ffffffffffffffffffffffff</span><br><span class="line">    t1 = pow(c, 2, p)</span><br><span class="line">    t1 = (t1 * c) % p</span><br><span class="line">    t2 = pow(t1, 2**2, p)</span><br><span class="line">    t2 = (t2 * t1) % p</span><br><span class="line">    t3 = pow(t2, 2**4, p)</span><br><span class="line">    t3 = (t3 * t2) % p</span><br><span class="line">    t4 = pow(t3, 2**8, p)</span><br><span class="line">    t4 = (t4 * t3) % p</span><br><span class="line">    r = pow(t4, 2**16, p)</span><br><span class="line">    r = (r * t4) % p</span><br><span class="line">    r = pow(r, 2**32, p)</span><br><span class="line">    r = (r * c) % p</span><br><span class="line">    r = pow(r, 2**96, p)</span><br><span class="line">    r = (r * c) % p</span><br><span class="line">    return pow(r, 2**94, p)</span><br><span class="line"></span><br><span class="line">def find_point_on_p256(x):</span><br><span class="line">    # equation: y^2 = x^3-ax+b</span><br><span class="line">    y2 = (x * x * x) - (3 * x) + P256.b</span><br><span class="line">    y2 = y2 % P256.p</span><br><span class="line">    y = p256_mod_sqrt(y2)</span><br><span class="line">    return y2 == (y * y) % P256.p, y</span><br><span class="line"></span><br><span class="line">class Solve:</span><br><span class="line">    def __init__(self) -&gt; None:</span><br><span class="line">        self.conn = remote(&#x27;192.168.0.64&#x27;, 58010)</span><br><span class="line">        self.n = 15</span><br><span class="line">    </span><br><span class="line">    def s_3(self):</span><br><span class="line">        self.conn.sendlineafter(&#x27;&gt;&#x27;, &#x27;3&#x27;)</span><br><span class="line">        </span><br><span class="line">        x0 = eval(self.conn.recvline())</span><br><span class="line">        x = eval(self.conn.recvline())</span><br><span class="line">        y = eval(self.conn.recvline())</span><br><span class="line">        x1 = x[:self.n]</span><br><span class="line">        x2 = x[self.n:]</span><br><span class="line">        p_list = []</span><br><span class="line">        PR = PolynomialRing(Zmod(x0), &#x27;x&#x27;)</span><br><span class="line">        x_ = PR.gen()</span><br><span class="line">        f = x_ + y</span><br><span class="line">        sol = f.small_roots(X=2**20, beta=1./20)</span><br><span class="line">        p_list = [ZZ(gcd(t + y, x0)) for t in sol]</span><br><span class="line">        print(len(p_list))</span><br><span class="line">        e = min(p_list)</span><br><span class="line">        # print(set(p0) == set(p_list))</span><br><span class="line">        return e</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    def gen_prediction(self, observed, Q, d):</span><br><span class="line">        ret = []</span><br><span class="line">        for high_bits in trange(2**15): # 2**16: have sol, 2**15: 1/2 prob</span><br><span class="line">            guess = (high_bits &lt;&lt; (8 * 30)) | observed</span><br><span class="line">            on_curve, y = find_point_on_p256(guess)</span><br><span class="line"></span><br><span class="line">            if on_curve:</span><br><span class="line">                # use the backdoor to guess the next 30 bytes</span><br><span class="line">                point = Point(guess, y, curve=P256)</span><br><span class="line">                s = (d * point).x</span><br><span class="line">                r = (s * Q).x &amp; (2**(8 * 30) - 1)</span><br><span class="line">                ret.append(r)</span><br><span class="line"></span><br><span class="line">        return ret</span><br><span class="line"></span><br><span class="line">    def s_pred(self, e):</span><br><span class="line">        d = int(inverse(e, P256.q))</span><br><span class="line">        Q = e * G</span><br><span class="line">        self.conn.sendlineafter(&#x27;&gt;&#x27;, &#x27;1&#x27;)</span><br><span class="line">        observed = eval(self.conn.recvline())</span><br><span class="line">        # print(guess)</span><br><span class="line">        # pred = eval(self.conn.recvline())</span><br><span class="line">        # print(pred)</span><br><span class="line">        predicted = self.gen_prediction(observed, Q, d)</span><br><span class="line">        # print(len(predicted))</span><br><span class="line">        # print(pred in predicted)</span><br><span class="line">        </span><br><span class="line">        return predicted</span><br><span class="line">    </span><br><span class="line">    def s_2(self, pred):</span><br><span class="line">        self.conn.sendlineafter(&#x27;&gt;&#x27;, &#x27;2&#x27;)</span><br><span class="line">        self.conn.recvuntil(&#x27;ct: &#x27;)</span><br><span class="line">        ct = self.conn.recvline().strip()</span><br><span class="line">        ct = base64.b64decode(ct)</span><br><span class="line">        for nx in pred:</span><br><span class="line">            key = pad(long_to_bytes(nx))</span><br><span class="line">            cipher = AES.new(key, AES.MODE_ECB)</span><br><span class="line">            pt = cipher.decrypt(ct)</span><br><span class="line">            if (all(64 &lt; x &lt; 128 for x in pt)):</span><br><span class="line">                print(pt)</span><br><span class="line">                self.conn.sendlineafter(&#x27;pt:&#x27;, base64.b64encode(pt))</span><br><span class="line">                self.conn.interactive()</span><br><span class="line">                return True</span><br><span class="line">        else:</span><br><span class="line">            self.conn.close()</span><br><span class="line">            return False</span><br><span class="line"></span><br><span class="line">    def s(self):</span><br><span class="line">        e = int(self.s_3())</span><br><span class="line">        pred = self.s_pred(e)</span><br><span class="line">        if (pred == 0):</span><br><span class="line">            self.conn.close()</span><br><span class="line">            return False</span><br><span class="line">        is_success = self.s_2(pred)</span><br><span class="line">        return is_success</span><br><span class="line"></span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    while True:</span><br><span class="line">        print(&#x27;Begin try...&#x27;)</span><br><span class="line">        s = Solve()</span><br><span class="line">        is_success = s.s()</span><br><span class="line">        if (is_success):</span><br><span class="line">            break</span><br><span class="line">        print(&#x27;Failed&#x27;)</span><br></pre></td></tr></table></figure>
+<p>因为环境问题最后在队友电脑上出的—</p>
+<h1 id="RSA"><a href="#RSA" class="headerlink" title="RSA"></a>RSA</h1><p>送分</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> md5</span><br><span class="line"></span><br><span class="line">lcm = <span class="number">4292158730589770192682795435047249488185453170529228019750042608688907718268448193363838203887391025871515871000364259326343790645215256385842265899206372365402431198699714374850409466996627163968391249416054093529090485677808301343590811445080871279796162536469847469761747058736980603093722710824453312207182881241846080117790728778291633761198069016865260030288832065807438020772711645648333908622890343009942617559434851450007195025869850769670769715654662127278293639938359741401336592219730356884542179574372134014927006215640945952229142436595334916765255426954857520777553915330597952622785359222832224632624</span></span><br><span class="line">c = <span class="number">4288727484183191191687364666620023549392656794153112764357730676861570386983002380982803054964588111708662498647767438881892355599604826306427809017097724346976778230464708540600157055782723189971534549543664668430013171469625043063261219462210251726207552819381767396148632877168530609902046293626355744288863460554297860696918890189350721960355460410677203131993419723440382095665713164422367291153108363066159712951217816814873413423853338021627653555202253351957999686659021298525147460016557904084617528199284448056532965033560516083489693334373695545423561715471204868795248569806148395196572046378679014697206</span></span><br><span class="line">N  = <span class="number">17168634922359080770731181740188997952741812682116912079000170434755630873073792773455352815549564103486063484001457037305375162580861025543369063596825489461609724794798857499401637867986508655873564997664216374116361942711233205374363245780323485119184650145879389879046988234947922412374890843297813248828996855478005656041814919367820336728271583686844991928889831691815821365423570311291064846736832327637944358854661523107817781673029406341843040857813841671405147146887291204140157388049394514390098066284975682117038362207142272098796924412602725857521665773622056312191400612944442008222587867782281556388669</span></span><br><span class="line">E = <span class="number">65537</span></span><br><span class="line">d = gmpy2.invert(E, lcm)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;flag&#123;&#x27;</span> + md5(long_to_bytes(<span class="built_in">pow</span>(c,d,N))).hexdigest() + <span class="string">&#x27;&#125;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/RSA/" rel="tag"><i class="fa fa-tag"></i></a>
+              <a href="/tags/ECC/" rel="tag"><i class="fa fa-tag"></i></a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/05/17/%E3%80%8A%E4%B8%80%E7%A7%92%E9%92%9F%E3%80%8B%E8%A7%82%E5%90%8E%E6%84%9F/" rel="prev" title="《一秒钟》观后感">
+      <i class="fa fa-chevron-left"></i> 《一秒钟》观后感
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#dual"><span class="nav-number">1.</span> <span class="nav-text">dual</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RSA"><span class="nav-number">2.</span> <span class="nav-text">RSA</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="sh1k4ku"
+      src="/images/zed.jpg">
+  <p class="site-author-name" itemprop="name">sh1k4ku</p>
+  <div class="site-description" itemprop="description">会当凌绝顶</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sh1k4ku" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sh1k4ku" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1615197422@qq.com" title="E-Mail → mailto:1615197422@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/shikaku_" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;shikaku_" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa-heartbeat"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sh1k4ku</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">103k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:34</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='250' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+   if (typeof MathJax === 'undefined') {
+       window.MathJax = {
+         loader: {
+         source: {
+           '[tex]/amsCd': '[tex]/amscd',
+           '[tex]/AMScd': '[tex]/amscd'
+         }
+       },
+       tex: {
+         inlineMath: {'[+]': [['$', '$']]},
+         tags: 'ams'
+       },
+       options: {
+         renderActions: {
+           findScript: [10, doc => {
+             document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+               const display = !!node.type.match(/; *mode=display/);
+               const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+               const text = document.createTextNode('');
+               node.parentNode.replaceChild(text, node);
+               math.start = {node: text, delim: '', n: 0};
+               math.end = {node: text, delim: '', n: 0};
+               doc.math.push(math);
+             });
+           }, '', false],
+           insertedScript: [200, () => {
+         document.querySelectorAll('mjx-container').forEach(node => {
+           let target = node.parentNode;
+           if (target.nodeName.toLowerCase() === 'li') {
+             target.parentNode.classList.add('has-jax');
+           }
+         });
+       }, '', false]
+     }
+   }
+ };
+	
+
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/fireworks.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":true},"log":false});</script></body>
+</html>
