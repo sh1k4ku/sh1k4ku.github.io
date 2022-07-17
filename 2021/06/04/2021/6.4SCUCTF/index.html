@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script type="text/javascript" src="/js/dytitle.js"></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"sh1k4ku.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="用以前的的博客测试一下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SCUCTF">
+<meta property="og:url" content="http://sh1k4ku.github.io/2021/06/04/2021/6.4SCUCTF/index.html">
+<meta property="og:site_name" content="sh1k4ku&#39;s blog">
+<meta property="og:description" content="用以前的的博客测试一下">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-04T07:40:24.000Z">
+<meta property="article:modified_time" content="2021-09-12T15:42:54.493Z">
+<meta property="article:author" content="sh1k4ku">
+<meta property="article:tag" content="randcrack">
+<meta property="article:tag" content="coppersmith">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://sh1k4ku.github.io/2021/06/04/2021/6.4SCUCTF/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>SCUCTF | sh1k4ku's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="sh1k4ku's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">sh1k4ku's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录我的学习之路</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links/" rel="section"><i class="leaf fa-fw"></i>友链</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://sh1k4ku.github.io/2021/06/04/2021/6.4SCUCTF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/zed.jpg">
+      <meta itemprop="name" content="sh1k4ku">
+      <meta itemprop="description" content="会当凌绝顶">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sh1k4ku's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SCUCTF
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-04 15:40:24" itemprop="dateCreated datePublished" datetime="2021-06-04T15:40:24+08:00">2021-06-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-12 23:42:54" itemprop="dateModified" datetime="2021-09-12T23:42:54+08:00">2021-09-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/" itemprop="url" rel="index"><span itemprop="name">CTF</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>用以前的的博客测试一下</p>
+<span id="more"></span>
+<h1 id="贝斯手"><a href="#贝斯手" class="headerlink" title="贝斯手"></a>贝斯手</h1><p>题目暗示了是base家族，先后使用base64 32 long_to_bytes 85和58解密即可获得flag</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> base64 <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> base58</span><br><span class="line"></span><br><span class="line">cipher=<span class="string">&#x27;R1EzVElOQlRHSTNVSU5aVUdRNERNTlpWR0UyREVOS0dHWTJES01aVUlZMkRHTkJSR1JCVE9OUlhHNDNFSU5CWUdSRERNUUpXR00yVElOQlNHUTNUTU1aV0dBMkRPTkJSR1laVE9OSldHQTNES01SV0dZMkRLTVJXSU0zRE9OSlFHVTRETVJCVUdRWlVHTVpVR1VaVE9SQlhJUTJETz09PQ==&#x27;</span></span><br><span class="line"></span><br><span class="line">res=b64decode(cipher)</span><br><span class="line"></span><br><span class="line">res=b32decode(res)</span><br><span class="line"></span><br><span class="line">res=long_to_bytes(<span class="built_in">int</span>(res,<span class="number">16</span>))</span><br><span class="line"></span><br><span class="line">res=b85decode(res)</span><br><span class="line"></span><br><span class="line">res=base58.b58decode(res)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(res)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>flag：scuctf{M4ny_k1nds_0f_13a5e!}</strong></p>
+<h1 id="crypto1"><a href="#crypto1" class="headerlink" title="crypto1"></a>crypto1</h1><p>预测随机数，有现成的库可以用。要将312个64位数拆成624个32位数，因为32位输出顺序是<strong>abcd</strong>,而64位的顺序是<strong>badc</strong>，所以要反过来取，注意还要填充，脚本如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> randcrack <span class="keyword">import</span> RandCrack</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line">f=<span class="built_in">open</span>(<span class="string">&quot;./test&quot;</span>,<span class="string">&#x27;rb&#x27;</span>)</span><br><span class="line">rc=RandCrack()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">312</span>):</span><br><span class="line">    a=<span class="built_in">int</span>(f.readline())</span><br><span class="line">    a=<span class="built_in">bin</span>(a)[<span class="number">2</span>:].zfill(<span class="number">64</span>)</span><br><span class="line">    c=<span class="built_in">int</span>(<span class="string">&#x27;0b&#x27;</span>+a[:<span class="number">32</span>],<span class="number">2</span>)</span><br><span class="line">    b=<span class="built_in">int</span>(<span class="string">&#x27;0b&#x27;</span>+a[<span class="number">32</span>:],<span class="number">2</span>)</span><br><span class="line">    rc.submit(c)</span><br><span class="line">    rc.submit(b)</span><br><span class="line">f.close()</span><br><span class="line"></span><br><span class="line">res=rc.predict_getrandbits(<span class="number">128</span>)</span><br><span class="line">key1=(long_to_bytes(res))</span><br><span class="line"></span><br><span class="line">res=<span class="built_in">open</span>(<span class="string">&#x27;./out&#x27;</span>,<span class="string">&#x27;rb&#x27;</span>).read()</span><br><span class="line">aes = AES.new(key1, AES.MODE_CBC, <span class="string">b&quot;\x00&quot;</span>*<span class="number">16</span>)</span><br><span class="line">flag=aes1.decrypt(res)</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>flag：scuctf{af0sd_f8}</strong></p>
+<h1 id="crypto2"><a href="#crypto2" class="headerlink" title="crypto2"></a>crypto2</h1><p>简单的CopperSmith<br>p是512位的，x是128位，将x首元变为1，转化后p_是1019位的，未知低128位，那么用CopperSmith Method即可解决。得到的p再在模n下和2^ex相乘即可得到真正的p。附上脚本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;sage</span></span><br><span class="line"><span class="string">n = 85016144249518040150910227120120655178858680112497903474795846550337648959184474608344455198424753002209821827392389091448043545937173891641586356377876821641241033232828279439195610943286663032638048058568003136520988549470764306016674503217880123290623177055115638997384030786304744623796469032887028528817</span></span><br><span class="line"><span class="string">e = 65537</span></span><br><span class="line"><span class="string">c = 83724265903365973936178131138176403586796491037282811488797349096425411605088349291193550728134684573063610685342590513444340298881918101517014943046522979731970278182306111863948764449232289625176702192589838375986050458189860493609407060988207562417247647655585368569618561494059816502622854344519538215287</span></span><br><span class="line"><span class="string">pbar = 4450463823628350893648746241337847373556196959762621885713665365237037340874488165755826348254697529157574566792939002187459776672801308978738078688091668148118673194644809701286264701999481650571431714684293423463355990167658855533422964048092514208406515703766237697665676941598677911363439038209842058509</span></span><br><span class="line"><span class="string">kbits = 128</span></span><br><span class="line"><span class="string">PR.&lt;x&gt; = PolynomialRing(Zmod(n))</span></span><br><span class="line"><span class="string">f = x + pbar</span></span><br><span class="line"><span class="string">x0 = f.small_roots(X=2^kbits, beta=0.5)[0]  </span></span><br><span class="line"><span class="string">p = x0 + pbar</span></span><br><span class="line"><span class="string">print(p)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">from</span> sympy <span class="keyword">import</span> nextprime</span><br><span class="line">leak=<span class="number">1145141920069</span></span><br><span class="line">n=   <span class="number">85016144249518040150910227120120655178858680112497903474795846550337648959184474608344455198424753002209821827392389091448043545937173891641586356377876821641241033232828279439195610943286663032638048058568003136520988549470764306016674503217880123290623177055115638997384030786304744623796469032887028528817</span></span><br><span class="line">c=   <span class="number">83724265903365973936178131138176403586796491037282811488797349096425411605088349291193550728134684573063610685342590513444340298881918101517014943046522979731970278182306111863948764449232289625176702192589838375986050458189860493609407060988207562417247647655585368569618561494059816502622854344519538215287</span></span><br><span class="line">pbar=<span class="number">4450463823628350893648746241337847373556196959762621885713665365237037340874488165755826348254697529157574566792939002187459776672801308978738078688091668148118673194644809701286264701999481650571431714684293423463355990167658855533422964048092514208406515703766237697665676941598677911363439038209842058509</span></span><br><span class="line">ex = <span class="number">384</span></span><br><span class="line">p_=<span class="number">4450463823628350893648746241337847373556196959762621885713665365237037340874488165755826348254697529157574566792939002187459776672801308978738078688091668148118673194644809701286264701999481650571431714684293423463355990167658855533422964048092514208406515703766237697896644308153471350247313227602240058029</span></span><br><span class="line">p=p_*<span class="number">2</span>**ex%n</span><br><span class="line">q=n//p</span><br><span class="line">phi=(p-<span class="number">1</span>)*(q-<span class="number">1</span>)</span><br><span class="line">d=gmpy2.invert(<span class="number">65537</span>,phi)</span><br><span class="line">m=gmpy2.powmod(c,d,n)</span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(m))</span><br></pre></td></tr></table></figure>
+<p><strong>flag:scuctf{f05fe93d159b398fe25f280d94241261}</strong></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/randcrack/" rel="tag"><i class="fa fa-tag"></i></a>
+              <a href="/tags/coppersmith/" rel="tag"><i class="fa fa-tag"></i></a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/07/26/2021/Test/" rel="next" title="Hello Hexo">
+      Hello Hexo <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B4%9D%E6%96%AF%E6%89%8B"><span class="nav-number">1.</span> <span class="nav-text">贝斯手</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#crypto1"><span class="nav-number">2.</span> <span class="nav-text">crypto1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#crypto2"><span class="nav-number">3.</span> <span class="nav-text">crypto2</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="sh1k4ku"
+      src="/images/zed.jpg">
+  <p class="site-author-name" itemprop="name">sh1k4ku</p>
+  <div class="site-description" itemprop="description">会当凌绝顶</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sh1k4ku" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sh1k4ku" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1615197422@qq.com" title="E-Mail → mailto:1615197422@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/shikaku_" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;shikaku_" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa-heartbeat"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sh1k4ku</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">113k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:43</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='250' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+   if (typeof MathJax === 'undefined') {
+       window.MathJax = {
+         loader: {
+         source: {
+           '[tex]/amsCd': '[tex]/amscd',
+           '[tex]/AMScd': '[tex]/amscd'
+         }
+       },
+       tex: {
+         inlineMath: {'[+]': [['$', '$']]},
+         tags: 'ams'
+       },
+       options: {
+         renderActions: {
+           findScript: [10, doc => {
+             document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+               const display = !!node.type.match(/; *mode=display/);
+               const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+               const text = document.createTextNode('');
+               node.parentNode.replaceChild(text, node);
+               math.start = {node: text, delim: '', n: 0};
+               math.end = {node: text, delim: '', n: 0};
+               doc.math.push(math);
+             });
+           }, '', false],
+           insertedScript: [200, () => {
+         document.querySelectorAll('mjx-container').forEach(node => {
+           let target = node.parentNode;
+           if (target.nodeName.toLowerCase() === 'li') {
+             target.parentNode.classList.add('has-jax');
+           }
+         });
+       }, '', false]
+     }
+   }
+ };
+	
+
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/fireworks.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":true},"log":false});</script></body>
+</html>

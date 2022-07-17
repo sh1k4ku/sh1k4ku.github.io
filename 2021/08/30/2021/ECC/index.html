@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script type="text/javascript" src="/js/dytitle.js"></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"sh1k4ku.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="抄点ECC笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ECC">
+<meta property="og:url" content="http://sh1k4ku.github.io/2021/08/30/2021/ECC/index.html">
+<meta property="og:site_name" content="sh1k4ku&#39;s blog">
+<meta property="og:description" content="抄点ECC笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/ECC/1.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/ECC/2.png">
+<meta property="article:published_time" content="2021-08-30T08:14:06.000Z">
+<meta property="article:modified_time" content="2021-08-30T15:56:59.318Z">
+<meta property="article:author" content="sh1k4ku">
+<meta property="article:tag" content="ECC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://sh1k4ku.github.io/images/ECC/1.png">
+
+<link rel="canonical" href="http://sh1k4ku.github.io/2021/08/30/2021/ECC/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>ECC | sh1k4ku's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="sh1k4ku's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">sh1k4ku's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录我的学习之路</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links/" rel="section"><i class="leaf fa-fw"></i>友链</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://sh1k4ku.github.io/2021/08/30/2021/ECC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/zed.jpg">
+      <meta itemprop="name" content="sh1k4ku">
+      <meta itemprop="description" content="会当凌绝顶">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sh1k4ku's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ECC
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-08-30 16:14:06 / 修改时间：23:56:59" itemprop="dateCreated datePublished" datetime="2021-08-30T16:14:06+08:00">2021-08-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Crypto/" itemprop="url" rel="index"><span itemprop="name">Crypto</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>994</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>抄点ECC笔记</p>
+<span id="more"></span>
+<h1 id="ECC"><a href="#ECC" class="headerlink" title="ECC"></a>ECC</h1><p>定义：ECC 全称为椭圆曲线加密，EllipseCurve Cryptography，是一种基于椭圆曲线数学的公钥密码。与传统的基于大质数因子分解困难性的加密方法不同，ECC 依赖于解决椭圆曲线离散对数问题的困难性。它的优势主要在于相对于其它方法，它可以在使用较短密钥长度的同时保持相同的密码强度。目前椭圆曲线主要采用的有限域有:</p>
+<ol>
+<li>以素数为模的整数域 GF(p)，通常在通用处理器上更为有效。</li>
+<li>特征为 2 的伽罗华域 GF（2^m），可以设计专门的硬件。</li>
+</ol>
+<p>（from CTF Wiki）</p>
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>定义式：<script type="math/tex">y^2+axy+by=x^3+cx^2+dx+e</script>，其中的所有系数都是在某个有限域GF(p)中的元素，p是一个大素数；</p>
+<p>最常用的方程为：<script type="math/tex">y^2=x^3+ax+b</script>，需要满足条件<script type="math/tex">4a^3+27b^2\;mod\; p \neq 0</script></p>
+<p>该定义要求曲线是非奇异的，意味着曲线不会自我相交或没有顶点。</p>
+<h2 id="群操作"><a href="#群操作" class="headerlink" title="群操作"></a>群操作</h2><p>假设用加法符号“+”表示它的群操作，事实上，E(Fp)对于运算+构成一个阿贝尔群（交换群，满足逆元存在，封闭性等），存在无穷远点O</p>
+<h3 id="逆元"><a href="#逆元" class="headerlink" title="逆元"></a>逆元</h3><p>定义群元素P的逆元-P，则P+(-P)=O</p>
+<script type="math/tex; mode=display">
+若P=(x_p,y_p)\;\;\;
+则-P=(x_p,p-y_p)</script><h3 id="数乘"><a href="#数乘" class="headerlink" title="数乘"></a>数乘</h3><script type="math/tex; mode=display">
+定义Q=kP，可以看作k个P相加得到Q    \\
+若O=tP,则称P的阶是t</script><h3 id="相异点相加"><a href="#相异点相加" class="headerlink" title="相异点相加"></a>相异点相加</h3><script type="math/tex; mode=display">P(x_1,y_1),Q(x_2,y_2),R(x_3,y_3)\;\;P+Q=R</script><p><img src="/images/ECC/1.png" alt></p>
+<script type="math/tex; mode=display">
+x_3=(\frac{y_2-y_1}{x_2-x_1})^2-x_1-x_2\;mod\;p\\
+y_3=\frac{y_2-y_1}{x_2-x_1}(x_1-x_3)-y_1\;mod\;p</script><h3 id="相同点相加"><a href="#相同点相加" class="headerlink" title="相同点相加"></a>相同点相加</h3><p><img src="/images/ECC/2.png" alt></p>
+<script type="math/tex; mode=display">
+x_3=(\frac{3x_1^2+a}{2y_1})^2-x_1-x_2\;mod\;p\\
+y_3=\frac{3x_1^2+a}{2y_1}(x_1-x_3)-y_1\;mod\;p</script><h2 id="加解密"><a href="#加解密" class="headerlink" title="加解密"></a>加解密</h2><h3 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h3><p>B向A发送m，其中m已经被编码为椭圆曲线上的点：</p>
+<ol>
+<li>查询A的公钥<script type="math/tex">E_q(a,b),q,P,G，其中P=kG。k为私钥</script>。</li>
+<li>在<script type="math/tex">（1，n）</script>内选择随机数r（其中n为G的阶数）。</li>
+<li>根据A的公钥计算<script type="math/tex">(x_1,y_1)=rG</script>。</li>
+<li>计算<script type="math/tex">(x_2,y_2)=kP</script>。如果为O，则从第二步重新开始。</li>
+<li>计算<script type="math/tex">C=m+(x_2,y_2)</script>。</li>
+<li>将<script type="math/tex">(x_1,y_1)和C</script>发送给A</li>
+</ol>
+<h3 id="解密"><a href="#解密" class="headerlink" title="解密"></a>解密</h3><script type="math/tex; mode=display">
+m=C-(x_2,y_2)=C-kP=C-rkG=C-k(x_1,y_1)</script>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ECC/" rel="tag"><i class="fa fa-tag"></i></a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/21/2021/%E7%A5%A5%E4%BA%91%E6%9D%AF/" rel="prev" title="祥云杯">
+      <i class="fa fa-chevron-left"></i> 祥云杯
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/08/31/2021/%E7%A6%BB%E6%95%A3%E5%AF%B9%E6%95%B0/" rel="next" title="离散对数">
+      离散对数 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ECC"><span class="nav-number">1.</span> <span class="nav-text">ECC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80"><span class="nav-number">1.1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BE%A4%E6%93%8D%E4%BD%9C"><span class="nav-number">1.2.</span> <span class="nav-text">群操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%86%E5%85%83"><span class="nav-number">1.2.1.</span> <span class="nav-text">逆元</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E4%B9%98"><span class="nav-number">1.2.2.</span> <span class="nav-text">数乘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%BC%82%E7%82%B9%E7%9B%B8%E5%8A%A0"><span class="nav-number">1.2.3.</span> <span class="nav-text">相异点相加</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%90%8C%E7%82%B9%E7%9B%B8%E5%8A%A0"><span class="nav-number">1.2.4.</span> <span class="nav-text">相同点相加</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E8%A7%A3%E5%AF%86"><span class="nav-number">1.3.</span> <span class="nav-text">加解密</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E5%AF%86"><span class="nav-number">1.3.1.</span> <span class="nav-text">加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%AF%86"><span class="nav-number">1.3.2.</span> <span class="nav-text">解密</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="sh1k4ku"
+      src="/images/zed.jpg">
+  <p class="site-author-name" itemprop="name">sh1k4ku</p>
+  <div class="site-description" itemprop="description">会当凌绝顶</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sh1k4ku" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sh1k4ku" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1615197422@qq.com" title="E-Mail → mailto:1615197422@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/shikaku_" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;shikaku_" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa-heartbeat"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sh1k4ku</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">113k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:43</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='250' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+   if (typeof MathJax === 'undefined') {
+       window.MathJax = {
+         loader: {
+         source: {
+           '[tex]/amsCd': '[tex]/amscd',
+           '[tex]/AMScd': '[tex]/amscd'
+         }
+       },
+       tex: {
+         inlineMath: {'[+]': [['$', '$']]},
+         tags: 'ams'
+       },
+       options: {
+         renderActions: {
+           findScript: [10, doc => {
+             document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+               const display = !!node.type.match(/; *mode=display/);
+               const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+               const text = document.createTextNode('');
+               node.parentNode.replaceChild(text, node);
+               math.start = {node: text, delim: '', n: 0};
+               math.end = {node: text, delim: '', n: 0};
+               doc.math.push(math);
+             });
+           }, '', false],
+           insertedScript: [200, () => {
+         document.querySelectorAll('mjx-container').forEach(node => {
+           let target = node.parentNode;
+           if (target.nodeName.toLowerCase() === 'li') {
+             target.parentNode.classList.add('has-jax');
+           }
+         });
+       }, '', false]
+     }
+   }
+ };
+	
+
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/fireworks.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":true},"log":false});</script></body>
+</html>
