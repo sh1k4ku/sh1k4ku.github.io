@@ -21,17 +21,21 @@
     var CONFIG = {"hostname":"sh1k4ku.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="会当凌绝顶">
+  <meta name="description" content="Private Information Retrieval">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PIR">
 <meta property="og:url" content="http://sh1k4ku.github.io/2022/08/03/PIR/index.html">
 <meta property="og:site_name" content="sh1k4ku&#39;s blog">
-<meta property="og:description" content="会当凌绝顶">
+<meta property="og:description" content="Private Information Retrieval">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://sh1k4ku.github.io/2022/08/03/images/PIR/image-20220803103926186.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/2022/08/03/images/PIR/image-20220803131344272.png">
 <meta property="article:published_time" content="2022-08-03T02:22:08.000Z">
-<meta property="article:modified_time" content="2022-08-03T02:22:08.266Z">
+<meta property="article:modified_time" content="2022-08-03T05:14:07.678Z">
 <meta property="article:author" content="sh1k4ku">
+<meta property="article:tag" content="PIR">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://sh1k4ku.github.io/2022/08/03/images/PIR/image-20220803103926186.png">
 
 <link rel="canonical" href="http://sh1k4ku.github.io/2022/08/03/PIR/">
 
@@ -187,8 +191,18 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2022-08-03 10:22:08" itemprop="dateCreated datePublished" datetime="2022-08-03T10:22:08+08:00">2022-08-03</time>
+              <time title="创建时间：2022-08-03 10:22:08 / 修改时间：13:14:07" itemprop="dateCreated datePublished" datetime="2022-08-03T10:22:08+08:00">2022-08-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Crypto/" itemprop="url" rel="index"><span itemprop="name">Crypto</span></a>
+                </span>
             </span>
 
           <br>
@@ -197,14 +211,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>2.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -216,7 +230,67 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <p><strong>Private Information Retrieval</strong></p>
+<span id="more"></span>
+<h1 id="introduction"><a href="#introduction" class="headerlink" title="introduction"></a>introduction</h1><p>Henry Corrigan-Gibbs and Dmitry Kogan二人提出了一个新的PIR方案，使得处理时间变为了对数多项式/次线性级别，并且没有增加开销。</p>
+<p><img src="../images/PIR/image-20220803103926186.png" alt="image-20220803103926186"></p>
+<p><code>Our idea is to push the (necessary) linear-time server-side computation into a query-independent offlfflffline phase, which allows a subsequent online phase to complete in sublinear time</code></p>
+<ol>
+<li>In an <strong>offline</strong> phase, which takes place before the client has decided which bit of the database it wants to retrieve, the client fetches a one-time-use “hint” from the database servers.</li>
+<li>In a subsequent <strong>online</strong> phase, which takes place after the client has decided which bit of the database it wants to retrieve, the client sends a query to the database servers. Given the servers’ answers to this query, along with the hint prefetched earlier, the client can recover its database bit of interest.</li>
+</ol>
+<h2 id="notation"><a href="#notation" class="headerlink" title="notation"></a>notation</h2><script type="math/tex; mode=display">
+N :  the\;set \;of \;positive \;integers\\
+
+n : the \;set \;{1, 2, . . . , n}\\
+
+1^n : 长度为n的全为1的二进制字符\\
+s-subset of [n] : a\;subset\;of\;size\;exactly\;s\\
+\begin{pmatrix}
+[n]\\
+s
+\end{pmatrix}:the\;set\;of\;all\;s-subsets\;of\;[n]\\
+x\stackrel{R}{\longleftarrow}S: choosing\;x\;independently\;and\;uniformly\;at\; random\;from\;the\;set\;S\\
+x\stackrel{R}{\longleftarrow}D: choosing\;x ∈ S\; according \;to \;distribution \;D\\
+For\;p ∈ [0, 1],x\stackrel{R}{\longleftarrow}Bernoulli(p): choosing \;the \;bit \;b \;to\; be \;‘1’ \;with \;probability \;p \;and \;‘0’\; with \;probability \;1 − p</script><h1 id="Puncturable-pseudorandom-sets"><a href="#Puncturable-pseudorandom-sets" class="headerlink" title="Puncturable pseudorandom sets"></a><strong>Puncturable pseudorandom sets</strong></h1><p>非常重要的一个概念</p>
+<p>还有个术语叫“puncturable pseudorandom function（puncturable PRF）”</p>
+<p>PRF key与函数f: [n] -&gt; [n]密切相关</p>
+<script type="math/tex; mode=display">
+a\;PRF\;key\;punctured \;at \;point\;x^∗ ∈ [n]\; allows \;its \;holder \;to \;evaluate \;f \;at \;every \;point \;in\; [n],\; \\except\; at\; the\;punctured\; point\; x^∗</script><p>也就是说punctured key不能对它的持有者揭示任何有关<script type="math/tex">f(x^*)</script>的信息</p>
+<p>同样的， the key for a puncturable pseudorandom set is a compressed representation of a pseudorandom set <em>S</em> <em>⊆</em> [<em>n</em>]. The set key punctured at element <script type="math/tex">x^∗ ∈ *S*</script>allows its holder to recover all elements of  <em>S</em> <em>except</em> the punctured element<script type="math/tex">x^∗</script>. The punctured set key reveals nothing about <script type="math/tex">x^∗</script>to its holder, apart from that fact that <script type="math/tex">x^∗</script> is not one of the remaining elements in <em>S</em>.</p>
+<h2 id="三个重要算法"><a href="#三个重要算法" class="headerlink" title="三个重要算法"></a>三个重要算法</h2><script type="math/tex; mode=display">
+设s: N\rightarrow N的函数满足s(n)\leq n.\\
+A\;puncturable\; pseudorandom\;set \;with \;set \;size\; s\; consists\; of \;a\; key\; space \;K\\
+a \;punctured-key \;space\; K_p\\</script><p>下面三个算法：\</p>
+<ol>
+<li><script type="math/tex; mode=display">Gen(1^\lambda,n)\rightarrow sk：传入\lambda 和size n，输出一个set key sk \in N</script></li>
+<li><script type="math/tex; mode=display">Punc(sk, i)\rightarrow sk_p：输入sk\in K 和i \in [n]，输出一个punctured set key sk_p \in K_p</script></li>
+<li><script type="math/tex; mode=display">Eval(sk）\rightarrow S：输入key \in K \bigcup K_p, 输出一个集合S \subseteq [n]</script></li>
+</ol>
+<p><strong>效率：</strong>对任何的安全参数<script type="math/tex">\lambda \in N</script>，上述三个算法以 s(n) * poly(\lambda, log n)的时间运行</p>
+<p><strong>正确性</strong>：对任何$$ \lambda , n \in N ，设取样sk \leftarrow Gen(1^\lambda, n)，计算S \leftarrow Eval(sk)，一定有以下：</p>
+<ol>
+<li>S \in \begin{pmatrix}<br>[n]\<br>s<br>\end{pmatrix}</li>
+<li>对任意i \in S，Eval(Punc(sk, i)) = S {i}$$</li>
+</ol>
+<p><strong>安全性</strong>：首先引入Game 1</p>
+<script type="math/tex; mode=display">
+Game \;1(Puncturable \;pseudorandom \;set \;security).\\
+For \;\lambda,n \in N, and \;a \;puncturable \;pseudorandom \;set\;\psi=(Gen, Punc, Eval)\\
+定义如下在挑战者和对手之间的游戏：\\
+-The\;challenger\;executes\;the \;following \;steps:\\
+\begin{align}\
+    &1.sk \leftarrow Gen(1^\lambda,n)&\\
+    &2.S \leftarrow Eval(sk)&\\
+    &3.x^*\stackrel{R}{\longleftarrow}S&\\
+    &4.sk_p\stackrel{R}{\longleftarrow}Punc(sk, x^*)&\\
+
+    并将1^\lambda和sk_p发送给对手。\\
+-对手输出一个整数x^{'} \in [n]\\
+如果x^{'} = x^*则认为对手获胜
+\end{align}</script><p><img src="../images/PIR/image-20220803131344272.png" alt="image-20220803131344272"></p>
+<p>这里没太看懂。。</p>
+<h1 id="Two-server-PIR"><a href="#Two-server-PIR" class="headerlink" title="Two-server PIR"></a><strong>Two-server PIR</strong></h1><h1 id="Two-server-PIR-with-sublinear-amortized-total-time"><a href="#Two-server-PIR-with-sublinear-amortized-total-time" class="headerlink" title="Two-server PIR with sublinear amortized total time"></a><strong>Two-server PIR with sublinear amortized</strong> <strong>total</strong> <strong>time</strong></h1><h1 id="Single-server-PIR"><a href="#Single-server-PIR" class="headerlink" title="Single-server PIR"></a><strong>Single-server PIR</strong></h1>
     </div>
 
     
@@ -224,6 +298,9 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PIR/" rel="tag"><i class="fa fa-tag"></i></a>
+          </div>
 
         
 
@@ -231,7 +308,7 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/08/03/%E5%BC%BA%E7%BD%91%E6%9D%AF/" rel="prev" title="强网杯">
+    <a href="/2022/08/01/%E5%BC%BA%E7%BD%91%E6%9D%AF/" rel="prev" title="强网杯">
       <i class="fa fa-chevron-left"></i> 强网杯
     </a></div>
       <div class="post-nav-item"></div>
@@ -293,6 +370,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">1.</span> <span class="nav-text">introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#notation"><span class="nav-number">1.1.</span> <span class="nav-text">notation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Puncturable-pseudorandom-sets"><span class="nav-number">2.</span> <span class="nav-text">Puncturable pseudorandom sets</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E4%B8%AA%E9%87%8D%E8%A6%81%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">三个重要算法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Two-server-PIR"><span class="nav-number">3.</span> <span class="nav-text">Two-server PIR</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Two-server-PIR-with-sublinear-amortized-total-time"><span class="nav-number">4.</span> <span class="nav-text">Two-server PIR with sublinear amortized total time</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Single-server-PIR"><span class="nav-number">5.</span> <span class="nav-text">Single-server PIR</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -321,7 +399,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -373,13 +451,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">126k</span>
+    <span title="站点总字数">149k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:55</span>
+    <span title="站点阅读时长">2:16</span>
 </div>
 
         
