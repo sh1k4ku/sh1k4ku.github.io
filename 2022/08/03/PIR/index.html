@@ -34,7 +34,7 @@
 <meta property="og:image" content="http://sh1k4ku.github.io/images/PIR/image-20220828150129012.png">
 <meta property="og:image" content="http://sh1k4ku.github.io/images/PIR/image-20220828151023565.png">
 <meta property="article:published_time" content="2022-08-03T02:22:08.000Z">
-<meta property="article:modified_time" content="2022-08-28T07:40:14.853Z">
+<meta property="article:modified_time" content="2022-08-28T08:55:16.906Z">
 <meta property="article:author" content="sh1k4ku">
 <meta property="article:tag" content="PIR">
 <meta name="twitter:card" content="summary">
@@ -202,7 +202,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-08-28 15:40:14" itemprop="dateModified" datetime="2022-08-28T15:40:14+08:00">2022-08-28</time>
+                <time title="修改时间：2022-08-28 16:55:16" itemprop="dateModified" datetime="2022-08-28T16:55:16+08:00">2022-08-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -220,14 +220,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>6.3k</span>
+              <span>8.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
+              <span>7 分钟</span>
             </span>
 
         </div>
@@ -308,14 +308,15 @@ For \;\lambda,n \in N, and \;a \;puncturable \;pseudorandom \;set\;\psi=(Gen, Pu
 Fact\;2 \;(Perfectly \;secure \;puncturable \;pseudorandom\; set with\; linear-sized\; keys):\\
 对任何函数s:N \rightarrow N \;with\;s(n) \leqslant n,\;总有一个perfectly \;secure\; puncturable\; pseudorandom \;set \;with \;set \;size \;s\\
 以及，对确定的n来说，the \;set\; keys \;and \;punctured\; keys\;的大小都是(s(n)+O(1))log\;n bits</script><script type="math/tex; mode=display">
-Theorem \;3 \;(puncturable\; pseudorandom\; set\; with\; short \;keys \;from\; puncturable\; PRFs):\\
-假设存在一个\epsilon_F-secure\;puncturable\;PRF,它对于安全的参数\lambda和输入的n\\
-有长度为\kappa(\lambda,n)的keys和长度为\kappa_p(\lambda,n)的punctured\;keys\\
-那么存在一个大小为\Theta(\sqrt{n})的\epsilon-secure \;puncturable \;pseudorandom \;set，对于\lambda和n，有：\\
 \begin{align}\
-&1.set\; keys\; of\; length\; κ(λ, n) + O(log \;n)\; bits\; and&\\
-&2.punctured\; keys\; of \;length\; κ_p(λ, n) + O(log \;n)\; bits, and&\\
-&3.\epsilon(λ, n) = poly(λ, n) · ( \epsilon_F + 2^{−λ}).&\\
+&Theorem \;3 \;(puncturable\; pseudorandom\; set\; with\; short \;keys \;from\; puncturable\; PRFs):&\\
+
+&\quad假设存在一个\epsilon_F-secure\;puncturable\;PRF,它对于安全的参数\lambda和输入的n,
+有长度为\kappa(\lambda,n)的keys和长度为\kappa_p(\lambda,n)&\\
+&\quad的punctured\;keys,那么存在一个大小为\Theta(\sqrt{n})的\epsilon-secure \;puncturable \;pseudorandom \;set，对于\lambda和n，有：&\\
+    &\qquad1.set\; keys\; of\; length\; κ(λ, n) + O(log \;n)\; bits\; and&\\
+    &\qquad2.punctured\; keys\; of \;length\; κ_p(λ, n) + O(log \;n)\; bits, and&\\
+    &\qquad3.\epsilon(λ, n) = poly(λ, n) · ( \epsilon_F + 2^{−λ}).&\\
 \end{align}</script><p>然后构造了一个puncturable pseudorandom set来证明上述Theorem：</p>
 <script type="math/tex; mode=display">
 Construction\;4 \;(Puncturable\; pseudorandom \;set \;from \;puncturable \;PRF).\\
@@ -345,8 +346,8 @@ Corollary\;6. \;Assuming\; that \;pseudorandom \;generators\; (PRGs)\; exist,\\ 
 <h2 id="Shifting-puncturable-pseudorandom-sets"><a href="#Shifting-puncturable-pseudorandom-sets" class="headerlink" title="Shifting puncturable pseudorandom sets"></a><strong>Shifting puncturable pseudorandom sets</strong></h2><p>引入了两个PRPs的性质：</p>
 <script type="math/tex; mode=display">
 \begin{align*}\label{2}
-1.GenWith(1^\lambda,n,i) \rightarrow sk,\;输出的sk满足i\in Eval(sk)\\
-2.Shift(sk, \delta) \rightarrow sk^{'}，即输出的sk^{'}满足Eval(sk^{'}) = {i+\delta\;|\;i \in Eval(sk)},对Eval的结果做了一个shift
+&1.GenWith(1^\lambda,n,i) \rightarrow sk,\;输出的sk满足i\in Eval(sk)&\\
+&2.Shift(sk, \delta) \rightarrow sk^{'}，即输出的sk^{'}满足Eval(sk^{'}) = {i+\delta\;|\;i \in Eval(sk)},对Eval的结果做了一个shift&
 \end{align*}</script><p>不失一般性，可以假设任何PRs都有这两条性质</p>
 <h1 id="Two-server-PIR-with-sublinear-online-time"><a href="#Two-server-PIR-with-sublinear-online-time" class="headerlink" title="Two-server PIR with sublinear online time"></a><strong>Two-server PIR with sublinear online time</strong></h1><h2 id="Defifinition"><a href="#Defifinition" class="headerlink" title="Defifinition"></a><strong>Defifinition</strong></h2><p>分为这五步：</p>
 <script type="math/tex; mode=display">
@@ -372,7 +373,43 @@ Corollary\;6. \;Assuming\; that \;pseudorandom \;generators\; (PRGs)\; exist,\\ 
 <p>引入puncturable pseudorandom sets后，PIR的效率可进一步提高：</p>
 <p><img src="/images/PIR/image-20220828151023565.png" alt="image-20220828151023565"></p>
 <h3 id="Construction-16-Two-server-PIR-with-sublinear-online-time"><a href="#Construction-16-Two-server-PIR-with-sublinear-online-time" class="headerlink" title="Construction 16 (Two-server PIR with sublinear online time)"></a><strong>Construction 16</strong> <strong>(Two-server PIR with sublinear online time)</strong></h3><script type="math/tex; mode=display">
-还是那些配置</script><h1 id="Two-server-PIR-with-sublinear-amortized-total-time"><a href="#Two-server-PIR-with-sublinear-amortized-total-time" class="headerlink" title="Two-server PIR with sublinear amortized total time"></a><strong>Two-server PIR with sublinear amortized</strong> <strong>total</strong> <strong>time</strong></h1><h1 id="Single-server-PIR"><a href="#Single-server-PIR" class="headerlink" title="Single-server PIR"></a><strong>Single-server PIR</strong></h1>
+\begin{align}
+&还是那些配置:s:N \rightarrow N ,\psi = (Gen, Punc, Eval)\;with\;key\;space K,punctured-key\;space\; K_p,&\\
+&extended\;by\;routines(Shift,GenWith),\;Throughout, let\;m := (n/s(n))log\;n. &\\
+&Offline\;phase: &\\
+    &\quad Setup(1^\lambda,n) \rightarrow ck,q_h: &\\
+        &\qquad sk \leftarrow Gen(1^\lambda,n) &\\
+        &\qquad sample\;\delta_1,...,\delta_m \stackrel{R}{\longleftarrow}[n]&\\
+        &\qquad ck \leftarrow (sk,\delta_1,...,\delta_m)&\\
+        &\qquad output\;ck\;and\;q_h \leftarrow sk&\\\\
+    &\quad Hint(q_h,x \in \{0,1\}^n)\rightarrow h \in \{0,1\}^m &\\
+        &\qquad parse\;q_h\;as\;sk \in K\;and\;\delta\in [n]^m &\\
+        &\qquad for\;j=1,...,m\;do:&\\
+            &\qquad\quad S_j \leftarrow Eval(Shift(sk,\delta_j))&\\
+            &\qquad\quad h_j \leftarrow \sum_{i\in S_j}x_i\;mod\;2&\\
+           &\qquad output\;h \leftarrow(h_1,...,h_m)&\\\\
+&Online\; phase &\\
+    &\quad Query(ck, i\in [n]) \rightarrow q\in K_p&\\
+        &\qquad parse\;ck\;as\;sk\in K\;and\;\delta\in[n]^m&\\
+        &\qquad sample\;a\;bit\;b\stackrel{R}{\longleftarrow}Bernouli(\frac{s-1}{n})&\\
+        &\qquad find\;a\;j\in[m]\;s.t.\;i-\delta_j \in Eval(sk)&\\
+        &\qquad if\;such\;a\;j\in[m]\;exists:&\\
+            &\qquad\quad sk_q \leftarrow Shift(sk,\delta_j)&\\
+        &\qquad otherwise:&\\
+            &\qquad\quad j \leftarrow ⊥&\\
+            &\qquad\quad i^{'} \stackrel{R}{\longleftarrow} Eval(sk)&\\
+            &\qquad\quad sk_q \leftarrow Shift(sk, i-i^{'})&\\
+        &\qquad if\;b=0:\qquad i_{punc} \leftarrow i&\\
+        &\qquad else: \qquad\quad\;\;\; i_{punc} \stackrel{R}{\longleftarrow} Eval(sk_q)\backslash \{i\}&\\
+        &\qquad output\;q \leftarrow Punc(sk_q, i_{punc}) &\\\\
+    &\quad Answer^x(q\in K_p )\rightarrow a\in\{0,1\}&\\
+        &\qquad S \leftarrow Eval(q)&\\
+        &\qquad return a \leftarrow \sum_{i\in S}x_i\;mod\;2&\\\\
+    &\quad Reconstruct(h\in \{0,1\}^m,a\in \{0,1\}) \rightarrow x_i &\\
+        &\qquad let\;j \;and\;b\;be\;as\;in\;Query&\\
+        &\qquad if\;j=⊥\;or\;b=0\;then\;output\;⊥ &\\
+        &\qquad output\;x_i\leftarrow h_j-a\;mod\;2 &\\
+\end{align}</script><h1 id="Two-server-PIR-with-sublinear-amortized-total-time"><a href="#Two-server-PIR-with-sublinear-amortized-total-time" class="headerlink" title="Two-server PIR with sublinear amortized total time"></a><strong>Two-server PIR with sublinear amortized</strong> <strong>total</strong> <strong>time</strong></h1><h1 id="Single-server-PIR"><a href="#Single-server-PIR" class="headerlink" title="Single-server PIR"></a><strong>Single-server PIR</strong></h1>
     </div>
 
     
@@ -533,13 +570,13 @@ Corollary\;6. \;Assuming\; that \;pseudorandom \;generators\; (PRGs)\; exist,\\ 
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">152k</span>
+    <span title="站点总字数">154k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:19</span>
+    <span title="站点阅读时长">2:20</span>
 </div>
 
         
