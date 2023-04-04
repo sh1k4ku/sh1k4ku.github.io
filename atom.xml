@@ -6,7 +6,7 @@
   <link href="http://sh1k4ku.github.io/atom.xml" rel="self"/>
   
   <link href="http://sh1k4ku.github.io/"/>
-  <updated>2022-10-30T08:05:47.704Z</updated>
+  <updated>2023-04-04T06:53:59.416Z</updated>
   <id>http://sh1k4ku.github.io/</id>
   
   <author>
@@ -17,9 +17,33 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>NumenCTF</title>
+    <link href="http://sh1k4ku.github.io/2023/04/04/2023/NumenCTF/"/>
+    <id>http://sh1k4ku.github.io/2023/04/04/2023/NumenCTF/</id>
+    <published>2023-04-04T06:52:52.000Z</published>
+    <updated>2023-04-04T06:53:59.416Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="wp"><a href="#wp" class="headerlink" title="wp"></a>wp</h1><p><a href="https://cn-sec.com/archives/1645084.html">NUMEN CTF writeup by ChaMd5 | CN-SEC 中文网</a></p><p><a href="https://defihacklabs.substack.com/">DeFiHackLabs’s Substack | SunWeb3Sec | Substack</a></p><h1 id="SimpleCall"><a href="#SimpleCall" class="headerlink" title="SimpleCall"></a>SimpleCall</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^0.7.0;</span><br><span class="line"></span><br><span class="line">contract ExistingStock &#123;</span><br><span class="line"></span><br><span class="line">address public owner;</span><br><span class="line">    address private reserve;</span><br><span class="line"></span><br><span class="line">string public name = &quot;Existing Stock&quot;;</span><br><span class="line">string public symbol = &quot;ES&quot;;</span><br><span class="line">uint256 public decimals = 18;</span><br><span class="line">uint256 public totalSupply = 200000000000;</span><br><span class="line">    uint8 public frequency = 1;</span><br><span class="line"></span><br><span class="line">bool public Lock = false;</span><br><span class="line">bool public result;</span><br><span class="line">bool public flag;</span><br><span class="line"></span><br><span class="line">event Approval(address indexed from, address indexed to, uint number);</span><br><span class="line">event Transfer(address indexed from, address indexed to, uint number);</span><br><span class="line">event Deposit(address indexed to, uint number);</span><br><span class="line">event Withdraw(address indexed from, uint number);</span><br><span class="line">    event Target(address indexed from, bool result);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">mapping (address =&gt; uint) public balanceOf;</span><br><span class="line">mapping (address =&gt; mapping (address =&gt; uint)) public allowance;</span><br><span class="line"></span><br><span class="line">constructor() public &#123;</span><br><span class="line">    owner = msg.sender;</span><br><span class="line">    balanceOf[owner] = totalSupply;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function approve(address to, uint number) public returns (bool) &#123;</span><br><span class="line">    allowance[msg.sender][to] = number;</span><br><span class="line">    emit Approval(msg.sender, to, number);</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function transfer(address _to, uint _value) public returns (bool) &#123;</span><br><span class="line">    require(balanceOf[msg.sender] - _value &gt;= 0);</span><br><span class="line">    balanceOf[msg.sender] -= _value;</span><br><span class="line">    balanceOf[_to] += _value;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">function transferFrom(address from, address to, uint number) public returns (bool)&#123;</span><br><span class="line"></span><br><span class="line">        require(balanceOf[from] &gt;= number);</span><br><span class="line"></span><br><span class="line">    if (from != msg.sender &amp;&amp; allowance[from][msg.sender] != uint256(-1)) &#123;</span><br><span class="line">        require(allowance[from][msg.sender] &gt;= number);</span><br><span class="line">        allowance[from][msg.sender] -= number;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    balanceOf[from] -= number;</span><br><span class="line">    balanceOf[to] += number;</span><br><span class="line"></span><br><span class="line">    emit Transfer(from, to, number);</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function privilegedborrowing(uint256 value,address secure,address target,bytes memory data) public &#123;</span><br><span class="line">        require(Lock == false &amp;&amp; value &gt;= 0 &amp;&amp; value &lt;= 1000);</span><br><span class="line">    balanceOf[address(this)] -= value;</span><br><span class="line">    balanceOf[target] += value;</span><br><span class="line"></span><br><span class="line">    address(target).call(data);</span><br><span class="line"></span><br><span class="line">    Lock = true; </span><br><span class="line"></span><br><span class="line">    require(balanceOf[target] &gt;= value);</span><br><span class="line">    balanceOf[address(this)] += value;</span><br><span class="line">    balanceOf[target] -= value;</span><br><span class="line"></span><br><span class="line">    Lock = false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">    function withdraw(uint number) public &#123;</span><br><span class="line">    require(balanceOf[msg.sender] &gt;= number);</span><br><span class="line">    balanceOf[msg.sender] -= number;</span><br><span class="line">    (msg.sender).transfer(number);</span><br><span class="line">    emit Withdraw(msg.sender, number);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function setflag() public &#123;</span><br><span class="line">    if(balanceOf[msg.sender] &gt; 200000 &amp;&amp; allowance[address(this)][msg.sender] &gt; 200000)&#123;</span><br><span class="line">flag = true;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function isSolved() public view returns(bool)&#123;</span><br><span class="line">    return flag;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>要满足的是：</p><p><img src="/.io//Users\shagua\AppData\Roaming\Typora\typora-user-images\image-20230404105307505.png" alt="image-20230404105307505"></p><p>balanceOf会下溢，利用transfer函数可以满足第一个条件：</p><p><img src="/.io//Users\shagua\AppData\Roaming\Typora\typora-user-images\image-20230404105453916.png" alt="image-20230404105453916"></p><p>只有approve能修改allowance，但是发起方只能是msg.sender</p><p><img src="/.io//Users\shagua\AppData\Roaming\Typora\typora-user-images\image-20230404105532045.png" alt="image-20230404105532045"></p><p>privilegeborrowing存在任意地址的call调用，调用后会使得msg.sender改为target，所以可以满足第二个条件</p><p><img src="/.io//Users\shagua\AppData\Roaming\Typora\typora-user-images\image-20230404105113104.png" alt="image-20230404105113104"></p><p><img src="/.io//Users\shagua\AppData\Roaming\Typora\typora-user-images\image-20230330182715865.png" alt="image-20230330182715865"></p><p><img src="file:///C:\Users\shagua\Documents\Tencent Files\1615197422\Image\C2C\Image3\JMFR4{6[S]Q4O8W0YE4VDEU.png" alt="img"></p><h1 id="counter"><a href="#counter" class="headerlink" title="counter"></a>counter</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^0.8.13;</span><br><span class="line"></span><br><span class="line">contract Deployer &#123;</span><br><span class="line">    constructor(bytes memory code) &#123; </span><br><span class="line">        assembly &#123; return (add(code, 0x20), mload(code)) &#125; </span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">contract SmartCounter&#123;</span><br><span class="line">    address public owner;</span><br><span class="line">    address public target;</span><br><span class="line">    bool flag=false;</span><br><span class="line">    constructor(address owner_)&#123;</span><br><span class="line">        owner=owner_;</span><br><span class="line">    &#125;</span><br><span class="line">    function create(bytes memory code) public&#123;</span><br><span class="line">        require(code.length&lt;=24);</span><br><span class="line">        target=address(new Deployer(code));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function A_delegateccall(bytes memory data) public&#123;</span><br><span class="line">        (bool success,bytes memory returnData)=target.delegatecall(data);</span><br><span class="line">        require(owner==msg.sender);</span><br><span class="line">        flag=true;</span><br><span class="line">    &#125;</span><br><span class="line">    function isSolved() public view returns(bool)&#123;</span><br><span class="line">        return flag;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>先学一下solidity的内存布局<a href="https://www.jianshu.com/p/f01a5790e8cb">Solidity - 内存布局 - 简书 (jianshu.com)</a></p><p>delegatecall调用的时候我们的地址会变成tx.origin，又由于owner在slot0，所以把tx.origin存到slot0即可满足owner=msg.sender。构造的code为：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ORIGIN</span><br><span class="line">PUSH1 0x00</span><br><span class="line">SSTORE</span><br><span class="line"></span><br><span class="line">32600055</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;wp&quot;&gt;&lt;a href=&quot;#wp&quot; class=&quot;headerlink&quot; title=&quot;wp&quot;&gt;&lt;/a&gt;wp&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://cn-sec.com/archives/1645084.html&quot;&gt;NUMEN CTF writeup b</summary>
+      
+    
+    
+    
+    <category term="CTF" scheme="http://sh1k4ku.github.io/categories/CTF/"/>
+    
+    
+    <category term="blockchain" scheme="http://sh1k4ku.github.io/tags/blockchain/"/>
+    
+  </entry>
+  
+  <entry>
     <title>祥云杯</title>
-    <link href="http://sh1k4ku.github.io/2022/10/30/%E7%A5%A5%E4%BA%91%E6%9D%AF/"/>
-    <id>http://sh1k4ku.github.io/2022/10/30/%E7%A5%A5%E4%BA%91%E6%9D%AF/</id>
+    <link href="http://sh1k4ku.github.io/2022/10/30/2022/%E7%A5%A5%E4%BA%91%E6%9D%AF/"/>
+    <id>http://sh1k4ku.github.io/2022/10/30/2022/%E7%A5%A5%E4%BA%91%E6%9D%AF/</id>
     <published>2022-10-30T08:01:35.000Z</published>
     <updated>2022-10-30T08:05:47.704Z</updated>
     
@@ -39,8 +63,8 @@
   
   <entry>
     <title>PIR</title>
-    <link href="http://sh1k4ku.github.io/2022/08/03/PIR/"/>
-    <id>http://sh1k4ku.github.io/2022/08/03/PIR/</id>
+    <link href="http://sh1k4ku.github.io/2022/08/03/2022/PIR/"/>
+    <id>http://sh1k4ku.github.io/2022/08/03/2022/PIR/</id>
     <published>2022-08-03T02:22:08.000Z</published>
     <updated>2022-09-13T08:31:59.971Z</updated>
     
@@ -60,8 +84,8 @@
   
   <entry>
     <title>强网杯</title>
-    <link href="http://sh1k4ku.github.io/2022/08/01/%E5%BC%BA%E7%BD%91%E6%9D%AF/"/>
-    <id>http://sh1k4ku.github.io/2022/08/01/%E5%BC%BA%E7%BD%91%E6%9D%AF/</id>
+    <link href="http://sh1k4ku.github.io/2022/08/01/2022/%E5%BC%BA%E7%BD%91%E6%9D%AF/"/>
+    <id>http://sh1k4ku.github.io/2022/08/01/2022/%E5%BC%BA%E7%BD%91%E6%9D%AF/</id>
     <published>2022-07-31T16:00:00.000Z</published>
     <updated>2022-08-03T05:31:57.818Z</updated>
     
@@ -79,8 +103,8 @@
   
   <entry>
     <title>CCTF</title>
-    <link href="http://sh1k4ku.github.io/2022/07/17/CCTF/"/>
-    <id>http://sh1k4ku.github.io/2022/07/17/CCTF/</id>
+    <link href="http://sh1k4ku.github.io/2022/07/17/2022/CCTF/"/>
+    <id>http://sh1k4ku.github.io/2022/07/17/2022/CCTF/</id>
     <published>2022-07-17T08:56:12.000Z</published>
     <updated>2022-07-19T14:45:31.200Z</updated>
     
@@ -100,8 +124,8 @@
   
   <entry>
     <title>DSCTF</title>
-    <link href="http://sh1k4ku.github.io/2022/07/17/DSCTF/"/>
-    <id>http://sh1k4ku.github.io/2022/07/17/DSCTF/</id>
+    <link href="http://sh1k4ku.github.io/2022/07/17/2022/DSCTF/"/>
+    <id>http://sh1k4ku.github.io/2022/07/17/2022/DSCTF/</id>
     <published>2022-07-17T03:01:56.000Z</published>
     <updated>2022-07-17T08:54:20.612Z</updated>
     
@@ -125,8 +149,8 @@
   
   <entry>
     <title>web</title>
-    <link href="http://sh1k4ku.github.io/2022/07/11/web/"/>
-    <id>http://sh1k4ku.github.io/2022/07/11/web/</id>
+    <link href="http://sh1k4ku.github.io/2022/07/11/2022/web/"/>
+    <id>http://sh1k4ku.github.io/2022/07/11/2022/web/</id>
     <published>2022-07-11T02:11:09.000Z</published>
     <updated>2022-07-18T10:08:18.016Z</updated>
     
@@ -146,8 +170,8 @@
   
   <entry>
     <title>做题记录</title>
-    <link href="http://sh1k4ku.github.io/2022/07/09/%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/"/>
-    <id>http://sh1k4ku.github.io/2022/07/09/%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/</id>
+    <link href="http://sh1k4ku.github.io/2022/07/09/2022/%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/"/>
+    <id>http://sh1k4ku.github.io/2022/07/09/2022/%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/</id>
     <published>2022-07-09T08:46:05.000Z</published>
     <updated>2022-07-12T09:13:17.392Z</updated>
     
@@ -169,8 +193,8 @@
   
   <entry>
     <title>分区赛</title>
-    <link href="http://sh1k4ku.github.io/2022/06/27/%E5%88%86%E5%8C%BA%E8%B5%9B/"/>
-    <id>http://sh1k4ku.github.io/2022/06/27/%E5%88%86%E5%8C%BA%E8%B5%9B/</id>
+    <link href="http://sh1k4ku.github.io/2022/06/27/2022/%E5%88%86%E5%8C%BA%E8%B5%9B/"/>
+    <id>http://sh1k4ku.github.io/2022/06/27/2022/%E5%88%86%E5%8C%BA%E8%B5%9B/</id>
     <published>2022-06-26T16:00:00.000Z</published>
     <updated>2022-06-28T08:43:26.601Z</updated>
     
@@ -192,8 +216,8 @@
   
   <entry>
     <title>《一秒钟》观后感</title>
-    <link href="http://sh1k4ku.github.io/2022/05/17/%E3%80%8A%E4%B8%80%E7%A7%92%E9%92%9F%E3%80%8B%E8%A7%82%E5%90%8E%E6%84%9F/"/>
-    <id>http://sh1k4ku.github.io/2022/05/17/%E3%80%8A%E4%B8%80%E7%A7%92%E9%92%9F%E3%80%8B%E8%A7%82%E5%90%8E%E6%84%9F/</id>
+    <link href="http://sh1k4ku.github.io/2022/05/17/2022/%E3%80%8A%E4%B8%80%E7%A7%92%E9%92%9F%E3%80%8B%E8%A7%82%E5%90%8E%E6%84%9F/"/>
+    <id>http://sh1k4ku.github.io/2022/05/17/2022/%E3%80%8A%E4%B8%80%E7%A7%92%E9%92%9F%E3%80%8B%E8%A7%82%E5%90%8E%E6%84%9F/</id>
     <published>2022-05-17T13:53:52.000Z</published>
     <updated>2022-05-17T14:45:42.750Z</updated>
     
@@ -211,8 +235,8 @@
   
   <entry>
     <title>SM2</title>
-    <link href="http://sh1k4ku.github.io/2022/03/14/SM2/"/>
-    <id>http://sh1k4ku.github.io/2022/03/14/SM2/</id>
+    <link href="http://sh1k4ku.github.io/2022/03/14/2022/SM2/"/>
+    <id>http://sh1k4ku.github.io/2022/03/14/2022/SM2/</id>
     <published>2022-03-14T07:03:44.000Z</published>
     <updated>2022-03-14T07:06:04.555Z</updated>
     
@@ -425,27 +449,6 @@
     
     
     <category term="离散对数" scheme="http://sh1k4ku.github.io/tags/%E7%A6%BB%E6%95%A3%E5%AF%B9%E6%95%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ECC</title>
-    <link href="http://sh1k4ku.github.io/2021/08/30/2021/ECC/"/>
-    <id>http://sh1k4ku.github.io/2021/08/30/2021/ECC/</id>
-    <published>2021-08-30T08:14:06.000Z</published>
-    <updated>2021-08-30T15:56:59.318Z</updated>
-    
-    <content type="html"><![CDATA[<p>抄点ECC笔记</p><span id="more"></span><h1 id="ECC"><a href="#ECC" class="headerlink" title="ECC"></a>ECC</h1><p>定义：ECC 全称为椭圆曲线加密，EllipseCurve Cryptography，是一种基于椭圆曲线数学的公钥密码。与传统的基于大质数因子分解困难性的加密方法不同，ECC 依赖于解决椭圆曲线离散对数问题的困难性。它的优势主要在于相对于其它方法，它可以在使用较短密钥长度的同时保持相同的密码强度。目前椭圆曲线主要采用的有限域有:</p><ol><li>以素数为模的整数域 GF(p)，通常在通用处理器上更为有效。</li><li>特征为 2 的伽罗华域 GF（2^m），可以设计专门的硬件。</li></ol><p>（from CTF Wiki）</p><h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>定义式：<script type="math/tex">y^2+axy+by=x^3+cx^2+dx+e</script>，其中的所有系数都是在某个有限域GF(p)中的元素，p是一个大素数；</p><p>最常用的方程为：<script type="math/tex">y^2=x^3+ax+b</script>，需要满足条件<script type="math/tex">4a^3+27b^2\;mod\; p \neq 0</script></p><p>该定义要求曲线是非奇异的，意味着曲线不会自我相交或没有顶点。</p><h2 id="群操作"><a href="#群操作" class="headerlink" title="群操作"></a>群操作</h2><p>假设用加法符号“+”表示它的群操作，事实上，E(Fp)对于运算+构成一个阿贝尔群（交换群，满足逆元存在，封闭性等），存在无穷远点O</p><h3 id="逆元"><a href="#逆元" class="headerlink" title="逆元"></a>逆元</h3><p>定义群元素P的逆元-P，则P+(-P)=O</p><script type="math/tex; mode=display">若P=(x_p,y_p)\;\;\;则-P=(x_p,p-y_p)</script><h3 id="数乘"><a href="#数乘" class="headerlink" title="数乘"></a>数乘</h3><script type="math/tex; mode=display">定义Q=kP，可以看作k个P相加得到Q    \\若O=tP,则称P的阶是t</script><h3 id="相异点相加"><a href="#相异点相加" class="headerlink" title="相异点相加"></a>相异点相加</h3><script type="math/tex; mode=display">P(x_1,y_1),Q(x_2,y_2),R(x_3,y_3)\;\;P+Q=R</script><p><img src="/images/ECC/1.png" alt></p><script type="math/tex; mode=display">x_3=(\frac{y_2-y_1}{x_2-x_1})^2-x_1-x_2\;mod\;p\\y_3=\frac{y_2-y_1}{x_2-x_1}(x_1-x_3)-y_1\;mod\;p</script><h3 id="相同点相加"><a href="#相同点相加" class="headerlink" title="相同点相加"></a>相同点相加</h3><p><img src="/images/ECC/2.png" alt></p><script type="math/tex; mode=display">x_3=(\frac{3x_1^2+a}{2y_1})^2-x_1-x_2\;mod\;p\\y_3=\frac{3x_1^2+a}{2y_1}(x_1-x_3)-y_1\;mod\;p</script><h2 id="加解密"><a href="#加解密" class="headerlink" title="加解密"></a>加解密</h2><h3 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h3><p>B向A发送m，其中m已经被编码为椭圆曲线上的点：</p><ol><li>查询A的公钥<script type="math/tex">E_q(a,b),q,P,G，其中P=kG。k为私钥</script>。</li><li>在<script type="math/tex">（1，n）</script>内选择随机数r（其中n为G的阶数）。</li><li>根据A的公钥计算<script type="math/tex">(x_1,y_1)=rG</script>。</li><li>计算<script type="math/tex">(x_2,y_2)=kP</script>。如果为O，则从第二步重新开始。</li><li>计算<script type="math/tex">C=m+(x_2,y_2)</script>。</li><li>将<script type="math/tex">(x_1,y_1)和C</script>发送给A</li></ol><h3 id="解密"><a href="#解密" class="headerlink" title="解密"></a>解密</h3><script type="math/tex; mode=display">m=C-(x_2,y_2)=C-kP=C-rkG=C-k(x_1,y_1)</script>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;抄点ECC笔记&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Crypto" scheme="http://sh1k4ku.github.io/categories/Crypto/"/>
-    
-    
-    <category term="ECC" scheme="http://sh1k4ku.github.io/tags/ECC/"/>
     
   </entry>
   
