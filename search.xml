@@ -2320,10 +2320,10 @@ Premilinary:\\
 <h2 id="基于失败事件的过渡"><a href="#基于失败事件的过渡" class="headerlink" title="基于失败事件的过渡"></a>基于失败事件的过渡</h2><p>在这种情况下，Game i 和Game i+1完全相同除非事件<script type="math/tex">F</script>发生。为了尽可能简洁，最好要让两个Game定义在两个相同的概率空间，唯一的不同是计算某些随机变量。所以有：</p>
 <script type="math/tex; mode=display">
 S_i\land F \Longleftrightarrow S_{i+1} \land F</script><p>也就是说<script type="math/tex">S_i\land F 和</script> <script type="math/tex">S_{i+1} \land F</script>相同，证明也不困难，利用<strong>Difference Lemma</strong>(其实非常trivial)</p>
-<p><img src="../images/Sequences-of-Games/image-20230709214524408.png" alt="image-20230709214524408"></p>
+<p><img src="/images/Sequences-of-Games/image-20230709214524408.png" alt="image-20230709214524408"></p>
 <p> 所以只需要证明<script type="math/tex">\text{Pr}[F]</script>是可忽略不计的就可以得到结论，通常这又是基于一个安全假设（例如当F发生时，敌手发现了一个哈希碰撞或者伪造了一个MAC）。</p>
 <p>———————————————————-下面这两段没太懂———————————————</p>
-<p><img src="../images/Sequences-of-Games/image-20230709215538103.png" alt="image-20230709215538103"></p>
+<p><img src="/images/Sequences-of-Games/image-20230709215538103.png" alt="image-20230709215538103"></p>
 <p>比如第一段的最后一句，通常其中某个game会更适合分析得出清晰的证明，难道不需要分析F和二者之间吗？</p>
 <p>以及第二段的第二句开始到最后都不太懂。</p>
 <h2 id="桥接步骤"><a href="#桥接步骤" class="headerlink" title="桥接步骤"></a>桥接步骤</h2><p>这个我觉得是最玄乎的方式，以相同的方式重述某些量的计算，改变是完全概念上的，就可以得到<script type="math/tex">\text{Pr}[S_i] = \text{Pr}[S_{i+1}]</script></p>
