@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"sh1k4ku.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="关于《Sequences of Games: A Tool for Taming Complexity in Security Proofs∗》的总结和疑问">
+    <meta name="description" content="关于《Sequences of Games: A Tool for Taming Complexity in Security Proofs∗》的总结和疑问">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Sequences of Games">
 <meta property="og:url" content="http://sh1k4ku.github.io/2023/07/09/Sequences-of-Games/index.html">
 <meta property="og:site_name" content="sh1k4ku&#39;s blog">
-<meta property="og:description" content="关于《Sequences of Games: A Tool for Taming Complexity in Security Proofs∗》的总结和疑问">
+<meta property="og:description" content="关于《Sequences of Games: A Tool for Taming Complexity in Security Proofs∗》的总结和疑问">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://sh1k4ku.github.io/images/Sequences-of-Games/image-20230709214524408.png">
 <meta property="og:image" content="http://sh1k4ku.github.io/images/Sequences-of-Games/image-20230709215538103.png">
@@ -284,7 +284,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.4k</span>
+      <span>1.5k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -301,29 +301,51 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>关于《Sequences of Games: A Tool for Taming Complexity in Security Proofs∗》的总结和疑问</p>
+    <div class="post-body" itemprop="articleBody"><p>关于《Sequences of Games: A Tool for Taming Complexity in Security
+Proofs∗》的总结和疑问</p>
 <span id="more"></span>
-<p>咨询可证明安全的学习建议时，沛公和Tover师傅推荐读这篇论文（还有《Introduction to Modern Cryptography 》，有空再看T-T）</p>
+<p>咨询可证明安全的学习建议时，沛公和Tover师傅推荐读这篇论文（还有《Introduction
+to Modern Cryptography 》，有空再看T-T）</p>
 <p>PS：最近一两个月给我的感觉，臭打CTF的，密码学压根没入门23333，还有好多好多要学的，计算复杂性、可证明安全、UC等等，总之任重道远，进入正题。</p>
-<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>总的来说，关于安全规约有两种方式，基于游戏的和基于模拟的安全，这篇文章主要是介绍如何使用基于游戏的安全证明来保证一个方案是安全的，其基本方法是假设一堆游戏，Game 0, Game 1, … ,  Game n, 其中Game 0是关于对手和方案的原始攻击游戏，并定义<script type="math/tex">S_0, S_1, ... ,S_n</script>为Game中的事件。随后，通过一步步推导，得到<script type="math/tex">\text{Pr}[S_0]</script>和之后的事件差距很小（negligibly close）或相等，最后说明<script type="math/tex">\text{Pr}[S_n]</script>与一个目标概率相等或可忽略不计，则可证明是安全的。</p>
+<h1 id="介绍">介绍</h1>
+<p>总的来说，关于安全规约有两种方式，基于游戏的和基于模拟的安全，这篇文章主要是介绍如何使用基于游戏的安全证明来保证一个方案是安全的，其基本方法是假设一堆游戏，Game
+0, Game 1, ... , Game n, 其中Game
+0是关于对手和方案的原始攻击游戏，并定义<span class="math display">\[S_0,
+S_1, ... ,S_n\]</span>为Game中的事件。随后，通过一步步推导，得到<span class="math display">\[\text{Pr}[S_0]\]</span>和之后的事件差距很小（negligibly
+close）或相等，最后说明<span class="math display">\[\text{Pr}[S_n]\]</span>与一个目标概率相等或可忽略不计，则可证明是安全的。</p>
 <p>为了让证明尽可能简洁，连续游戏之间的变换有三种类型：</p>
-<ol>
+<ol type="1">
 <li><strong>Transitions based on indistinguishability</strong></li>
 <li><strong>Transitions based on failure events</strong></li>
 <li><strong>Bridging steps</strong></li>
 </ol>
-<h2 id="基于不可区分的过渡"><a href="#基于不可区分的过渡" class="headerlink" title="基于不可区分的过渡"></a>基于不可区分的过渡</h2><p>假定有一个很小的改变在连续的游戏之间，如果被敌手所检测到，就说明存在一个高效的算法能区分两个不可区分的分布。例如：</p>
-<p>假设<script type="math/tex">P_1</script>和<script type="math/tex">P_2</script>是两个不可区分的分布，为了证明<script type="math/tex">|\text{Pr}[S_i] - \text{Pr}[S_{i+1}]|</script>是忽略不计的，假定存在一个区分算法（distinguishing algorithm）<script type="math/tex">D</script> 插入在Game i和Game i+1之间，当输入为取自分布<script type="math/tex">P_1</script> 的元素时，D输出1的概率为<script type="math/tex">\text{Pr}[S_i]</script> ；当输入为取自分布<script type="math/tex">P_2</script> 的元素时，D输出1的概率为<script type="math/tex">\text{Pr}[S_{i+1}]</script> ，于是不可区分性就证明了<script type="math/tex">|\text{Pr}[S_i] - \text{Pr}[S_{i+1}]|</script>是忽略不计的。</p>
-<h2 id="基于失败事件的过渡"><a href="#基于失败事件的过渡" class="headerlink" title="基于失败事件的过渡"></a>基于失败事件的过渡</h2><p>在这种情况下，Game i 和Game i+1完全相同除非事件<script type="math/tex">F</script>发生。为了尽可能简洁，最好要让两个Game定义在两个相同的概率空间，唯一的不同是计算某些随机变量。所以有：</p>
-<script type="math/tex; mode=display">
-S_i\land F \Longleftrightarrow S_{i+1} \land F</script><p>也就是说<script type="math/tex">S_i\land F 和</script> <script type="math/tex">S_{i+1} \land F</script>相同，证明也不困难，利用<strong>Difference Lemma</strong>(其实非常trivial)</p>
+<h2 id="基于不可区分的过渡">基于不可区分的过渡</h2>
+<p>假定有一个很小的改变在连续的游戏之间，如果被敌手所检测到，就说明存在一个高效的算法能区分两个不可区分的分布。例如：</p>
+<p>假设<span class="math display">\[P_1\]</span>和<span class="math display">\[P_2\]</span>是两个不可区分的分布，为了证明<span class="math display">\[|\text{Pr}[S_i] -
+\text{Pr}[S_{i+1}]|\]</span>是忽略不计的，假定存在一个区分算法（distinguishing
+algorithm）<span class="math display">\[ D\]</span> 插入在Game i和Game
+i+1之间，当输入为取自分布<span class="math display">\[ P_1\]</span>
+的元素时，D输出1的概率为<span class="math display">\[
+\text{Pr}[S_i]\]</span> ；当输入为取自分布<span class="math display">\[
+P_2\]</span> 的元素时，D输出1的概率为<span class="math display">\[
+\text{Pr}[S_{i+1}]\]</span> ，于是不可区分性就证明了<span class="math display">\[|\text{Pr}[S_i] -
+\text{Pr}[S_{i+1}]|\]</span>是忽略不计的。</p>
+<h2 id="基于失败事件的过渡">基于失败事件的过渡</h2>
+<p>在这种情况下，Game i 和Game i+1完全相同除非事件<span class="math display">\[F\]</span>发生。为了尽可能简洁，最好要让两个Game定义在两个相同的概率空间，唯一的不同是计算某些随机变量。所以有：
+<span class="math display">\[
+S_i\land F \Longleftrightarrow S_{i+1} \land F
+\]</span> 也就是说<span class="math display">\[S_i\land F 和\]</span>
+<span class="math display">\[S_{i+1} \land
+F\]</span>相同，证明也不困难，利用<strong>Difference
+Lemma</strong>(其实非常trivial)</p>
 <p><img src="/images/Sequences-of-Games/image-20230709214524408.png" alt="image-20230709214524408"></p>
-<p> 所以只需要证明<script type="math/tex">\text{Pr}[F]</script>是可忽略不计的就可以得到结论，通常这又是基于一个安全假设（例如当F发生时，敌手发现了一个哈希碰撞或者伪造了一个MAC）。</p>
-<p>———————————————————-下面这两段没太懂———————————————</p>
+<p>所以只需要证明<span class="math display">\[\text{Pr}[F]\]</span>是可忽略不计的就可以得到结论，通常这又是基于一个安全假设（例如当F发生时，敌手发现了一个哈希碰撞或者伪造了一个MAC）。</p>
+<p>---------------------------------------下面这两段没太懂------------------------------</p>
 <p><img src="/images/Sequences-of-Games/image-20230709215538103.png" alt="image-20230709215538103"></p>
 <p>比如第一段的最后一句，通常其中某个game会更适合分析得出清晰的证明，难道不需要分析F和二者之间吗？</p>
 <p>以及第二段的第二句开始到最后都不太懂。</p>
-<h2 id="桥接步骤"><a href="#桥接步骤" class="headerlink" title="桥接步骤"></a>桥接步骤</h2><p>这个我觉得是最玄乎的方式，以相同的方式重述某些量的计算，改变是完全概念上的，就可以得到<script type="math/tex">\text{Pr}[S_i] = \text{Pr}[S_{i+1}]</script></p>
+<h2 id="桥接步骤">桥接步骤</h2>
+<p>这个我觉得是最玄乎的方式，以相同的方式重述某些量的计算，改变是完全概念上的，就可以得到<span class="math display">\[\text{Pr}[S_i] = \text{Pr}[S_{i+1}]\]</span></p>
 <p>后面也只介绍了为什么要引入这个方式：如果没有它某些证明就会很麻烦0.0.</p>
 
     </div>
@@ -395,14 +417,14 @@ S_i\land F \Longleftrightarrow S_{i+1} \land F</script><p>也就是说<script ty
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">50k</span>
+    <span title="站点总字数">67k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">45 分钟</span>
+    <span title="站点阅读时长">1:01</span>
   </span>
 </div>
 <div class="busuanzi-count">
@@ -456,7 +478,7 @@ S_i\land F \Longleftrightarrow S_{i+1} \land F</script><p>也就是说<script ty
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
 <script src="/js/third-party/math/mathjax.js"></script>
 
 

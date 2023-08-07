@@ -306,85 +306,53 @@
     
     <div class="post-body" itemprop="articleBody"><p>不想老是搜了</p>
 <span id="more"></span>
-<h1 id="镜像操作"><a href="#镜像操作" class="headerlink" title="镜像操作"></a>镜像操作</h1><ul>
-<li><p>拉取镜像</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker pull image_name</span></span><br></pre></td></tr></table></figure>
-</li>
+<h1 id="镜像操作">镜像操作</h1>
+<ul>
+<li><p>拉取镜像 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker pull image_name</span></span><br></pre></td></tr></table></figure></p></li>
 <li><p>搜索镜像</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker search image_name</span></span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker search image_name</span></span><br></pre></td></tr></table></figure></li>
 <li><p>镜像列表</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker images</span></span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker images</span></span><br></pre></td></tr></table></figure></li>
 <li><p>删除镜像</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker rmi image_name</span></span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker rmi image_name</span></span><br></pre></td></tr></table></figure></li>
 </ul>
-<h1 id="容器操作"><a href="#容器操作" class="headerlink" title="容器操作"></a>容器操作</h1><ul>
+<h1 id="容器操作">容器操作</h1>
+<ul>
 <li><p>启动镜像建立容器</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">run</span> image_name</span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>建立并打开 STDIN，和shell交互</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">run</span> -<span class="keyword">it</span> image_name</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>挂载文件夹 </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run -v $&quot;pwd&quot;:/share image_name </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">docker run -it -v <span class="string">&quot;<span class="variable">$PWD</span>&quot;</span>:/home/share christoftorres/osiris</span></span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">run</span> -<span class="keyword">it</span> image_name</span><br></pre></td></tr></table></figure></li>
+<li><p>挂载文件夹</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run -v $&quot;pwd&quot;:/share image_name </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">docker run -it -v <span class="string">&quot;<span class="variable">$PWD</span>&quot;</span>:/home/share christoftorres/osiris</span></span><br></pre></td></tr></table></figure></li>
 <li><p>指定容器名</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">run</span> <span class="attribute">--name</span>=container_name image_name</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li><p>查看容器列表 </p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -<span class="selector-tag">a</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li>启动容器 </li>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">run</span> <span class="attribute">--name</span>=container_name image_name</span><br></pre></td></tr></table></figure></li>
+</ul></li>
+<li><p>查看容器列表</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -<span class="selector-tag">a</span></span><br></pre></td></tr></table></figure></li>
+<li><p>启动容器</p></li>
 </ul>
 <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="literal">start</span> container_name</span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>启动并交互</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="literal">start</span> -i container_name</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li><p>关闭容器 </p>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop container_name</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li><p>重启容器 </p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker restart container_name</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="literal">start</span> -i container_name</span><br></pre></td></tr></table></figure></li>
+<li><p>关闭容器</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop container_name</span><br></pre></td></tr></table></figure></li>
+<li><p>重启容器</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker restart container_name</span></span><br></pre></td></tr></table></figure></li>
 <li><p>删除容器</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">rm</span> container_name</span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>删除指定镜像的所有容器</p>
-<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm <span class="constructor">$(<span class="params">docker</span> <span class="params">ps</span> -<span class="params">a</span> | <span class="params">grep</span> <span class="string">&quot;image_name&quot;</span> | <span class="params">awk</span> &#x27;&#123;<span class="params">print</span> $1&#125;&#x27;)</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm <span class="constructor">$(<span class="params">docker</span> <span class="params">ps</span> -<span class="params">a</span> | <span class="params">grep</span> <span class="string">&quot;image_name&quot;</span> | <span class="params">awk</span> &#x27;&#123;<span class="params">print</span> $1&#125;&#x27;)</span></span><br></pre></td></tr></table></figure></li>
+</ul></li>
 <li><p>文件拷贝</p>
 <ul>
-<li><p>当前目录-&gt;容器 </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">cp</span> file_name container_name:/file_path</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>容器-&gt;当前目录 </p>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">docker</span> <span class="meta">cp</span>  container_name:file_name</span><br></pre></td></tr></table></figure>
-</li>
+<li><p>当前目录-&gt;容器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">cp</span> file_name container_name:/file_path</span><br></pre></td></tr></table></figure></li>
+<li><p>容器-&gt;当前目录</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">docker</span> <span class="meta">cp</span>  container_name:file_name</span><br></pre></td></tr></table></figure></li>
+</ul></li>
 </ul>
 
     </div>
@@ -459,14 +427,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">50k</span>
+    <span title="站点总字数">67k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">45 分钟</span>
+    <span title="站点阅读时长">1:01</span>
   </span>
 </div>
 <div class="busuanzi-count">
@@ -520,7 +488,7 @@
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
 <script src="/js/third-party/math/mathjax.js"></script>
 
 
