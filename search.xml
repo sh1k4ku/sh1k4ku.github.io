@@ -3381,16 +3381,16 @@ Leaks in Mini-Programs</h1>
 app，就像为软件提供平台的操作系统一样。同时，作为一种应用，小程序需要通过特定的api来访问后端或云上的数据或服务，也因此，小程序后端的master
 key(MS)至关重要，它对于小程序来说几乎是root权限的存在，要将MS保存在后端而不能发往前端，否则会造成严重的后果，本文便是基于这个思路所写。</p>
 <p>接下来，文章以微信为例，介绍了微信上的小程序的预备知识，下图1是小程序的常用api和云服务，例如获取手机号（在中国，一个app上的手机号即绑定了一个公民的身份）、用户信息，亦或是使用OCR、安全服务等：</p>
-<p><img src="/images/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230815110554834.png" alt="image-20230815110554834"></p>
+<p><img src="/images/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230815110554834.png" style="zoom:50%;"></p>
 <p>相较于传统的app和web服务，小程序天然带有一系列密钥管理和访问协议，确保密钥不会被非法获取，下图是小程序业务流程中主要涉及的四个密钥：</p>
-<p><img src="/images/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230815111523583.png" alt="image-20230815111523583"></p>
+<p><img src="/images/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230815111523583.png" style="zoom:50%;"></p>
 <p>在一次敏感数据访问，通常的业务逻辑是这样的：首先小程序前端（MF）向微信客户端（WC）请求Login
 Token(LT)，WC向微信服务端(WS)请求得到后发给MF，MF再利用LT向小程序后端(MB)发起登陆请求；随后，MB把LT,
 MK,
 appID发给WC得到加密密钥(EK)；同时MF再次通过WC从WS得到用户的数据，只不过是用EK加密后的密文C。最后，MF把C传给MB，MB用EK对其进行解密，完成一次敏感数据访问。该协议可由下图概括：</p>
-<p><img src="/images/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230815112258234.png" alt="image-20230815112258234"></p>
+<p><img src="/images/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230815112258234.png" style="zoom:50%;"></p>
 <p>与之相比，云服务访问协议就简单很多，只在MB和WS之间发生：只需要MB向WS请求得到AT，即可用AT调用服务：</p>
-<p><img src="/images/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230815112511761.png" alt="image-20230815112511761"></p>
+<p><img src="/images/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230815112511761.png" style="zoom:50%;"></p>
 <p>接下来，作者介绍了小程序密钥的威胁模型，即上述四个密钥的作用和泄露带来的危害；这篇文章聚焦于MK的泄露，因为MK泄露总是能造成EK和AT的泄露，攻击者便可以访问隐私数据以及免费享受云服务功能。</p>
 <p>终于到方法论的部分了，作者基于以下五个问题展开：</p>
 <ul>
