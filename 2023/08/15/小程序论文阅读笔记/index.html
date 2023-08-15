@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sh1k4ku.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="论文记录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小程序论文阅读笔记">
+<meta property="og:url" content="http://sh1k4ku.github.io/2023/08/15/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="sh1k4ku&#39;s blog">
+<meta property="og:description" content="论文记录">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://sh1k4ku.github.io/2023/08/15/images/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230815110554834.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/2023/08/15/images/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230815111523583.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/2023/08/15/images/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230815112258234.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/2023/08/15/images/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230815112511761.png">
+<meta property="article:published_time" content="2023-08-15T02:48:02.000Z">
+<meta property="article:modified_time" content="2023-08-15T08:02:32.097Z">
+<meta property="article:author" content="sh1k4ku">
+<meta property="article:tag" content="paper">
+<meta property="article:tag" content="miniapp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://sh1k4ku.github.io/2023/08/15/images/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230815110554834.png">
+
+
+<link rel="canonical" href="http://sh1k4ku.github.io/2023/08/15/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://sh1k4ku.github.io/2023/08/15/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/","path":"2023/08/15/小程序论文阅读笔记/","title":"小程序论文阅读笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>小程序论文阅读笔记 | sh1k4ku's blog</title>
+  
+
+
+
+
+
+
+
+<link rel="dns-prefetch" href="https://vercel-hdhnmm0j7-sh1k4ku.vercel.app/">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="sh1k4ku's blog" type="application/atom+xml">
+</head>
+
+  
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">sh1k4ku's blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录我的学习之路</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#dont-leak-your-keys-understanding-measuring-and-exploiting-the-appsecret-leaks-in-mini-programs"><span class="nav-number">1.</span> <span class="nav-text">Don’t
+Leak Your Keys: Understanding, Measuring, and Exploiting the AppSecret
+Leaks in Mini-Programs</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#a-measurement-study-of-wechat-mini-apps"><span class="nav-number">2.</span> <span class="nav-text">A Measurement Study of
+Wechat Mini-Apps</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="sh1k4ku"
+      src="/images/zed.jpg">
+  <p class="site-author-name" itemprop="name">sh1k4ku</p>
+  <div class="site-description" itemprop="description">会当凌绝顶</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sh1k4ku" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sh1k4ku" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:sh1k4k5@gmail.com" title="E-Mail → mailto:sh1k4k5@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+        <div class="sidebar-inner sidebar-post-related">
+          <div class="animated">
+              <div class="links-of-blogroll-title"><i class="fa fa-signs-post fa-fw"></i>
+    相关文章
+  </div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/" rel="bookmark">
+      
+      </a>
+    </li>
+  </ul>
+
+          </div>
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://sh1k4ku.github.io/2023/08/15/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/zed.jpg">
+      <meta itemprop="name" content="sh1k4ku">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sh1k4ku's blog">
+      <meta itemprop="description" content="会当凌绝顶">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="小程序论文阅读笔记 | sh1k4ku's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          小程序论文阅读笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-08-15 10:48:02 / 修改时间：16:02:32" itemprop="dateCreated datePublished" datetime="2023-08-15T10:48:02+08:00">2023-08-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">论文阅读笔记</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2023/08/15/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2023/08/15/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>论文记录</p>
+<span id="more"></span>
+<h1 id="dont-leak-your-keys-understanding-measuring-and-exploiting-the-appsecret-leaks-in-mini-programs">Don’t
+Leak Your Keys: Understanding, Measuring, and Exploiting the AppSecret
+Leaks in Mini-Programs</h1>
+<p>小程序，挂在app上，其因规模小、功能丰富的原因，在市场上大受欢迎，这也让app成为了super
+app，就像为软件提供平台的操作系统一样。同时，作为一种应用，小程序需要通过特定的api来访问后端或云上的数据或服务，也因此，小程序后端的master
+key(MS)至关重要，它对于小程序来说几乎是root权限的存在，要将MS保存在后端而不能发往前端，否则会造成严重的后果，本文便是基于这个思路所写。</p>
+<p>接下来，文章以微信为例，介绍了微信上的小程序的预备知识，下图1是小程序的常用api和云服务，例如获取手机号（在中国，一个app上的手机号即绑定了一个公民的身份）、用户信息，亦或是使用OCR、安全服务等：</p>
+<p><img src="../images/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230815110554834.png" alt="image-20230815110554834"></p>
+<p>相较于传统的app和web服务，小程序天然带有一系列密钥管理和访问协议，确保密钥不会被非法获取，下图是小程序业务流程中主要涉及的四个密钥：</p>
+<p><img src="../images/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230815111523583.png" alt="image-20230815111523583"></p>
+<p>在一次敏感数据访问，通常的业务逻辑是这样的：首先小程序前端（MF）向微信客户端（WC）请求Login
+Token(LT)，WC向微信服务端(WS)请求得到后发给MF，MF再利用LT向小程序后端(MB)发起登陆请求；随后，MB把LT,
+MK,
+appID发给WC得到加密密钥(EK)；同时MF再次通过WC从WS得到用户的数据，只不过是用EK加密后的密文C。最后，MF把C传给MB，MB用EK对其进行解密，完成一次敏感数据访问。该协议可由下图概括：</p>
+<p><img src="../images/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230815112258234.png" alt="image-20230815112258234"></p>
+<p>与之相比，云服务访问协议就简单很多，只在MB和WS之间发生：只需要MB向WS请求得到AT，即可用AT调用服务：</p>
+<p><img src="../images/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230815112511761.png" alt="image-20230815112511761"></p>
+<p>接下来，作者介绍了小程序密钥的威胁模型，即上述四个密钥的作用和泄露带来的危害；这篇文章聚焦于MK的泄露，因为MK泄露总是能造成EK和AT的泄露，攻击者便可以访问隐私数据以及免费享受云服务功能。</p>
+<p>终于到方法论的部分了，作者基于以下五个问题展开：</p>
+<ul>
+<li>问题 1：MK 泄露小程序的类别是什么？</li>
+<li>问题 2：它们的评级如何？</li>
+<li>问题 3：它们获取了哪些资源？</li>
+<li>问题 4：它们的开发者是谁？</li>
+<li>问题 5：它们的最新更新时间是什么时候？</li>
+<li>问题 6：是否有备受瞩目的小程序存在MK泄露？</li>
+</ul>
+<p>首先便是数据收集环节，作者通过“Mp.wx.qq.com/wxa-cgi/innersearch”
+API来批量下载小程序，得到了3,450,586个小程序（太可怕了）。在获取前端代码后，去寻找里面的32个16进制字符串，通过“Api.weixin.qq.com/cgi-bin/token”
+API确定是否为MK，得到的结果是40,880个小程序存在MK泄露的问题。得到数据集，便可进行分析，回答上述五个问题：</p>
+<ul>
+<li>泄露MK的小程序种类多种多样，生活方式和购物类占比最高，工具、政府和游戏类数量较多。</li>
+<li>作者基于用户的评分对小程序评级，结果表明，低评级的小程序更容易存在MK泄露。</li>
+<li>有24,701个小程序可以通过MK泄露被账户劫持、推广滥用、服务窃取（这些攻击会在下面介绍）；同时6,907个小程序没有这样的问题，但不保证以后也不会有。</li>
+<li>大多公司只开发了一个存在这种问题的小程序，但也有开发了30个的。</li>
+<li>自微信引入小程序的第一年，就存在MK泄露的问题；随着时间推移，漏洞小程序数量在减少。</li>
+<li>一些高知名度的公司在多个小程序中犯了同样的错误（如雀巢）；
+微信提供商腾讯是小程序中出现 MK
+泄露的排名第一的公司；一些高知名度公司的小程序只泄露了
+MK，而没有访问敏感信息。</li>
+</ul>
+<p>然后，作者提出了基于MK泄露的两种攻击，一种是针对敏感数据的，如账户劫持、推广滥用，另一种是针对云服务的，如服务窃取。作者不仅提出攻击，还提出了修复意见和推广这个研究到其他app上，以及表明自己在研究过程中遵守了道德准则，例如每分钟只发送六个爬取小程序的请求、限制确认MK的线程数、保证只使用自己的账户。</p>
+<p>最后，介绍了一下近几年有关小程序和密钥泄露的相关研究，并提出总结。</p>
+<h1 id="a-measurement-study-of-wechat-mini-apps">A Measurement Study of
+Wechat Mini-Apps</h1>
+<p>这一篇是2021年zhangyue老师的论文，介绍了他们开发的分析微信小程序的工具MiniCrawler，篇幅较短只有2页</p>
+<p>引入了小程序的背景后，开始介绍他们的工具，总共分为三个部分：</p>
+<ol type="1">
+<li>元数据爬虫：接受一系列关键词，通过微信的api爬取小程序的信息</li>
+<li>关键词生成器：使用NLP技术分析小程序的名称和描述，生成高质量的关键词</li>
+<li>包下载器：根据appid下载小程序的包</li>
+</ol>
+<p>拿到包后，便可以统计小程序的信息，做出归纳推理，文中统计了小程序的大小、常用api、类型、rating(评分？)</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>sh1k4ku
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://sh1k4ku.github.io/2023/08/15/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" title="小程序论文阅读笔记">http://sh1k4ku.github.io/2023/08/15/小程序论文阅读笔记/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/paper/" rel="tag"># paper</a>
+              <a href="/tags/miniapp/" rel="tag"># miniapp</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/07/09/Sequences-of-Games/" rel="prev" title="Sequences of Games">
+                  <i class="fa fa-angle-left"></i> Sequences of Games
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heartbeat"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">sh1k4ku</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">68k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:02</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        访问人数：<span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        访问次数：<span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="/js/busuanzi.js"></script>
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"https://vercel-hdhnmm0j7-sh1k4ku.vercel.app/","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"请文明评论呀","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":true,"requiredFields":["nick","mail"],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/2023/08/15/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":true},"log":false});</script></body>
+</html>
