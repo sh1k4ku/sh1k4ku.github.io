@@ -3458,4 +3458,62 @@ Wechat Mini-Apps</h1>
         <tag>miniapp</tag>
       </tags>
   </entry>
+  <entry>
+    <title>cnss_re</title>
+    <url>/2023/08/16/cnss-re/</url>
+    <content><![CDATA[<p>CNSS新生赛的逆向题题解</p>
+<span id="more"></span>
+<h1 id="reverse-guideline">Reverse Guideline</h1>
+<p>教程，直接拿到flag</p>
+<h1 id="welcome-to-reverse-world">Welcome to Reverse World!</h1>
+<p>用ida打开即可看到flag</p>
+<h1 id="find-me">Find me</h1>
+<p>用ida看伪代码，介绍从三个方向去找flag：string、function和xref</p>
+<p>shift-f12查看字符串找到第一部分</p>
+<p><img src="../images/cnss-re/image-20230816194830839.png" alt="image-20230816194830839" style="zoom:50%;"></p>
+<p>左侧函数框最上方看到第二部分</p>
+<p><img src="../images/cnss-re/image-20230816194850994.png" alt="image-20230816194850994" style="zoom:50%;"></p>
+<p>选中函数按x查看交叉引用</p>
+<p><img src="../images/cnss-re/image-20230816194936131.png" alt="image-20230816194936131" style="zoom:50%;"></p>
+<p>按r把数字变成字符</p>
+<p>最后拼接flag</p>
+<h1 id="maware">maware</h1>
+<p>查看代码逻辑，先对输入异或，encode函数里是每四字节输入把bit置换，结果要求等于一个给定数组(shift+e导出数据)</p>
+<p>写一个逆脚本即可</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">encode</span><span class="params">(<span class="type">unsigned</span> <span class="type">char</span> *a1, <span class="type">unsigned</span> <span class="type">char</span> *a2, <span class="type">unsigned</span> <span class="type">char</span> *a3, <span class="type">unsigned</span> <span class="type">char</span> *a4)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> v5; <span class="comment">// [rsp+2Ch] [rbp-4h]</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> v6; <span class="comment">// [rsp+2Dh] [rbp-3h]</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> v7; <span class="comment">// [rsp+2Eh] [rbp-2h]</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> v8; <span class="comment">// [rsp+2Fh] [rbp-1h]</span></span><br><span class="line"></span><br><span class="line">    v5 = (*a1 &lt;&lt; <span class="number">7</span>) | (*a2 &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    v6 = ((*a4 &gt;&gt; <span class="number">2</span>) | (*a3 &lt;&lt; <span class="number">6</span>)) ^ v5;</span><br><span class="line">    v7 = ((*a1 &gt;&gt; <span class="number">1</span>) | (*a2 &lt;&lt; <span class="number">7</span>)) ^ v6;</span><br><span class="line">    v8 = ((*a3 &gt;&gt; <span class="number">2</span>) | (*a4 &lt;&lt; <span class="number">6</span>)) ^ v7;</span><br><span class="line">    *a1 = v5;</span><br><span class="line">    *a2 = v6;</span><br><span class="line">    *a3 = v7;</span><br><span class="line">    *a4 = v8;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">decode</span><span class="params">(<span class="type">unsigned</span> <span class="type">char</span> *a1, <span class="type">unsigned</span> <span class="type">char</span> *a2, <span class="type">unsigned</span> <span class="type">char</span> *a3, <span class="type">unsigned</span> <span class="type">char</span> *a4)</span>&#123;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> m1, m2, m3, m4;</span><br><span class="line">    m1 = *a1;</span><br><span class="line">    m2 = *a2 ^ *a1;</span><br><span class="line">    m3 = *a3 ^ *a2;</span><br><span class="line">    m4 = *a4 ^ *a3;</span><br><span class="line">    </span><br><span class="line">    *a4 = ((m2 &lt;&lt; <span class="number">2</span>) | (m4 &gt;&gt; <span class="number">6</span>));</span><br><span class="line">    *a3 = ((m4 &lt;&lt; <span class="number">2</span>) | (m2 &gt;&gt; <span class="number">6</span>));</span><br><span class="line">    *a2 = ((m1 &lt;&lt; <span class="number">1</span>) | (m3 &gt;&gt; <span class="number">7</span>));</span><br><span class="line">    *a1 = ((m3 &lt;&lt; <span class="number">1</span>) | (m1 &gt;&gt; <span class="number">7</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> cipher[] =</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="number">0x3F</span>, <span class="number">0x8F</span>, <span class="number">0xA3</span>, <span class="number">0xBC</span>, <span class="number">0x8D</span>, <span class="number">0x27</span>, <span class="number">0x7A</span>, <span class="number">0x67</span>, <span class="number">0xE2</span>, <span class="number">0x03</span>, </span><br><span class="line">        <span class="number">0xA2</span>, <span class="number">0xE0</span>, <span class="number">0xAC</span>, <span class="number">0xEA</span>, <span class="number">0x95</span>, <span class="number">0x8B</span>, <span class="number">0xA3</span>, <span class="number">0xED</span>, <span class="number">0xCC</span>, <span class="number">0xB6</span>, </span><br><span class="line">        <span class="number">0x32</span>, <span class="number">0x8C</span>, <span class="number">0x94</span>, <span class="number">0x52</span>, <span class="number">0x82</span>, <span class="number">0x8A</span>, <span class="number">0x14</span>, <span class="number">0xC6</span>, <span class="number">0xF5</span>, <span class="number">0xAE</span>, </span><br><span class="line">        <span class="number">0x68</span>, <span class="number">0x73</span>, <span class="number">0x00</span></span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">28</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">        decode(&amp;cipher[i], &amp;cipher[i+<span class="number">1</span>], &amp;cipher[i+<span class="number">2</span>], &amp;cipher[i+<span class="number">3</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">32</span>; i++)&#123;</span><br><span class="line">        cipher[i] ^= <span class="number">0x11</span>;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>, cipher[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="encode">encode</h1>
+<p>代码逻辑是输入一个字符串，经过encode函数后要求等于一个给定的字符串</p>
+<p><img src="../images/cnss-re/image-20230816195750648.png" alt="image-20230816195750648" style="zoom:50%;"></p>
+<p>encode函数是每三个字符进行处理，一开始没看懂，把61那里变成字符('=')后大概猜到了是base64，里面的alpha数组确实是个表，但是和标准的表不一样，写个脚本就可解密</p>
+<h1 id="youve-got-a-flag">You've got a flag!</h1>
+<p>考点是patch程序</p>
+<p>流程是要求让coin小于0，每轮coin会自减去1/4，但是小于一个值的时候就会加上1</p>
+<p>查看指令后是用addsd实现的，那么很显然就会想到把它改成subsd即可</p>
+<p>在option-general可以选择查看字节码，再在网上搜对应subsd的字节码即可</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">modify_machine_code</span>(<span class="params">filename, original_code, new_code</span>):</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(filename, <span class="string">&quot;rb&quot;</span>) <span class="keyword">as</span> file:</span><br><span class="line">        content = file.read()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> original_code <span class="keyword">in</span> content:</span><br><span class="line">        modified_content = content.replace(original_code, new_code)</span><br><span class="line">        <span class="comment"># print(&quot;机器码找到了&quot;)</span></span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(filename, <span class="string">&quot;wb&quot;</span>) <span class="keyword">as</span> file:</span><br><span class="line">            file.write(modified_content)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;机器码修改成功&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;未找到原始机器码&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 文件名</span></span><br><span class="line">filename = <span class="string">&quot;You&#x27;ve got a flag!.exe&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 原始机器码</span></span><br><span class="line">original_code = <span class="string">b&quot;\xF2\x0F\x5B\xC8&quot;</span></span><br><span class="line"><span class="comment"># 新的机器码</span></span><br><span class="line">new_code = <span class="string">b&quot;\xF2\x0F\x5C\xC8&quot;</span></span><br><span class="line"></span><br><span class="line">modify_machine_code(filename, original_code, new_code)</span><br></pre></td></tr></table></figure>
+<h1 id="diannaobaozhale">diannaobaozhale</h1>
+<p>考点是看汇编指令</p>
+<p>其实整个流程就是把flag输出了，照着走一遍即可，坑的话可能就是jle这个指令的意思是Jump
+if Less than or Equal，所以程序一共要循环10次而不是9次</p>
+<h1 id="pyfuck">Pyfuck</h1>
+<p>考点算是变量混淆？把值变成了这个fuck的表示，打印一遍就知道是啥了，再异或回去即可</p>
+<h1 id="cnss-rev-challenge">CNSS Rev Challenge</h1>
+<p>c#写的一个小游戏，最后要把让看板娘跑到语句后面。</p>
+<p>逆了半天也没发现怎么改配置文件，最后在hurrison的提示下，了解到可以在程序运行到那个阶段的时候查看内存，搜索字符串就能拿到flag了</p>
+<p>用ida或cheat engine都可以</p>
+<h1 id="ezarm">EzArm</h1>
+<p>考点是arm逆向，出题人手写的arm汇编指令，太牛了</p>
+<p>先装个qemu环境，用gdb调试程序，发现程序从最开始跳到了10000的地方，那么程序起始的地址应该是10000，然后就可以在ida中看到伪代码了，整个流程不难，经过某些运算后要等于一个数组，有个关键数组是动态生成的，所以ida里直接找不到，根据地址在gdb里查看即可</p>
+<p>最后的exp如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">secret = [<span class="number">0x6E</span>, <span class="number">0x6D</span>, <span class="number">0x79</span>, <span class="number">0x7E</span>, <span class="number">0x82</span>, <span class="number">0x53</span>, <span class="number">0x3D</span>, <span class="number">0x84</span>, <span class="number">0x55</span>, <span class="number">0x5F</span>, </span><br><span class="line">  <span class="number">0x4A</span>, <span class="number">0x6B</span>, <span class="number">0x79</span>, <span class="number">0x6B</span>, <span class="number">0x73</span>, <span class="number">0x6A</span>, <span class="number">0x72</span>, <span class="number">0x66</span>, <span class="number">0x3D</span>, <span class="number">0x86</span>, </span><br><span class="line">  <span class="number">0x55</span>, <span class="number">0x6C</span>, <span class="number">0x46</span>, <span class="number">0x67</span>, <span class="number">0x6A</span>, <span class="number">0x48</span>, <span class="number">0x77</span>]</span><br><span class="line">x = [<span class="number">1</span>, <span class="number">0xc</span>, <span class="number">0xb</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0x1b</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">chr</span>(((secret[i] - x[(i+<span class="number">1</span>)%<span class="number">3</span>]) % <span class="number">256</span>) ^x[i % <span class="number">3</span>]), end=<span class="string">&quot;&quot;</span> )</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>re</tag>
+        <tag>arm</tag>
+        <tag>galgame</tag>
+      </tags>
+  </entry>
 </search>
