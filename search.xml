@@ -3506,6 +3506,20 @@ if Less than or Equal，所以程序一共要循环10次而不是9次</p>
 <p>先装个qemu环境，用gdb调试程序，发现程序从最开始跳到了10000的地方，那么程序起始的地址应该是10000，然后就可以在ida中看到伪代码了，整个流程不难，经过某些运算后要等于一个数组，有个关键数组是动态生成的，所以ida里直接找不到，根据地址在gdb里查看即可</p>
 <p>最后的exp如下：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">secret = [<span class="number">0x6E</span>, <span class="number">0x6D</span>, <span class="number">0x79</span>, <span class="number">0x7E</span>, <span class="number">0x82</span>, <span class="number">0x53</span>, <span class="number">0x3D</span>, <span class="number">0x84</span>, <span class="number">0x55</span>, <span class="number">0x5F</span>, </span><br><span class="line">  <span class="number">0x4A</span>, <span class="number">0x6B</span>, <span class="number">0x79</span>, <span class="number">0x6B</span>, <span class="number">0x73</span>, <span class="number">0x6A</span>, <span class="number">0x72</span>, <span class="number">0x66</span>, <span class="number">0x3D</span>, <span class="number">0x86</span>, </span><br><span class="line">  <span class="number">0x55</span>, <span class="number">0x6C</span>, <span class="number">0x46</span>, <span class="number">0x67</span>, <span class="number">0x6A</span>, <span class="number">0x48</span>, <span class="number">0x77</span>]</span><br><span class="line">x = [<span class="number">1</span>, <span class="number">0xc</span>, <span class="number">0xb</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0x1b</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">chr</span>(((secret[i] - x[(i+<span class="number">1</span>)%<span class="number">3</span>]) % <span class="number">256</span>) ^x[i % <span class="number">3</span>]), end=<span class="string">&quot;&quot;</span> )</span><br></pre></td></tr></table></figure>
+<h1 id="brainfuck">Brainfuck++</h1>
+<p>不会</p>
+<h1 id="eazy-blockchain">Eazy Blockchain</h1>
+<p>evm逆向，给了bytecode和check函数</p>
+<p>运行后90w行的调试信息，看关键逻辑，一共分为两部分。</p>
+<p>这个地方是对输入的bytes进行判断，如果长度不是0x20就revert了，所以可以得知flag是32字节的.</p>
+<p><img src="/images/cnss-re/image-20230821105646840.png" alt="image-20230821105646840" style="zoom:50%;"></p>
+<p>后面就是漫长的审代码，这里把calldata存到栈里：</p>
+<p><img src="/images/cnss-re/image-20230821105908007.png" alt="image-20230821105908007" style="zoom:50%;"></p>
+<p>接下来是一个字节一个字节的加密操作，第一步的加密是用8字节的key对输入进行异或操作，把几个key找到后就可恢复这一部分。</p>
+<p>第二部分和第一部分类似，但我实在是累的一，这已经到90多万行，不想再一个个调，发现逻辑也是异或后，直接写了个shell脚本进行字节翻转，但没有完全自动化，最后还是手调的flag。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/sh</span></span><br><span class="line">rm output.txt</span><br><span class="line">python demo.py &gt; output.txt</span><br><span class="line">grep &quot;EQ&quot; output.txt | wc -l</span><br><span class="line">grep -B 4 &quot;EQ&quot; output.txt | grep -v &quot;^--$&quot; | tail -n 3 | head -n 1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>最后到return就代表跑通了</p>
+<p><img src="/images/cnss-re/image-20230821110811948.png" alt="image-20230821110811948" style="zoom:50%;"></p>
 ]]></content>
       <categories>
         <category>CTF</category>
@@ -3515,5 +3529,11 @@ if Less than or Equal，所以程序一共要循环10次而不是9次</p>
         <tag>arm</tag>
         <tag>galgame</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>证书论文阅读笔记</title>
+    <url>/2023/08/21/%E8%AF%81%E4%B9%A6%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[
+]]></content>
   </entry>
 </search>
