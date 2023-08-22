@@ -3561,16 +3561,16 @@ stapling的站点；<strong>证书透明度（CT）</strong>会将已签名的�
 <a href="https://crt.sh/">ctr.sh</a>
 CT搜索引擎来获取，得到了31,211个域名，19,493
 (62.45%)个域名可访问，11,718 (35.54%)个域名存在访问问题。继续利用 <a href="https://requests.readthedocs.io/en/master/">Requests</a>来从HTTP和HTTPS访问这些域名以检查他们的可访问性，得到了如下图的统计结果：</p>
-<p><img src="../images/%E8%AF%81%E4%B9%A6%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230821172040654.png" alt="image-20230821172040654" style="zoom:50%;"></p>
+<p><img src="/images/%E8%AF%81%E4%B9%A6%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230821172040654.png" alt="image-20230821172040654" style="zoom:50%;"></p>
 <p>接下来，为了分析是否存在五个方面的问题，作者获取每个域名的证书，以Chrome
 Root Store、Apple OS , Mozilla, and Windows Root Certificate
 Program中的98个根证书作为可信根证书列表，来分析得到的域名数据。具体来说，使用OpenSSL的报错信息来验证证书链，对其他四个问题，使用pyOpenSSL来解析证书，提取每个字段的信息和预设的标准进行比较。统计结果如下表所示：</p>
-<p><img src="../images/%E8%AF%81%E4%B9%A6%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230821190516277.png" alt="image-20230821190516277" style="zoom:50%;"></p>
+<p><img src="/images/%E8%AF%81%E4%B9%A6%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230821190516277.png" alt="image-20230821190516277" style="zoom:50%;"></p>
 <ul>
 <li><p><strong>SAN不匹配</strong>：域名如果不在证书的SAN字段则被认为符合这种情况，结果由下图总结。还有个有趣的事实是在1680个不匹配的域名中有1171（69.70%）个是多级域名，但通配符证书只能匹配一级。</p>
-<p><img src="../images/%E8%AF%81%E4%B9%A6%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230821192244853.png" alt="image-20230821192244853" style="zoom:50%;"></p></li>
+<p><img src="/images/%E8%AF%81%E4%B9%A6%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230821192244853.png" alt="image-20230821192244853" style="zoom:50%;"></p></li>
 <li><p><strong>有效期过长</strong>：2020年1月1日以后的证书有效期不允许超过398天，如果在以前，则考虑不超过825天。结果由下图总结。作者同样考虑了有效期较短的问题——管理员会忘记更新证书，结果表明70%过期但仍被使用的证书有效期较短。</p>
-<p><img src="../images/%E8%AF%81%E4%B9%A6%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230821192817522.png" alt="image-20230821192817522" style="zoom:50%;"></p></li>
+<p><img src="/images/%E8%AF%81%E4%B9%A6%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230821192817522.png" alt="image-20230821192817522" style="zoom:50%;"></p></li>
 <li><p><strong>证书链断裂</strong>：如果域名提供的证书不能将叶证书连接到根证书则视为符合这种情况。8%的域名没有安装中间证书，在第十周证书链断裂的数量从1042增长到了1211，98.16%的都是由于证书更新。我们发现
 89.00%
 存在此问题的域名只提供了叶证书。这表明出现此问题的主要原因是管理员不知道安装完整的证书链。剩下的
@@ -3580,7 +3580,7 @@ Program中的98个根证书作为可信根证书列表，来分析得到的域�
 <li><p><strong>证书不透明</strong>：2018年4月以后证书不提交SCT则视为符合这种情况。在指定日期后签发的1789个证书中，只有85个没有设置SCT字段，并且它们都是自签名证书。在指定日期以前有
 199 个域名在未设置 SCT 的情况下安装了四个证书。</p></li>
 <li><p><strong>过时的密码学算法</strong>：使用MD5、SHA1和RSA有效bit为1024的则视为符合这种情况。统计结果由下图总结：</p>
-<p><img src="../images/%E8%AF%81%E4%B9%A6%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230821193954874.png" alt="image-20230821193954874" style="zoom:50%;"></p></li>
+<p><img src="/images/%E8%AF%81%E4%B9%A6%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230821193954874.png" alt="image-20230821193954874" style="zoom:50%;"></p></li>
 </ul>
 <p>为了回答问题2，作者提出了四个可用性因素（？，Usability Factor）</p>
 <ul>
@@ -3591,12 +3591,12 @@ DV 证书，而大多数域名（65.48%）都疯狂地安装了 IV/OV 证书。 
 证书的无效比例最高（83.70%），DV 证书的无效比例最低（24.99%）。在 IV/OV
 证书中，我们发现 98.97% 的域名与他人共享证书，55.09%
 的证书被错误部署。</p>
-<p><img src="../images/%E8%AF%81%E4%B9%A6%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230821195207400.png" alt="image-20230821195207400" style="zoom:50%;"></p></li>
+<p><img src="/images/%E8%AF%81%E4%B9%A6%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230821195207400.png" alt="image-20230821195207400" style="zoom:50%;"></p></li>
 <li><p><strong>证书颁发者的选择</strong>：从证书 <em>Issuer Name</em>
 字段的 <em>commonName</em> 中提取 CA 名称。</p>
-<p><img src="../images/%E8%AF%81%E4%B9%A6%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230821200041544.png" alt="image-20230821200041544" style="zoom:50%;"></p></li>
+<p><img src="/images/%E8%AF%81%E4%B9%A6%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230821200041544.png" alt="image-20230821200041544" style="zoom:50%;"></p></li>
 <li><p><strong>多个域名共享证书</strong>：结果如下图所示。一个有趣的事实是80%无效部署的域名都是使用了付费CA</p>
-<p><img src="../images/%E8%AF%81%E4%B9%A6%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230821200539018.png" alt="image-20230821200539018" style="zoom:50%;"></p></li>
+<p><img src="/images/%E8%AF%81%E4%B9%A6%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230821200539018.png" alt="image-20230821200539018" style="zoom:50%;"></p></li>
 <li><p><strong>证书申请者的撤销选择</strong>：作者发现有 1,750 份由可信
 CA 签发的证书提供了 OCSP
 信息。对于过期的证书，我们提取了签发者，以评估现代浏览器是否无法识别其根证书。作者发现没有证书在有效期内被吊销。过期证书被浏览器撤销了，并且过期了很长时间，这表明被动撤销对管理者来说是未知的。在安装了
