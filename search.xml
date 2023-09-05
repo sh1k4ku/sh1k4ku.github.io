@@ -3625,19 +3625,19 @@ Must-staple。（这个不知道怎么来的）</p></li>
 <p>官方提供hook 模板https://frida.re/docs/examples/android/</p>
 <p>hook输入框https://www.jianshu.com/p/82d2bfeb4fbf</p>
 <p>获取输入框</p>
-<p><img src="../images/android%20vx%20reverse/image-20230823154613871.png" alt="image-20230823154613871" style="zoom:50%;"></p>
-<p><img src="../images/android%20vx%20reverse/image-20230823154710130.png" alt="image-20230823154710130" style="zoom:50%;"></p>
+<p><img src="/images/android%20vx%20reverse/image-20230823154613871.png" alt="image-20230823154613871" style="zoom:50%;"></p>
+<p><img src="/images/android%20vx%20reverse/image-20230823154710130.png" alt="image-20230823154710130" style="zoom:50%;"></p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> frida, sys</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">on_message</span>(<span class="params">message, data</span>):</span><br><span class="line">    <span class="keyword">if</span> message[<span class="string">&#x27;type&#x27;</span>] == <span class="string">&#x27;send&#x27;</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;[*] &#123;0&#125;&quot;</span>.<span class="built_in">format</span>(message[<span class="string">&#x27;payload&#x27;</span>]))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(message)</span><br><span class="line"></span><br><span class="line">jscode = <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Java.perform(() =&gt; &#123;</span></span><br><span class="line"><span class="string">    let MMFlexEditText = Java.use(&quot;com.tencent.mm.ui.widget.cedit.api.MMFlexEditText&quot;);</span></span><br><span class="line"><span class="string">    var CharSequence = Java.use(&quot;java.lang.CharSequence&quot;);</span></span><br><span class="line"><span class="string">    MMFlexEditText[&quot;getText&quot;].implementation = function () &#123;</span></span><br><span class="line"><span class="string">        console.log(`MMFlexEditText.getText is called`);</span></span><br><span class="line"><span class="string">        let result = this[&quot;getText&quot;]();</span></span><br><span class="line"><span class="string">        var resultStr = Java.cast(result, CharSequence);</span></span><br><span class="line"><span class="string">        console.log(`MMFlexEditText.getText result=$&#123;resultStr&#125;`);</span></span><br><span class="line"><span class="string">        return result;</span></span><br><span class="line"><span class="string">&#125;;</span></span><br><span class="line"><span class="string">&#125;);</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">process = frida.get_usb_device().attach(<span class="string">&#x27;微信&#x27;</span>)</span><br><span class="line">script = process.create_script(jscode)</span><br><span class="line">script.on(<span class="string">&#x27;message&#x27;</span>, on_message)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;[*] Running CTF&#x27;</span>)</span><br><span class="line">script.load()</span><br><span class="line">sys.stdin.read()</span><br></pre></td></tr></table></figure>
-<p>创建发起动态 <img src="../images/android%20vx%20reverse/image-20230823162611566.png" alt="image-20230823162611566"></p>
-<p><img src="../images/android%20vx%20reverse/image-20230823162854590.png" alt="image-20230823162854590" style="zoom:50%;"></p>
+<p>创建发起动态 <img src="/images/android%20vx%20reverse/image-20230823162611566.png" alt="image-20230823162611566"></p>
+<p><img src="/images/android%20vx%20reverse/image-20230823162854590.png" alt="image-20230823162854590" style="zoom:50%;"></p>
 <p>两个pj.c.l是在输入法展开时进行，返回值恒为4000</p>
 <h1 id="访问量">访问量</h1>
-<p><img src="../images/android%20vx%20reverse/image-20230825103210829.png" alt="image-20230825103210829" style="zoom:50%;"></p>
+<p><img src="/images/android%20vx%20reverse/image-20230825103210829.png" alt="image-20230825103210829" style="zoom:50%;"></p>
 <p>class: android.widget.TextView</p>
 <p>resource-id: com.tencent.mm:id/m6r</p>
 <p>搜索框类：com.tencent.mm.ui.search.FTSEditTextView.e</p>
-<p><img src="../images/android%20vx%20reverse/image-20230825105846853.png" alt="image-20230825105846853" style="zoom:50%;"></p>
-<p><img src="../images/android%20vx%20reverse/image-20230825110010120.png" alt="image-20230825110010120"></p>
+<p><img src="/images/android%20vx%20reverse/image-20230825105846853.png" alt="image-20230825105846853" style="zoom:50%;"></p>
+<p><img src="/images/android%20vx%20reverse/image-20230825110010120.png" alt="image-20230825110010120"></p>
 ]]></content>
       <categories>
         <category>security</category>
