@@ -2705,7 +2705,8 @@ a(z^4 - x^2) = b(y^2 - z^4)\\
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>RSA, math</tag>
+        <tag>RSA</tag>
+        <tag>math</tag>
       </tags>
   </entry>
   <entry>
@@ -3645,6 +3646,20 @@ Must-staple。（这个不知道怎么来的）</p></li>
       <tags>
         <tag>vx</tag>
         <tag>Android reverse</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>introduction to modern cryptography</title>
+    <url>/2023/10/08/introduction-to-modern-cryptography/</url>
+    <content><![CDATA[<p>开个坑，看今年搞不搞的完</p>
+<span id="more"></span>
+]]></content>
+      <categories>
+        <category>Crypto</category>
+      </categories>
+      <tags>
+        <tag>book</tag>
+        <tag>cryptography</tag>
       </tags>
   </entry>
 </search>
