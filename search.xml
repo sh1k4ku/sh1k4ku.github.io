@@ -3662,4 +3662,78 @@ Must-staple。（这个不知道怎么来的）</p></li>
         <tag>cryptography</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Learning record of Dilithium</title>
+    <url>/2023/11/15/Learning-record-of-Dilithium/</url>
+    <content><![CDATA[<p>记录一下论文</p>
+<span id="more"></span>
+<table>
+<colgroup>
+<col style="width: 51%">
+<col style="width: 16%">
+<col style="width: 31%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>paper</th>
+<th>义眼顶真</th>
+<th>概述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>https://pq-crystals.org/dilithium/data/dilithium-specification-round3-20210208.pdf</td>
+<td></td>
+<td>NIST第三轮文档；和Kyber的很多内容相似</td>
+</tr>
+<tr class="even">
+<td>[DKL+18]</td>
+<td></td>
+<td>和文档的内容差不多</td>
+</tr>
+<tr class="odd">
+<td>[MUTS22]</td>
+<td>AI？</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>[RJH+18]</td>
+<td>论证得到s_1即可签名</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+]]></content>
+      <categories>
+        <category>Crypto</category>
+      </categories>
+      <tags>
+        <tag>PQC</tag>
+      </tags>
+  </entry>
 </search>
