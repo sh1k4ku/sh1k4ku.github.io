@@ -3665,13 +3665,12 @@ Must-staple。（这个不知道怎么来的）</p></li>
   <entry>
     <title>Learning record of Dilithium</title>
     <url>/2023/11/15/Learning-record-of-Dilithium/</url>
-    <content><![CDATA[<p>记录一下论文</p>
-<span id="more"></span>
+    <content><![CDATA[<span id="more"></span>
 <table>
 <colgroup>
 <col style="width: 51%">
-<col style="width: 16%">
-<col style="width: 31%">
+<col style="width: 28%">
+<col style="width: 20%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -3682,19 +3681,20 @@ Must-staple。（这个不知道怎么来的）</p></li>
 </thead>
 <tbody>
 <tr class="odd">
-<td>https://pq-crystals.org/dilithium/data/dilithium-specification-round3-20210208.pdf</td>
+<td>https://pq-crystals.org/dilithium/data/dilithium-specification-round3-20210208.pdf,
+[BDK+]</td>
 <td></td>
-<td>NIST第三轮文档；和Kyber的很多内容相似</td>
+<td>NIST implement document.</td>
 </tr>
 <tr class="even">
 <td>[DKL+18]</td>
 <td></td>
-<td>和文档的内容差不多</td>
+<td>similar to doc above.</td>
 </tr>
 <tr class="odd">
-<td>[MUTS22]</td>
-<td>AI？</td>
+<td><a href="#MUTS22">MUTS22</a></td>
 <td></td>
+<td>when <span class="math inline">\(y_{i, j}\)</span> is zero.</td>
 </tr>
 <tr class="even">
 <td>[RJH+18]</td>
@@ -3702,13 +3702,13 @@ Must-staple。（这个不知道怎么来的）</p></li>
 <td></td>
 </tr>
 <tr class="odd">
-<td></td>
-<td></td>
+<td>Lyubashevsky</td>
+<td>Fiat-Shamir with Aborts framework</td>
 <td></td>
 </tr>
 <tr class="even">
-<td></td>
-<td></td>
+<td>DDLL13</td>
+<td>BLISS signature scheme</td>
 <td></td>
 </tr>
 <tr class="odd">
@@ -3728,6 +3728,37 @@ Must-staple。（这个不知道怎么来的）</p></li>
 </tr>
 </tbody>
 </table>
+<h1 id="muts22">MUTS22</h1>
+<p>recovering <span class="math inline">\(s_1\)</span> based on
+<strong><em>Multi-Layer Perceptron (MLP)</em></strong> machine-learning,
+and according to a [RJH+18], it's possible to sign using just that
+knowledge. the leaking point is bit-unpacking function when generating
+the vector <strong>y</strong> (input <span class="math inline">\(\rho^{&#39;}\)</span> in XOF to generate a byte
+string and unpacked it into <span class="math inline">\(\ell\)</span>
+polynomials, who has N cocoefficients). the function use in [BDK+]:</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">polyz_unpack</span><span class="params">(poly *r, <span class="type">const</span> <span class="type">uint8_t</span> *a)</span> &#123;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> i;</span><br><span class="line">  DBENCH_START();</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">if</span> GAMMA1 == (1 &lt;&lt; 17)</span></span><br><span class="line">  <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; N/<span class="number">4</span>; ++i) &#123;</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">0</span>]  = a[<span class="number">9</span>*i+<span class="number">0</span>];</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">0</span>] |= (<span class="type">uint32_t</span>)a[<span class="number">9</span>*i+<span class="number">1</span>] &lt;&lt; <span class="number">8</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">0</span>] |= (<span class="type">uint32_t</span>)a[<span class="number">9</span>*i+<span class="number">2</span>] &lt;&lt; <span class="number">16</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">0</span>] &amp;= <span class="number">0x3FFFF</span>;</span><br><span class="line"></span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">1</span>]  = a[<span class="number">9</span>*i+<span class="number">2</span>] &gt;&gt; <span class="number">2</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">1</span>] |= (<span class="type">uint32_t</span>)a[<span class="number">9</span>*i+<span class="number">3</span>] &lt;&lt; <span class="number">6</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">1</span>] |= (<span class="type">uint32_t</span>)a[<span class="number">9</span>*i+<span class="number">4</span>] &lt;&lt; <span class="number">14</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">1</span>] &amp;= <span class="number">0x3FFFF</span>;</span><br><span class="line"></span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">2</span>]  = a[<span class="number">9</span>*i+<span class="number">4</span>] &gt;&gt; <span class="number">4</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">2</span>] |= (<span class="type">uint32_t</span>)a[<span class="number">9</span>*i+<span class="number">5</span>] &lt;&lt; <span class="number">4</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">2</span>] |= (<span class="type">uint32_t</span>)a[<span class="number">9</span>*i+<span class="number">6</span>] &lt;&lt; <span class="number">12</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">2</span>] &amp;= <span class="number">0x3FFFF</span>;</span><br><span class="line"></span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">3</span>]  = a[<span class="number">9</span>*i+<span class="number">6</span>] &gt;&gt; <span class="number">6</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">3</span>] |= (<span class="type">uint32_t</span>)a[<span class="number">9</span>*i+<span class="number">7</span>] &lt;&lt; <span class="number">2</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">3</span>] |= (<span class="type">uint32_t</span>)a[<span class="number">9</span>*i+<span class="number">8</span>] &lt;&lt; <span class="number">10</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">3</span>] &amp;= <span class="number">0x3FFFF</span>;</span><br><span class="line"></span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">0</span>] = GAMMA1 - r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">0</span>];</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">1</span>] = GAMMA1 - r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">1</span>];</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">2</span>] = GAMMA1 - r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">2</span>];</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">3</span>] = GAMMA1 - r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">3</span>];</span><br><span class="line">  &#125;</span><br><span class="line"><span class="meta">#<span class="keyword">elif</span> GAMMA1 == (1 &lt;&lt; 19)</span></span><br><span class="line">  <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; N/<span class="number">2</span>; ++i) &#123;</span><br><span class="line">    r-&gt;coeffs[<span class="number">2</span>*i+<span class="number">0</span>]  = a[<span class="number">5</span>*i+<span class="number">0</span>];</span><br><span class="line">    r-&gt;coeffs[<span class="number">2</span>*i+<span class="number">0</span>] |= (<span class="type">uint32_t</span>)a[<span class="number">5</span>*i+<span class="number">1</span>] &lt;&lt; <span class="number">8</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">2</span>*i+<span class="number">0</span>] |= (<span class="type">uint32_t</span>)a[<span class="number">5</span>*i+<span class="number">2</span>] &lt;&lt; <span class="number">16</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">2</span>*i+<span class="number">0</span>] &amp;= <span class="number">0xFFFFF</span>;</span><br><span class="line"></span><br><span class="line">    r-&gt;coeffs[<span class="number">2</span>*i+<span class="number">1</span>]  = a[<span class="number">5</span>*i+<span class="number">2</span>] &gt;&gt; <span class="number">4</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">2</span>*i+<span class="number">1</span>] |= (<span class="type">uint32_t</span>)a[<span class="number">5</span>*i+<span class="number">3</span>] &lt;&lt; <span class="number">4</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">2</span>*i+<span class="number">1</span>] |= (<span class="type">uint32_t</span>)a[<span class="number">5</span>*i+<span class="number">4</span>] &lt;&lt; <span class="number">12</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">2</span>*i+<span class="number">0</span>] &amp;= <span class="number">0xFFFFF</span>;</span><br><span class="line"></span><br><span class="line">    r-&gt;coeffs[<span class="number">2</span>*i+<span class="number">0</span>] = GAMMA1 - r-&gt;coeffs[<span class="number">2</span>*i+<span class="number">0</span>];</span><br><span class="line">    r-&gt;coeffs[<span class="number">2</span>*i+<span class="number">1</span>] = GAMMA1 - r-&gt;coeffs[<span class="number">2</span>*i+<span class="number">1</span>];</span><br><span class="line">  &#125;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">  DBENCH_STOP(*tpack);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>two phases:</p>
+<ol type="1">
+<li><strong>profiling phase</strong>: execute signing process with
+random input messages on A device and collect the power usage during the
+execution of the <strong><em>bit-unpacking function</em></strong>.
+Training their classifiers with labelled traces of sensitive internal
+data.</li>
+<li><strong>attack phase</strong>：By observing the power traces of the
+signature generation on Device B, predicting the sensitive internal
+data, using <strong><em>Least Squares Method(LSM)</em></strong> to get a
+solution candidate and uncovering the secret key <span class="math inline">\(s_1\)</span> by solving an <strong><em>Integer
+Linear Program(ILP)</em></strong>.</li>
+</ol>
+<p>you cant distinguish the difference of an unpacking result between
+zero and none-zero, so they train machine-learning classifiers</p>
+<p>(I indeed cant distinguish it)</p>
+<p><img src="/images/Learning-record-of-Dilithium/image-20231116123634446.png" alt="image-20231116123634446" style="zoom:50%;"></p>
+<p>it is obvious that when <span class="math inline">\(y_{i, j}\)</span>
+is zero one can recovery the secret <span class="math inline">\(s_1\)</span>, so authors use the ml tech to
+distinguish whether it's zero or none-zero. when this is done, thing's
+getting easy.</p>
+<h3 id="section"></h3>
 ]]></content>
       <categories>
         <category>Crypto</category>

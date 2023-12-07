@@ -19,18 +19,20 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"sh1k4ku.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="记录一下论文">
+    <meta name="description" content="paper 义眼顶真 概述     https:&#x2F;&#x2F;pq-crystals.org&#x2F;dilithium&#x2F;data&#x2F;dilithium-specification-round3-20210208.pdf, [BDK+]  NIST implement document.   [DKL+18]  similar to doc above">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Learning record of Dilithium">
 <meta property="og:url" content="http://sh1k4ku.github.io/2023/11/15/Learning-record-of-Dilithium/index.html">
 <meta property="og:site_name" content="sh1k4ku&#39;s blog">
-<meta property="og:description" content="记录一下论文">
+<meta property="og:description" content="paper 义眼顶真 概述     https:&#x2F;&#x2F;pq-crystals.org&#x2F;dilithium&#x2F;data&#x2F;dilithium-specification-round3-20210208.pdf, [BDK+]  NIST implement document.   [DKL+18]  similar to doc above">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Learning-record-of-Dilithium/image-20231116123634446.png">
 <meta property="article:published_time" content="2023-11-15T05:36:08.000Z">
-<meta property="article:modified_time" content="2023-11-15T05:45:41.759Z">
+<meta property="article:modified_time" content="2023-11-17T06:34:46.363Z">
 <meta property="article:author" content="sh1k4ku">
 <meta property="article:tag" content="PQC">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://sh1k4ku.github.io/images/Learning-record-of-Dilithium/image-20231116123634446.png">
 
 
 <link rel="canonical" href="http://sh1k4ku.github.io/2023/11/15/Learning-record-of-Dilithium/">
@@ -130,7 +132,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -143,6 +145,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#muts22"><span class="nav-number">1.</span> <span class="nav-text">MUTS22</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#section"><span class="nav-number">1.0.1.</span> <span class="nav-text"></span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -194,6 +197,23 @@
     </div>
 
     
+        <div class="sidebar-inner sidebar-post-related">
+          <div class="animated">
+              <div class="links-of-blogroll-title"><i class="fa fa-signs-post fa-fw"></i>
+    相关文章
+  </div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/2023/01/30/Zero-Knowledge-Proofs/" rel="bookmark">
+        <time class="popular-posts-time">2023-01-30</time>
+        <br>
+      Zero Knowledge Proofs
+      </a>
+    </li>
+  </ul>
+
+          </div>
+        </div>
   </aside>
 
 
@@ -238,9 +258,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-11-15 13:36:08 / 修改时间：13:45:41" itemprop="dateCreated datePublished" datetime="2023-11-15T13:36:08+08:00">2023-11-15</time>
+      <time title="创建时间：2023-11-15 13:36:08" itemprop="dateCreated datePublished" datetime="2023-11-15T13:36:08+08:00">2023-11-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-11-17 14:34:46" itemprop="dateModified" datetime="2023-11-17T14:34:46+08:00">2023-11-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -280,7 +306,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>169</span>
+      <span>1.3k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -297,13 +323,12 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>记录一下论文</p>
-<span id="more"></span>
+    <div class="post-body" itemprop="articleBody"><span id="more"></span>
 <table>
 <colgroup>
 <col style="width: 51%">
-<col style="width: 16%">
-<col style="width: 31%">
+<col style="width: 28%">
+<col style="width: 20%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -314,19 +339,20 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td>https://pq-crystals.org/dilithium/data/dilithium-specification-round3-20210208.pdf</td>
+<td>https://pq-crystals.org/dilithium/data/dilithium-specification-round3-20210208.pdf,
+[BDK+]</td>
 <td></td>
-<td>NIST第三轮文档；和Kyber的很多内容相似</td>
+<td>NIST implement document.</td>
 </tr>
 <tr class="even">
 <td>[DKL+18]</td>
 <td></td>
-<td>和文档的内容差不多</td>
+<td>similar to doc above.</td>
 </tr>
 <tr class="odd">
-<td>[MUTS22]</td>
-<td>AI？</td>
+<td><a href="#MUTS22">MUTS22</a></td>
 <td></td>
+<td>when <span class="math inline">\(y_{i, j}\)</span> is zero.</td>
 </tr>
 <tr class="even">
 <td>[RJH+18]</td>
@@ -334,13 +360,13 @@
 <td></td>
 </tr>
 <tr class="odd">
-<td></td>
-<td></td>
+<td>Lyubashevsky</td>
+<td>Fiat-Shamir with Aborts framework</td>
 <td></td>
 </tr>
 <tr class="even">
-<td></td>
-<td></td>
+<td>DDLL13</td>
+<td>BLISS signature scheme</td>
 <td></td>
 </tr>
 <tr class="odd">
@@ -360,6 +386,37 @@
 </tr>
 </tbody>
 </table>
+<h1 id="muts22">MUTS22</h1>
+<p>recovering <span class="math inline">\(s_1\)</span> based on
+<strong><em>Multi-Layer Perceptron (MLP)</em></strong> machine-learning,
+and according to a [RJH+18], it's possible to sign using just that
+knowledge. the leaking point is bit-unpacking function when generating
+the vector <strong>y</strong> (input <span class="math inline">\(\rho^{&#39;}\)</span> in XOF to generate a byte
+string and unpacked it into <span class="math inline">\(\ell\)</span>
+polynomials, who has N cocoefficients). the function use in [BDK+]:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">polyz_unpack</span><span class="params">(poly *r, <span class="type">const</span> <span class="type">uint8_t</span> *a)</span> &#123;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> i;</span><br><span class="line">  DBENCH_START();</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">if</span> GAMMA1 == (1 &lt;&lt; 17)</span></span><br><span class="line">  <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; N/<span class="number">4</span>; ++i) &#123;</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">0</span>]  = a[<span class="number">9</span>*i+<span class="number">0</span>];</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">0</span>] |= (<span class="type">uint32_t</span>)a[<span class="number">9</span>*i+<span class="number">1</span>] &lt;&lt; <span class="number">8</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">0</span>] |= (<span class="type">uint32_t</span>)a[<span class="number">9</span>*i+<span class="number">2</span>] &lt;&lt; <span class="number">16</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">0</span>] &amp;= <span class="number">0x3FFFF</span>;</span><br><span class="line"></span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">1</span>]  = a[<span class="number">9</span>*i+<span class="number">2</span>] &gt;&gt; <span class="number">2</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">1</span>] |= (<span class="type">uint32_t</span>)a[<span class="number">9</span>*i+<span class="number">3</span>] &lt;&lt; <span class="number">6</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">1</span>] |= (<span class="type">uint32_t</span>)a[<span class="number">9</span>*i+<span class="number">4</span>] &lt;&lt; <span class="number">14</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">1</span>] &amp;= <span class="number">0x3FFFF</span>;</span><br><span class="line"></span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">2</span>]  = a[<span class="number">9</span>*i+<span class="number">4</span>] &gt;&gt; <span class="number">4</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">2</span>] |= (<span class="type">uint32_t</span>)a[<span class="number">9</span>*i+<span class="number">5</span>] &lt;&lt; <span class="number">4</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">2</span>] |= (<span class="type">uint32_t</span>)a[<span class="number">9</span>*i+<span class="number">6</span>] &lt;&lt; <span class="number">12</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">2</span>] &amp;= <span class="number">0x3FFFF</span>;</span><br><span class="line"></span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">3</span>]  = a[<span class="number">9</span>*i+<span class="number">6</span>] &gt;&gt; <span class="number">6</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">3</span>] |= (<span class="type">uint32_t</span>)a[<span class="number">9</span>*i+<span class="number">7</span>] &lt;&lt; <span class="number">2</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">3</span>] |= (<span class="type">uint32_t</span>)a[<span class="number">9</span>*i+<span class="number">8</span>] &lt;&lt; <span class="number">10</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">3</span>] &amp;= <span class="number">0x3FFFF</span>;</span><br><span class="line"></span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">0</span>] = GAMMA1 - r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">0</span>];</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">1</span>] = GAMMA1 - r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">1</span>];</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">2</span>] = GAMMA1 - r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">2</span>];</span><br><span class="line">    r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">3</span>] = GAMMA1 - r-&gt;coeffs[<span class="number">4</span>*i+<span class="number">3</span>];</span><br><span class="line">  &#125;</span><br><span class="line"><span class="meta">#<span class="keyword">elif</span> GAMMA1 == (1 &lt;&lt; 19)</span></span><br><span class="line">  <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; N/<span class="number">2</span>; ++i) &#123;</span><br><span class="line">    r-&gt;coeffs[<span class="number">2</span>*i+<span class="number">0</span>]  = a[<span class="number">5</span>*i+<span class="number">0</span>];</span><br><span class="line">    r-&gt;coeffs[<span class="number">2</span>*i+<span class="number">0</span>] |= (<span class="type">uint32_t</span>)a[<span class="number">5</span>*i+<span class="number">1</span>] &lt;&lt; <span class="number">8</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">2</span>*i+<span class="number">0</span>] |= (<span class="type">uint32_t</span>)a[<span class="number">5</span>*i+<span class="number">2</span>] &lt;&lt; <span class="number">16</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">2</span>*i+<span class="number">0</span>] &amp;= <span class="number">0xFFFFF</span>;</span><br><span class="line"></span><br><span class="line">    r-&gt;coeffs[<span class="number">2</span>*i+<span class="number">1</span>]  = a[<span class="number">5</span>*i+<span class="number">2</span>] &gt;&gt; <span class="number">4</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">2</span>*i+<span class="number">1</span>] |= (<span class="type">uint32_t</span>)a[<span class="number">5</span>*i+<span class="number">3</span>] &lt;&lt; <span class="number">4</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">2</span>*i+<span class="number">1</span>] |= (<span class="type">uint32_t</span>)a[<span class="number">5</span>*i+<span class="number">4</span>] &lt;&lt; <span class="number">12</span>;</span><br><span class="line">    r-&gt;coeffs[<span class="number">2</span>*i+<span class="number">0</span>] &amp;= <span class="number">0xFFFFF</span>;</span><br><span class="line"></span><br><span class="line">    r-&gt;coeffs[<span class="number">2</span>*i+<span class="number">0</span>] = GAMMA1 - r-&gt;coeffs[<span class="number">2</span>*i+<span class="number">0</span>];</span><br><span class="line">    r-&gt;coeffs[<span class="number">2</span>*i+<span class="number">1</span>] = GAMMA1 - r-&gt;coeffs[<span class="number">2</span>*i+<span class="number">1</span>];</span><br><span class="line">  &#125;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">  DBENCH_STOP(*tpack);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>two phases:</p>
+<ol type="1">
+<li><strong>profiling phase</strong>: execute signing process with
+random input messages on A device and collect the power usage during the
+execution of the <strong><em>bit-unpacking function</em></strong>.
+Training their classifiers with labelled traces of sensitive internal
+data.</li>
+<li><strong>attack phase</strong>：By observing the power traces of the
+signature generation on Device B, predicting the sensitive internal
+data, using <strong><em>Least Squares Method(LSM)</em></strong> to get a
+solution candidate and uncovering the secret key <span class="math inline">\(s_1\)</span> by solving an <strong><em>Integer
+Linear Program(ILP)</em></strong>.</li>
+</ol>
+<p>you cant distinguish the difference of an unpacking result between
+zero and none-zero, so they train machine-learning classifiers</p>
+<p>(I indeed cant distinguish it)</p>
+<p><img src="/images/Learning-record-of-Dilithium/image-20231116123634446.png" alt="image-20231116123634446" style="zoom:50%;"></p>
+<p>it is obvious that when <span class="math inline">\(y_{i, j}\)</span>
+is zero one can recovery the secret <span class="math inline">\(s_1\)</span>, so authors use the ml tech to
+distinguish whether it's zero or none-zero. when this is done, thing's
+getting easy.</p>
+<h3 id="section"></h3>
 
     </div>
 
@@ -430,14 +487,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">75k</span>
+    <span title="站点总字数">76k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:08</span>
+    <span title="站点阅读时长">1:09</span>
   </span>
 </div>
 <div class="busuanzi-count">
