@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sh1k4ku.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="This is the record of my study of ZKP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Zero Knowledge Proofs">
+<meta property="og:url" content="http://sh1k4ku.github.io/2023/01/30/2023/Zero-Knowledge-Proofs/index.html">
+<meta property="og:site_name" content="sh1k4ku&#39;s blog">
+<meta property="og:description" content="This is the record of my study of ZKP">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230522224623815-1687768159269-1687768206432.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230523142952475-1687768226894.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230523150750929.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230523152110707.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230523150823383.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230523153110540.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230523193610535.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230523195408388.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230523195948302.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230523201302340.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230523201308019.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230523201313789.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230523201318111.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230523201324211.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230524222300092.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230524223927289.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230524223949298.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230524225626646.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230524230400145.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230525130450691.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230525130646106.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230525130843430.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230525130947030.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230525132124326.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230525132221418.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230525132556241.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230525164356620.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230525165835815.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230525165846209.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230525171633287.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230525190022314.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230525190028070.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230525190035739.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230525190040511.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230602152443353.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230602152726766.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230602160136344.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230602161417667.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230602162155729.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230602162911169.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230602163154657.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230602163200099.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230602163204782.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230602163225247.png">
+<meta property="og:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230602163954149.png">
+<meta property="article:published_time" content="2023-01-30T14:15:01.000Z">
+<meta property="article:modified_time" content="2023-08-07T12:56:19.818Z">
+<meta property="article:author" content="sh1k4ku">
+<meta property="article:tag" content="ZKP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://sh1k4ku.github.io/images/Zero-Knowledge-Proofs/image-20230522224623815-1687768159269-1687768206432.png">
+
+
+<link rel="canonical" href="http://sh1k4ku.github.io/2023/01/30/2023/Zero-Knowledge-Proofs/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://sh1k4ku.github.io/2023/01/30/2023/Zero-Knowledge-Proofs/","path":"2023/01/30/2023/Zero-Knowledge-Proofs/","title":"Zero Knowledge Proofs"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Zero Knowledge Proofs | sh1k4ku's blog</title>
+  
+
+
+
+
+
+
+
+<link rel="dns-prefetch" href="https://vercel-hdhnmm0j7-sh1k4ku.vercel.app/">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="sh1k4ku's blog" type="application/atom+xml">
+</head>
+
+  
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">sh1k4ku's blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录我的学习之路</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction-and-history-of-zkp"><span class="nav-number">1.</span> <span class="nav-text">Introduction and History of
+ZKP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#what-is-proofs"><span class="nav-number">1.1.</span> <span class="nav-text">what is Proofs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zero-knowledge-interactive-proofs"><span class="nav-number">1.2.</span> <span class="nav-text">Zero Knowledge Interactive
+Proofs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#define-interactive-proofs"><span class="nav-number">1.2.1.</span> <span class="nav-text">Define Interactive Proofs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#what-is-zero-knowledge"><span class="nav-number">1.2.2.</span> <span class="nav-text">What is zero-knowledge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#the-simulation-paradigm"><span class="nav-number">1.2.3.</span> <span class="nav-text">The Simulation Paradigm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#computational-indistinguishability"><span class="nav-number">1.2.4.</span> <span class="nav-text">Computational
+Indistinguishability</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zero-knowledge-definition"><span class="nav-number">1.2.5.</span> <span class="nav-text">Zero Knowledge: Definition</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zk-proof-of-knowledge"><span class="nav-number">1.3.</span> <span class="nav-text">ZK proof of Knowledge</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#miscellaneous"><span class="nav-number">1.4.</span> <span class="nav-text">Miscellaneous</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#do-all-np-languages-have-zero-knowledge-interactive-proofs"><span class="nav-number">1.4.1.</span> <span class="nav-text">do
+all NP Languages have Zero Knowledge Interactive Proofs?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bit-commitment-protocol"><span class="nav-number">1.4.2.</span> <span class="nav-text">Bit Commitment Protocol</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#quiz"><span class="nav-number">1.4.3.</span> <span class="nav-text">quiz</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#overview-of-modern-snark-constructions"><span class="nav-number">2.</span> <span class="nav-text">Overview of Modern SNARK
+Constructions</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#what-is-a-snark"><span class="nav-number">2.1.</span> <span class="nav-text">What is a SNARK?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#review-arithmetic-circuits"><span class="nav-number">2.1.1.</span> <span class="nav-text">review arithmetic circuits</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#categories"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">categories</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#preprocessing-nark-non-interactive-argument-of-knowledge"><span class="nav-number">2.1.2.</span> <span class="nav-text">(preprocessing)
+NARK: Non-interactive ARgument of Knowledge</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#requirements-informal"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">requirements (informal)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#types-of-preprocessing-setup"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">Types of preprocessing Setup</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#knowledge-soundness"><span class="nav-number">2.1.2.3.</span> <span class="nav-text">knowledge soundness</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#snark-a-succinct-argument-of-knowledge"><span class="nav-number">2.1.3.</span> <span class="nav-text">SNARK: a Succinct
+ARgument of Knowledge</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#building-an-efficient-snark"><span class="nav-number">2.2.</span> <span class="nav-text">Building an efficient SNARK</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#commitments"><span class="nav-number">2.2.0.1.</span> <span class="nav-text">Commitments</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#committing-to-a-function"><span class="nav-number">2.2.0.1.1.</span> <span class="nav-text">Committing to a function</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#four-important-functional-commitments"><span class="nav-number">2.2.0.1.2.</span> <span class="nav-text">Four important functional
+commitments</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#equality-test-protocol"><span class="nav-number">2.2.0.1.3.</span> <span class="nav-text">equality test protocol</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#f-iop-poly-iop"><span class="nav-number">2.2.0.2.</span> <span class="nav-text">\(F-IOP\) (Poly
+IOP)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#miscellaneous-1"><span class="nav-number">2.3.</span> <span class="nav-text">Miscellaneous</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#question"><span class="nav-number">2.3.1.</span> <span class="nav-text">question</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#quiz-1"><span class="nav-number">2.3.2.</span> <span class="nav-text">quiz</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#libraries-and-compilers-to-build-zkp"><span class="nav-number">3.</span> <span class="nav-text">Libraries and Compilers to
+build ZKP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#zkp-programmability"><span class="nav-number">3.1.</span> <span class="nav-text">ZKP Programmability</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#r1cs-format-for-zkp-acs"><span class="nav-number">3.1.1.</span> <span class="nav-text">R1CS: format for ZKP ACs</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hdluse-circom"><span class="nav-number">3.2.</span> <span class="nav-text">HDL(use Circom)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#libraryuse-arkwork"><span class="nav-number">3.3.</span> <span class="nav-text">library(use arkwork)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#compileruse-zokrates"><span class="nav-number">3.4.</span> <span class="nav-text">compiler(use ZoKrates)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#an-overview-of-prominent-zkp-toolchains"><span class="nav-number">3.5.</span> <span class="nav-text">An overview of
+prominent ZKP toolchains</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#misc"><span class="nav-number">3.6.</span> <span class="nav-text">Misc</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#interactive-proofs"><span class="nav-number">4.</span> <span class="nav-text">Interactive Proofs</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#plonk-interactive-oracle-proofs-iop"><span class="nav-number">5.</span> <span class="nav-text">Plonk Interactive Oracle
+Proofs (IOP)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#discrete-log-based-polynomial-commitments"><span class="nav-number">6.</span> <span class="nav-text">Discrete-log-based
+Polynomial Commitments</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#zkp-based-on-error-correcting-codes"><span class="nav-number">7.</span> <span class="nav-text">ZKP based on
+Error-Correcting Codes</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#error-correcting-codes"><span class="nav-number">7.1.</span> <span class="nav-text">error-correcting codes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#polynomial-commitment-based-on-error-correcting-codes"><span class="nav-number">7.2.</span> <span class="nav-text">polynomial
+commitment based on error-correcting codes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linear-time-encodable-code-based-on-expanders"><span class="nav-number">7.3.</span> <span class="nav-text">linear-time
+encodable code based on expanders</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="sh1k4ku"
+      src="/images/zed.jpg">
+  <p class="site-author-name" itemprop="name">sh1k4ku</p>
+  <div class="site-description" itemprop="description">会当凌绝顶</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sh1k4ku" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sh1k4ku" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:sh1k4k5@gmail.com" title="E-Mail → mailto:sh1k4k5@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+        <div class="sidebar-inner sidebar-post-related">
+          <div class="animated">
+              <div class="links-of-blogroll-title"><i class="fa fa-signs-post fa-fw"></i>
+    相关文章
+  </div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/2023/04/04/2023/NumenCTF/" rel="bookmark">
+        <time class="popular-posts-time">2023-04-04</time>
+        <br>
+      NumenCTF
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/2023/07/10/2023/vx%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="bookmark">
+        <time class="popular-posts-time">2023-07-10</time>
+        <br>
+      vx小程序
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/2023/08/23/2023/android%20vx%20reverse/" rel="bookmark">
+        <time class="popular-posts-time">2023-08-23</time>
+        <br>
+      android vx reverse
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/2023/04/03/2023/ethernaut/" rel="bookmark">
+        <time class="popular-posts-time">2023-04-03</time>
+        <br>
+      ethernaut
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/2022/07/11/2022/web/" rel="bookmark">
+        <time class="popular-posts-time">2022-07-11</time>
+        <br>
+      web
+      </a>
+    </li>
+  </ul>
+
+          </div>
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://sh1k4ku.github.io/2023/01/30/2023/Zero-Knowledge-Proofs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/zed.jpg">
+      <meta itemprop="name" content="sh1k4ku">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sh1k4ku's blog">
+      <meta itemprop="description" content="会当凌绝顶">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Zero Knowledge Proofs | sh1k4ku's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Zero Knowledge Proofs
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-01-30 22:15:01" itemprop="dateCreated datePublished" datetime="2023-01-30T22:15:01+08:00">2023-01-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-08-07 20:56:19" itemprop="dateModified" datetime="2023-08-07T20:56:19+08:00">2023-08-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/ZKP/" itemprop="url" rel="index"><span itemprop="name">ZKP</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2023/01/30/2023/Zero-Knowledge-Proofs/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2023/01/30/2023/Zero-Knowledge-Proofs/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>9.6k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>9 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>This is the record of my study of ZKP</p>
+<span id="more"></span>
+<p>latex是真难敲这些密码学定义，干脆截图</p>
+<h1 id="introduction-and-history-of-zkp">Introduction and History of
+ZKP</h1>
+<h2 id="what-is-proofs">what is Proofs</h2>
+<p>Mainly to introduce some definitions：</p>
+<p><strong>Proofs</strong>: For a <strong>Claim</strong>, the
+<strong>Prover</strong> provides a <strong>proof</strong>
+<strong>w</strong> to prove the correctness of the
+<strong>Claim</strong> <strong>x</strong>, and the
+<strong>Verifier</strong> decides to accept/reject based on the
+<strong>proof</strong></p>
+<p><span class="math display">\[ \begin{align*}\label{2}
+  &amp; \rm \textbf{Def: A language }\textit{L} \text{ is a set of
+binary strings x}\\
+\end{align*}\]</span></p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230522224623815-1687768159269-1687768206432.png" alt="image-20230522224623815"><br>
+</p>
+<p>For example: Large number factoring(N = p*q), quadratic residue(y,
+N), the two graphs are isomorphic.</p>
+<p><strong>Zero Knowledge Proofs</strong> means <strong>Prover</strong>
+prove that I could prove it If I felt like it.</p>
+<h2 id="zero-knowledge-interactive-proofs">Zero Knowledge Interactive
+Proofs</h2>
+<p>there are Two New Ingredients: <strong>Interactive</strong> and
+<strong>Probabilistic Proofs</strong>:</p>
+<ul>
+<li><strong>Interaction</strong>: rather than passively “reading” proof,
+<strong>verifier</strong> engages in a non-trivial
+<strong>interaction</strong> with the <strong>prover</strong>.</li>
+<li><strong>Randomness</strong>: verifier is randomized (tosses coins as
+a primitive operation), and can err in accept/reject with small
+probability</li>
+<li>PS: the prover can compute in unbounded time, but the verifier can
+just compute in Polynominal-time(<strong>PPT</strong>)</li>
+</ul>
+<p>e.g., the prover proves to the color-blind verifier that a flag has
+two colors, the verifier flips a coin to decide whether to flip the
+flag, and the prover guesses the result of the coin based on the flags'
+obverse and reverse. And if we repeat the progress k times, the $
+prob_{coins}((1/2)^k$</p>
+<h3 id="define-interactive-proofs">Define Interactive Proofs</h3>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230523142952475-1687768226894.png" alt="image-20230523142952475"> <span class="math display">\[
+\begin{align*}\label{eq1}
+  &amp; \text{completeness means if x} \in L,\;V\text{ always accepts}\\
+&amp; \text{soundness means if x} \notin L,\; \text{for all }
+\textcolor[rgb]{0,0,1}{cheating \;prover\;strategy},V \text{ will not
+accept except with negligible probability. }
+\end{align*}
+\]</span> so class of languages <strong>IP = {L for which there is an
+interactive proof}</strong></p>
+<h3 id="what-is-zero-knowledge">What is zero-knowledge</h3>
+<p>For true Statements, What the verifier can compute
+<strong>after</strong> the interaction = What the verifier could have
+computed before interaction</p>
+<p>Now we introduce the concept of simulation paradigm</p>
+<h3 id="the-simulation-paradigm">The Simulation Paradigm</h3>
+<p>V’s view gives him nothing new, if he could have simulated it its own
+s.t <code>simulated view</code> and <code>real-view</code> are
+<strong>computationally-Indistinguishable</strong></p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230523150750929.png" alt="image-20230523150750929"></p>
+<p>Working through a Simulation for QR Protocol: <span class="math display">\[
+\begin{align}
+&amp; view_V(P,V):\\
+&amp; Transcript = (s, b, z)\\
+&amp; Coins = b
+\end{align}
+\]</span> so the output of simulation should be (s, b, z)</p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230523152110707.png" alt="image-20230523152110707"></p>
+<h3 id="computational-indistinguishability">Computational
+Indistinguishability</h3>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230523150823383.png" alt="image-20230523150823383"></p>
+<p>For all distinguisher algorithms D, even after receiving a polynomial
+number of samples from <span class="math inline">\(D_b, \text{Prob[D
+guesses b] &lt;1/2 + negl(k)}\)</span></p>
+<h3 id="zero-knowledge-definition">Zero Knowledge: Definition</h3>
+<p>An Interactive Protocol (P,V) is zero-knowledge for a language <span class="math inline">\(L\)</span> if there exists a <span class="math inline">\(\textcolor[rgb]{0,0,1}{PPT}\)</span> algorithm Sim
+(a simulator) such that $ L,$ the following two probability
+distributions are <span class="math inline">\(\textcolor[rgb]{0,0,1}{poly-time}\)</span>
+indistinguishable:</p>
+<ol type="1">
+<li><span class="math inline">\(View_V(P,V)[x] =
+{(q_1,a_1,q_2,a_2,…,coins\;of\; V)}\)</span></li>
+<li><span class="math inline">\(Sim(x, 1^{\lambda}),\lambda\text{-
+security parameter allows sufficient Runtime onn small x}\)</span></li>
+</ol>
+<p>and we can get the <strong>define</strong>: (P,V) is a zero-knowledge
+interactive protocol if it is complete, sound and zero-knowledge.</p>
+<p>but what if V is not honest? we need a further definition:</p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230523153110540.png" alt="image-20230523153110540"></p>
+<p>also, there are several types of ZK:</p>
+<ul>
+<li>Computationally indistinguishable distributions = CZK</li>
+<li>Perfectly identical distributions = PZK</li>
+<li>Statistically close distributions = SZK</li>
+</ul>
+<h2 id="zk-proof-of-knowledge">ZK proof of Knowledge</h2>
+<p>it seems prover can not only prove the claim x(e.g. y is the
+quadratic residual under mode N), but also she knows more(the square
+root of y mod N), so we need extractor to get the knowledge.</p>
+<p>the concept of ZKPOK is as follows:</p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230523193610535.png" alt="image-20230523193610535"></p>
+<h2 id="miscellaneous">Miscellaneous</h2>
+<h3 id="do-all-np-languages-have-zero-knowledge-interactive-proofs">do
+all NP Languages have Zero Knowledge Interactive Proofs?</h3>
+<p>the answer is <strong>yes</strong>!</p>
+<p><strong>Theorem[GMW86,Naor]</strong>: If one-way functions exist,
+then every L in NP has computational zero knowledge interactive
+proofs</p>
+<p>the ideas of the proof:</p>
+<ol type="1">
+<li><strong>[GMW87]</strong> Showed ZK interactive proof for G3-COLOR
+using bit- commitments
+<ul>
+<li>for any L in NP, <span class="math inline">\(L &lt;_p
+\text{G3-COLOR}\)</span>(due to NPC reducibility)</li>
+<li>every instance x can be reduced to graph <span class="math inline">\(G_x\)</span> such that:
+<ul>
+<li>if x in L the <span class="math inline">\(G_x\)</span> is 3
+colorable; if not, <span class="math inline">\(G_x\)</span> is not 3
+colorable</li>
+</ul></li>
+</ul></li>
+<li><strong>[Naor]</strong> showed if One Way Function exits, then bit
+commitment protocol exits.</li>
+</ol>
+<h3 id="bit-commitment-protocol">Bit Commitment Protocol</h3>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230523195408388.png" alt="image-20230523195408388"></p>
+<p>i think it's a kind of variant of signature?</p>
+<p>CZK examples</p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230523195948302.png" alt="image-20230523195948302"></p>
+<h3 id="quiz">quiz</h3>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230523201302340.png" alt="image-20230523201302340"></p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230523201308019.png" alt="image-20230523201308019"></p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230523201313789.png" alt="image-20230523201313789"></p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230523201318111.png" alt="image-20230523201318111"></p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230523201324211.png" alt="image-20230523201324211"></p>
+<h1 id="overview-of-modern-snark-constructions">Overview of Modern SNARK
+Constructions</h1>
+<p>this class is focusing on <strong>None-Interactive Proof</strong></p>
+<h2 id="what-is-a-snark">What is a SNARK?</h2>
+<h3 id="review-arithmetic-circuits">review arithmetic circuits</h3>
+<p>arithmetic circuits: <span class="math inline">\(C: \text{F}^n
+\rightarrow \text{F and |C| = # gates in }C\)</span></p>
+<h4 id="categories">categories</h4>
+<ul>
+<li>An <u>unstructured circuit</u>: a circuit with arbitrary wires</li>
+<li>A <u>structured circuit</u>: <img src="/images/Zero-Knowledge-Proofs/image-20230524222300092.png" alt="image-20230524222300092"></li>
+</ul>
+<p><strong>M is often called a virtual machine (VM) -- one step of a
+processor</strong></p>
+<h3 id="preprocessing-nark-non-interactive-argument-of-knowledge">(preprocessing)
+NARK: Non-interactive ARgument of Knowledge</h3>
+<p>Definition: $$ <span class="math display">\[\begin{align*}\label{lab3}
+&amp; Premilinary:\\
+&amp;  \text{public arithmetic circuit: }C(x,w) \rightarrow
+\text{F},\text{where } x\text{ is the statement in }F^n, \text{and
+}w\text{ is the secret witness in }F^m\\
+&amp;  \text{Preprocessing(setup): S(}C\text{)}\rightarrow \text{public
+parameters }(pp, vp)\\
+&amp; \text{so a preprocessing NARK is a triple }(S,P,V):\\
+
+&amp; \bullet\text{S(C)} \rightarrow \text{public parameters (pp, vp)
+for prover and verifier}\\
+&amp; \bullet\text{P(pp, x, w)} \rightarrow \text{proof }\pi\\
+&amp; \bullet\text{V(vp, x, }\pi \text{)} \rightarrow \text{accept or
+reject}
+\end{align*}\]</span> $$ <img src="/images/Zero-Knowledge-Proofs/image-20230524223927289.png" alt="image-20230524223927289"></p>
+<h4 id="requirements-informal">requirements (informal)</h4>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230524223949298.png" alt="image-20230524223949298"></p>
+<h4 id="types-of-preprocessing-setup">Types of preprocessing Setup</h4>
+<p>Setup for circuit C: <span class="math inline">\(S(C, r) \rightarrow
+\text{public parameters }(pp, vp)\)</span> where r is a random bit</p>
+<ul>
+<li>trusted setup per circuit: S(C, r) random r must be kept secret from
+prover</li>
+<li>trusted but universal (updatable) setup: secret r is independt of C
+<ul>
+<li>$ S = (S_{init}, S_{index})$</li>
+<li><span class="math inline">\(S_{init}(\lambda;r)\rightarrow \text{gp,
+which is one-time setup by secret r}\)</span></li>
+<li><span class="math inline">\(S_{index}(gp,C)\rightarrow(pp, vp),
+\text{which is used many times}\)</span></li>
+</ul></li>
+<li>transparent setup: S(C) does not use secret data(or trusted
+setup)</li>
+</ul>
+<p>for example:</p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230524225626646.png" alt="image-20230524225626646"></p>
+<h4 id="knowledge-soundness">knowledge soundness</h4>
+<p><span class="math inline">\(\text{how can we know P &quot;know&quot;
+w?} \rightarrow \text{P knows w, if w can be extracted from
+P}\)</span></p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230524230400145.png" alt="image-20230524230400145"></p>
+<p>I think the A here is to consider all P (honest d + malicious)</p>
+<h3 id="snark-a-succinct-argument-of-knowledge">SNARK: a Succinct
+ARgument of Knowledge</h3>
+<p>a succinct proprocessing NARK is a triple(S, P, V) balabala(see
+above)</p>
+<ul>
+<li>need a <strong>short</strong> proof (len(<span class="math inline">\(\pi\)</span>)=sublinear(|w|))</li>
+<li>fast to verify (time(V)=<span class="math inline">\(O_\lambda(|x|,
+sublinear(|C|))\)</span>) (allowing verifier sufficient time to know x
+but cant learn all of C, so vp is a short summary of circuit)</li>
+</ul>
+<p>so SNARK is a <strong>NARK</strong>(with complete and knowledge
+sound) that is succinct.</p>
+<p>zk-SNARK is a SNARK that is also zero knowledge</p>
+<h2 id="building-an-efficient-snark">Building an efficient SNARK</h2>
+<p>we just need two steps to get a <strong>SNARK for general
+circuits</strong>, combining:</p>
+<ul>
+<li><strong>A functional commitment scheme</strong> (Cryptographic
+object)</li>
+<li><strong>A compatible interactive oracle proof</strong>(IOP, which is
+information theoretic object)</li>
+</ul>
+<h4 id="commitments">Commitments</h4>
+<p><strong>two algorithms</strong>:</p>
+<ul>
+<li><span class="math inline">\(commit(m,r)\rightarrow com
+\;\;\;\;\;\text{(r chosen at random)}\)</span></li>
+<li><span class="math inline">\(verify(m,com,r)\rightarrow \text{accept
+or reject}\)</span></li>
+</ul>
+<p>Properties: (informal)</p>
+<ul>
+<li>binding: <span class="math inline">\(\rightarrow \text{a malicious
+committer cant produce a commitment and there is no two valid openings
+for com}\)</span></li>
+<li>hiding: <span class="math inline">\(\rightarrow \text{com reveals
+nothing about committed data}\)</span></li>
+</ul>
+<p><u>for example:</u></p>
+<p>use Hash function as commitment</p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230525130450691.png" alt="image-20230525130450691"></p>
+<h5 id="committing-to-a-function">Committing to a function</h5>
+<p>next picture shows <strong>how</strong> to committe to a
+function:</p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230525130646106.png" alt="image-20230525130646106"></p>
+<p>the <strong>definition</strong> of committing to a function:</p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230525130843430.png" alt="image-20230525130843430"></p>
+<h5 id="four-important-functional-commitments">Four important functional
+commitments</h5>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230525130947030.png" alt="image-20230525130947030"></p>
+<h5 id="equality-test-protocol">equality test protocol</h5>
+<p>there is a useful observation: <span class="math display">\[
+\begin{align}
+&amp; \text{for a }f\in F_{p}^{(\leq d)}[X],\text{ and } r
+\stackrel{$}{\leftarrow}F_p: Pr[f(r) = 0] \leq d/p \;(*)\\
+&amp; \text{suppose p}  \approx2^{256} \text{and d} \leq
+2^{40},\text{the d/p is negligible}\\
+&amp; \text{so for }r \stackrel{$}{\leftarrow}F_p: \text{ if f(r)=0 then
+f is identically zero w.h.p}\\
+&amp; \text{this is a simple zere test for a committed polynomial}
+\end{align}
+\]</span> further， <strong>SZDL lemma</strong>: (*) also holds for
+multivariate polynomials (where d is total degree of f)</p>
+<p>now we can get this:</p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230525132124326.png" alt="image-20230525132124326"></p>
+<p>which is a simple <strong>equality test</strong> for two committed
+polynomials.</p>
+<p>so the equalitty test protocol is:</p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230525132221418.png" alt="image-20230525132221418"></p>
+<p>but this is interactive, we want <strong>none-interactive</strong> to
+make it a SNARK, the <strong>Fiat-Shamir transform</strong> can do
+it.</p>
+<p><strong>The Fiat-Shamir transform</strong>: <span class="math inline">\(H:M\rightarrow R \text{ a cryptographic hash
+function}\)</span>, the idea: prover generates verifier's random bits on
+its own using H</p>
+<p>H is also modeled as a Random Oracle (RO)</p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230525132556241.png" alt="image-20230525132556241"></p>
+<p>now we can get a SNARK for polynomial equality testing (just let the
+r generated by H)</p>
+<h4 id="f-iop-poly-iop"><span class="math inline">\(F-IOP\)</span> (Poly
+IOP)</h4>
+<p><strong>Goal</strong>: make a functional commitment to a SNARK for
+general circuits</p>
+<p><em>example</em> :</p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230525164356620.png" alt="image-20230525164356620"></p>
+<p>Here's how F-IOP works:</p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230525165835815.png" alt="image-20230525165835815"></p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230525165846209.png" alt="image-20230525165846209"></p>
+<p>properties:</p>
+<ul>
+<li><strong>Complete</strong>: <span class="math inline">\(if \; \exists
+w:C(x,w)=0 \text{ then Pr[verifier accepts]=1}\)</span></li>
+<li>(Unconditional) knowledge sound (as an IOP): [<span class="math inline">\(\text{extractor is given }(x, f_1,r_1,...,r_{t-1},
+f_t) \text{ and outputs w}\)</span>]</li>
+<li>Optional: <strong>Zero knowledge</strong> (for a zk-SNARK)</li>
+</ul>
+<p><em>example</em>:</p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230525171633287.png" alt="image-20230525171633287"></p>
+<p>although this process is interactive, we can use Fiat-Sharmir
+transformer to turn it to an none-interactive process(SNARK)</p>
+<h2 id="miscellaneous-1">Miscellaneous</h2>
+<h3 id="question">question</h3>
+<ol type="1">
+<li>In the Poly-IOP example listed above, sending the commitment of f
+and q to the verifier is what is done. According to the definition of
+commitment, there needs to be f and random r to open and verify, but
+apparently the verifier does not have this data (This problem also
+exists in other examples) (this problem may be because I do not know
+about commitment)</li>
+</ol>
+<h3 id="quiz-1">quiz</h3>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230525190022314.png" alt="image-20230525190022314"></p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230525190028070.png" alt="image-20230525190028070"></p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230525190035739.png" alt="image-20230525190035739"></p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230525190040511.png" alt="image-20230525190040511"></p>
+<h1 id="libraries-and-compilers-to-build-zkp">Libraries and Compilers to
+build ZKP</h1>
+<p>introducting how to instance a zkp</p>
+<h2 id="zkp-programmability">ZKP Programmability</h2>
+<p>something about <span class="math inline">\(\phi\)</span>:</p>
+<ol type="1">
+<li>in theory, witness w can be a factorization of integer x, is the sk
+for pk x</li>
+<li>in practice, <span class="math inline">\(\phi\)</span> is an
+"<strong>arithmetic circuit</strong>", over inputs x and w.</li>
+</ol>
+<p>AC as circuit has inputs, gates and wires</p>
+<h3 id="r1cs-format-for-zkp-acs">R1CS: format for ZKP ACs</h3>
+<ul>
+<li>x: field elements <span class="math inline">\(x_1,
+...x_l\)</span></li>
+<li>w: <span class="math inline">\(w_1, ...w_{m-l-1}\)</span></li>
+<li><span class="math inline">\(\phi\)</span>: n equations of form:
+<ul>
+<li><span class="math inline">\(\alpha \times\beta=\gamma\)</span></li>
+</ul></li>
+</ul>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230602152443353.png" alt="image-20230602152443353"></p>
+<p>The definition of the extension is matrix-based, but we can treat
+each of these row vectors as a linear R1CS:</p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230602152726766.png" alt="image-20230602152726766"></p>
+<p>The next step is to build R1CS from three parts: HDL, Library,
+Compiler, using examples that are all Sudoku</p>
+<h2 id="hdluse-circom">HDL(use Circom)</h2>
+<p>PL VS HDL:</p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230602160136344.png" alt="image-20230602160136344"></p>
+<p>Circom does:</p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230602161417667.png" alt="image-20230602161417667"></p>
+<p>https://docs.circom.io/</p>
+<p>there are several basic method in the code, like judging two nums not
+equal, num in range of 4bits, and advanced applications.</p>
+<p>code:
+https://github.com/rdi-berkeley/zkp-course-lecture3-code/blob/main/circom/sudoku.circom</p>
+<h2 id="libraryuse-arkwork">library(use arkwork)</h2>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230602162155729.png" alt="image-20230602162155729"></p>
+<p>so we can just use this library in some certain pl, just using their
+syntax.</p>
+<p>https://github.com/arkworks-rs/r1cs-tutorial/</p>
+<p>code:
+https://github.com/rdi-berkeley/zkp-course-lecture3-code/tree/main/arkworks</p>
+<h2 id="compileruse-zokrates">compiler(use ZoKrates)</h2>
+<p>the idea of this way is using variables, functions, and arrays in the
+circuit.</p>
+<p>but there is <strong>no way</strong> to compute witness(?), all
+witness must be provided as input.</p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230602162911169.png" alt="image-20230602162911169"></p>
+<p>code:https://github.com/rdi-berkeley/zkp-course-lecture3-code/blob/main/zokrates/root.zok</p>
+<h2 id="an-overview-of-prominent-zkp-toolchains">An overview of
+prominent ZKP toolchains</h2>
+<p>comparison:</p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230602163154657.png" alt="image-20230602163154657"></p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230602163200099.png" alt="image-20230602163200099"></p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230602163204782.png" alt="image-20230602163204782"></p>
+<p>other tools:</p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230602163225247.png" alt="image-20230602163225247"></p>
+<h2 id="misc">Misc</h2>
+<p>quiz:</p>
+<p><img src="/images/Zero-Knowledge-Proofs/image-20230602163954149.png" alt="image-20230602163954149"></p>
+<h1 id="interactive-proofs">Interactive Proofs</h1>
+<p>Introducing ip and checksum protocols</p>
+<h1 id="plonk-interactive-oracle-proofs-iop">Plonk Interactive Oracle
+Proofs (IOP)</h1>
+<p>introducing widely used SNARK called Plonk, understanding all the
+component that make up the SNARK.</p>
+<h1 id="discrete-log-based-polynomial-commitments">Discrete-log-based
+Polynomial Commitments</h1>
+<h1 id="zkp-based-on-error-correcting-codes">ZKP based on
+Error-Correcting Codes</h1>
+<h2 id="error-correcting-codes">error-correcting codes</h2>
+<h2 id="polynomial-commitment-based-on-error-correcting-codes">polynomial
+commitment based on error-correcting codes</h2>
+<h2 id="linear-time-encodable-code-based-on-expanders">linear-time
+encodable code based on expanders</h2>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>sh1k4ku
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://sh1k4ku.github.io/2023/01/30/2023/Zero-Knowledge-Proofs/" title="Zero Knowledge Proofs">http://sh1k4ku.github.io/2023/01/30/2023/Zero-Knowledge-Proofs/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/ZKP/" rel="tag"># ZKP</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/10/30/2022/%E7%A5%A5%E4%BA%91%E6%9D%AF/" rel="prev" title="祥云杯">
+                  <i class="fa fa-angle-left"></i> 祥云杯
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/04/03/2023/ethernaut/" rel="next" title="ethernaut">
+                  ethernaut <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heartbeat"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">sh1k4ku</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">78k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:11</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        访问人数：<span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        访问次数：<span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="/js/busuanzi.js"></script>
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"https://vercel-hdhnmm0j7-sh1k4ku.vercel.app/","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"请文明评论呀","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":true,"requiredFields":["nick","mail"],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/2023/01/30/2023/Zero-Knowledge-Proofs/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+
+
+  
+    <canvas class="fireworks" style="position: fixed; left: 0; top: 0; z-index: 1; pointer-events: none;"></canvas>
+    <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+    <script type="text/javascript" src="/js/fireworks.js"></script>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":true},"log":false});</script></body>
+</html>

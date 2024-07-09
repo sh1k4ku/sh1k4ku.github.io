@@ -6,7 +6,7 @@
   <link href="http://sh1k4ku.github.io/atom.xml" rel="self"/>
   
   <link href="http://sh1k4ku.github.io/"/>
-  <updated>2024-01-08T08:27:32.911Z</updated>
+  <updated>2024-07-09T08:24:01.136Z</updated>
   <id>http://sh1k4ku.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Key Mismatch Attack</title>
+    <link href="http://sh1k4ku.github.io/2024/07/09/Key-Mismatch-Attack/"/>
+    <id>http://sh1k4ku.github.io/2024/07/09/Key-Mismatch-Attack/</id>
+    <published>2024-07-09T08:21:51.000Z</published>
+    <updated>2024-07-09T08:24:01.136Z</updated>
+    
+    <content type="html"><![CDATA[<p>[toc]</p><h1 id="key-mismatch-attack">Key mismatch attack</h1><p>前几天打DownUnderCTF碰到了一个针对Kyber的key mismathcattack。题目只给了一个若干次的解密oracle，最后还能恢复密钥，遂感觉很牛逼，于是研究一下:D</p><span id="more"></span><h2 id="related-papers">related papers</h2><ul><li>Misuse attacks on post-quantum cryptosystems. 2019</li><li>Assessment of the key-reuse resilience of NewHope. 2019</li><li>Complete attack on RLWE key exchange with reused keys, withoutsignal leakage. 2018</li><li>Do not bound to a single position: Near-Optimal multipositionalmismatch attacks against Kyber and Saber. 2022</li><li>Lattice reduction meets key-mismatch: New misuse attack onLattice-based NIST candidate KEMs. 2022</li><li>Improving key mismatch attack on NewHope with fewer queries.2020</li><li>A complete and optimized key mismatch attack on NIST candidateNewHope. 2019</li><li>An efficient key mismatch attack on the NIST second round candidateKyber. 2019</li><li>A systematic approach and analysis of key mismatch attacks onlattice-based NIST candidate KEMs. 2021</li></ul>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;[toc]&lt;/p&gt;
+&lt;h1 id=&quot;key-mismatch-attack&quot;&gt;Key mismatch attack&lt;/h1&gt;
+&lt;p&gt;前几天打DownUnderCTF碰到了一个针对Kyber的key mismathc
+attack。题目只给了一个若干次的解密oracle，最后还能恢复密钥，遂感觉很牛逼，于是研究一下:D&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Cryptoanalysis" scheme="http://sh1k4ku.github.io/categories/Cryptoanalysis/"/>
+    
+    
+    <category term="PQC" scheme="http://sh1k4ku.github.io/tags/PQC/"/>
+    
+    <category term="attack" scheme="http://sh1k4ku.github.io/tags/attack/"/>
+    
+  </entry>
   
   <entry>
     <title>石卡库的2023</title>
@@ -37,8 +63,8 @@
   
   <entry>
     <title>Learning record of Dilithium</title>
-    <link href="http://sh1k4ku.github.io/2023/11/15/Learning-record-of-Dilithium/"/>
-    <id>http://sh1k4ku.github.io/2023/11/15/Learning-record-of-Dilithium/</id>
+    <link href="http://sh1k4ku.github.io/2023/11/15/2023/Learning-record-of-Dilithium/"/>
+    <id>http://sh1k4ku.github.io/2023/11/15/2023/Learning-record-of-Dilithium/</id>
     <published>2023-11-15T05:36:08.000Z</published>
     <updated>2023-12-12T04:49:14.162Z</updated>
     
@@ -58,8 +84,8 @@
   
   <entry>
     <title>introduction to modern cryptography</title>
-    <link href="http://sh1k4ku.github.io/2023/10/08/introduction-to-modern-cryptography/"/>
-    <id>http://sh1k4ku.github.io/2023/10/08/introduction-to-modern-cryptography/</id>
+    <link href="http://sh1k4ku.github.io/2023/10/08/2023/introduction-to-modern-cryptography/"/>
+    <id>http://sh1k4ku.github.io/2023/10/08/2023/introduction-to-modern-cryptography/</id>
     <published>2023-10-08T05:47:00.000Z</published>
     <updated>2023-10-08T05:50:55.392Z</updated>
     
@@ -81,10 +107,10 @@
   
   <entry>
     <title>android vx reverse</title>
-    <link href="http://sh1k4ku.github.io/2023/08/23/android%20vx%20reverse/"/>
-    <id>http://sh1k4ku.github.io/2023/08/23/android%20vx%20reverse/</id>
+    <link href="http://sh1k4ku.github.io/2023/08/23/2023/android%20vx%20reverse/"/>
+    <id>http://sh1k4ku.github.io/2023/08/23/2023/android%20vx%20reverse/</id>
     <published>2023-08-23T07:23:30.000Z</published>
-    <updated>2023-09-05T07:33:47.307Z</updated>
+    <updated>2023-09-08T02:21:13.660Z</updated>
     
     <content type="html"><![CDATA[<p>s偷</p><span id="more"></span><p>参考https://juejin.cn/post/6844904098328739853</p><p>官方提供hook 模板https://frida.re/docs/examples/android/</p><p>hook输入框https://www.jianshu.com/p/82d2bfeb4fbf</p><p>获取输入框</p><p><img src="/images/android%20vx%20reverse/image-20230823154613871.png" alt="image-20230823154613871" style="zoom:50%;"></p><p><img src="/images/android%20vx%20reverse/image-20230823154710130.png" alt="image-20230823154710130" style="zoom:50%;"></p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> frida, sys</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">on_message</span>(<span class="params">message, data</span>):</span><br><span class="line">    <span class="keyword">if</span> message[<span class="string">&#x27;type&#x27;</span>] == <span class="string">&#x27;send&#x27;</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;[*] &#123;0&#125;&quot;</span>.<span class="built_in">format</span>(message[<span class="string">&#x27;payload&#x27;</span>]))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(message)</span><br><span class="line"></span><br><span class="line">jscode = <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Java.perform(() =&gt; &#123;</span></span><br><span class="line"><span class="string">    let MMFlexEditText = Java.use(&quot;com.tencent.mm.ui.widget.cedit.api.MMFlexEditText&quot;);</span></span><br><span class="line"><span class="string">    var CharSequence = Java.use(&quot;java.lang.CharSequence&quot;);</span></span><br><span class="line"><span class="string">    MMFlexEditText[&quot;getText&quot;].implementation = function () &#123;</span></span><br><span class="line"><span class="string">        console.log(`MMFlexEditText.getText is called`);</span></span><br><span class="line"><span class="string">        let result = this[&quot;getText&quot;]();</span></span><br><span class="line"><span class="string">        var resultStr = Java.cast(result, CharSequence);</span></span><br><span class="line"><span class="string">        console.log(`MMFlexEditText.getText result=$&#123;resultStr&#125;`);</span></span><br><span class="line"><span class="string">        return result;</span></span><br><span class="line"><span class="string">&#125;;</span></span><br><span class="line"><span class="string">&#125;);</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">process = frida.get_usb_device().attach(<span class="string">&#x27;微信&#x27;</span>)</span><br><span class="line">script = process.create_script(jscode)</span><br><span class="line">script.on(<span class="string">&#x27;message&#x27;</span>, on_message)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;[*] Running CTF&#x27;</span>)</span><br><span class="line">script.load()</span><br><span class="line">sys.stdin.read()</span><br></pre></td></tr></table></figure><p>创建发起动态 <img src="/images/android%20vx%20reverse/image-20230823162611566.png" alt="image-20230823162611566"></p><p><img src="/images/android%20vx%20reverse/image-20230823162854590.png" alt="image-20230823162854590" style="zoom:50%;"></p><p>两个pj.c.l是在输入法展开时进行，返回值恒为4000</p><h1 id="访问量">访问量</h1><p><img src="/images/android%20vx%20reverse/image-20230825103210829.png" alt="image-20230825103210829" style="zoom:50%;"></p><p>class: android.widget.TextView</p><p>resource-id: com.tencent.mm:id/m6r</p><p>搜索框类：com.tencent.mm.ui.search.FTSEditTextView.e</p><p><img src="/images/android%20vx%20reverse/image-20230825105846853.png" alt="image-20230825105846853" style="zoom:50%;"></p><p><img src="/images/android%20vx%20reverse/image-20230825110010120.png" alt="image-20230825110010120"></p>]]></content>
     
@@ -104,8 +130,8 @@
   
   <entry>
     <title>证书论文阅读笔记</title>
-    <link href="http://sh1k4ku.github.io/2023/08/21/%E8%AF%81%E4%B9%A6%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"/>
-    <id>http://sh1k4ku.github.io/2023/08/21/%E8%AF%81%E4%B9%A6%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/</id>
+    <link href="http://sh1k4ku.github.io/2023/08/21/2023/%E8%AF%81%E4%B9%A6%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"/>
+    <id>http://sh1k4ku.github.io/2023/08/21/2023/%E8%AF%81%E4%B9%A6%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/</id>
     <published>2023-08-21T02:51:14.000Z</published>
     <updated>2023-08-22T04:37:48.557Z</updated>
     
@@ -129,8 +155,8 @@
   
   <entry>
     <title>cnss_re</title>
-    <link href="http://sh1k4ku.github.io/2023/08/16/cnss-re/"/>
-    <id>http://sh1k4ku.github.io/2023/08/16/cnss-re/</id>
+    <link href="http://sh1k4ku.github.io/2023/08/16/2023/cnss-re/"/>
+    <id>http://sh1k4ku.github.io/2023/08/16/2023/cnss-re/</id>
     <published>2023-08-16T11:30:31.000Z</published>
     <updated>2023-08-21T03:08:15.099Z</updated>
     
@@ -154,10 +180,10 @@
   
   <entry>
     <title>小程序论文阅读笔记</title>
-    <link href="http://sh1k4ku.github.io/2023/08/15/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"/>
-    <id>http://sh1k4ku.github.io/2023/08/15/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/</id>
+    <link href="http://sh1k4ku.github.io/2023/08/15/2023/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"/>
+    <id>http://sh1k4ku.github.io/2023/08/15/2023/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/</id>
     <published>2023-08-15T02:48:02.000Z</published>
-    <updated>2023-08-15T10:59:27.540Z</updated>
+    <updated>2023-08-15T11:13:01.482Z</updated>
     
     <content type="html"><![CDATA[<p>论文记录</p><span id="more"></span><h1 id="dont-leak-your-keys-understanding-measuring-and-exploiting-the-appsecret-leaks-in-mini-programs">Don’tLeak Your Keys: Understanding, Measuring, and Exploiting the AppSecretLeaks in Mini-Programs</h1><p>小程序，挂在app上，其因规模小、功能丰富的原因，在市场上大受欢迎，这也让app成为了superapp，就像为软件提供平台的操作系统一样。同时，作为一种应用，小程序需要通过特定的api来访问后端或云上的数据或服务，也因此，小程序后端的masterkey(MS)至关重要，它对于小程序来说几乎是root权限的存在，要将MS保存在后端而不能发往前端，否则会造成严重的后果，本文便是基于这个思路所写。</p><p>接下来，文章以微信为例，介绍了微信上的小程序的预备知识，下图1是小程序的常用api和云服务，例如获取手机号（在中国，一个app上的手机号即绑定了一个公民的身份）、用户信息，亦或是使用OCR、安全服务等：</p><p><img src="/images/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230815110554834.png" style="zoom:50%;"></p><p>相较于传统的app和web服务，小程序天然带有一系列密钥管理和访问协议，确保密钥不会被非法获取，下图是小程序业务流程中主要涉及的四个密钥：</p><p><img src="/images/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230815111523583.png" style="zoom:50%;"></p><p>在一次敏感数据访问，通常的业务逻辑是这样的：首先小程序前端（MF）向微信客户端（WC）请求LoginToken(LT)，WC向微信服务端(WS)请求得到后发给MF，MF再利用LT向小程序后端(MB)发起登陆请求；随后，MB把LT,MK,appID发给WC得到加密密钥(EK)；同时MF再次通过WC从WS得到用户的数据，只不过是用EK加密后的密文C。最后，MF把C传给MB，MB用EK对其进行解密，完成一次敏感数据访问。该协议可由下图概括：</p><p><img src="/images/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230815112258234.png" style="zoom:50%;"></p><p>与之相比，云服务访问协议就简单很多，只在MB和WS之间发生：只需要MB向WS请求得到AT，即可用AT调用服务：</p><p><img src="/images/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/image-20230815112511761.png" style="zoom:50%;"></p><p>接下来，作者介绍了小程序密钥的威胁模型，即上述四个密钥的作用和泄露带来的危害；这篇文章聚焦于MK的泄露，因为MK泄露总是能造成EK和AT的泄露，攻击者便可以访问隐私数据以及免费享受云服务功能。</p><p>终于到方法论的部分了，作者基于以下五个问题展开：</p><ul><li>问题 1：MK 泄露小程序的类别是什么？</li><li>问题 2：它们的评级如何？</li><li>问题 3：它们获取了哪些资源？</li><li>问题 4：它们的开发者是谁？</li><li>问题 5：它们的最新更新时间是什么时候？</li><li>问题 6：是否有备受瞩目的小程序存在MK泄露？</li></ul><p>首先便是数据收集环节，作者通过“Mp.wx.qq.com/wxa-cgi/innersearch”API来批量下载小程序，得到了3,450,586个小程序（太可怕了）。在获取前端代码后，去寻找里面的32个16进制字符串，通过“Api.weixin.qq.com/cgi-bin/token”API确定是否为MK，得到的结果是40,880个小程序存在MK泄露的问题。得到数据集，便可进行分析，回答上述五个问题：</p><ul><li>泄露MK的小程序种类多种多样，生活方式和购物类占比最高，工具、政府和游戏类数量较多。</li><li>作者基于用户的评分对小程序评级，结果表明，低评级的小程序更容易存在MK泄露。</li><li>有24,701个小程序可以通过MK泄露被账户劫持、推广滥用、服务窃取（这些攻击会在下面介绍）；同时6,907个小程序没有这样的问题，但不保证以后也不会有。</li><li>大多公司只开发了一个存在这种问题的小程序，但也有开发了30个的。</li><li>自微信引入小程序的第一年，就存在MK泄露的问题；随着时间推移，漏洞小程序数量在减少。</li><li>一些高知名度的公司在多个小程序中犯了同样的错误（如雀巢）；微信提供商腾讯是小程序中出现 MK泄露的排名第一的公司；一些高知名度公司的小程序只泄露了MK，而没有访问敏感信息。</li></ul><p>然后，作者提出了基于MK泄露的两种攻击，一种是针对敏感数据的，如账户劫持、推广滥用，另一种是针对云服务的，如服务窃取。作者不仅提出攻击，还提出了修复意见和推广这个研究到其他app上，以及表明自己在研究过程中遵守了道德准则，例如每分钟只发送六个爬取小程序的请求、限制确认MK的线程数、保证只使用自己的账户。</p><p>最后，介绍了一下近几年有关小程序和密钥泄露的相关研究，并提出总结。</p><h1 id="a-measurement-study-of-wechat-mini-apps">A Measurement Study ofWechat Mini-Apps</h1><p>这一篇是2021年zhangyue老师的论文，介绍了他们开发的分析微信小程序的工具MiniCrawler，篇幅较短只有2页</p><p>引入了小程序的背景后，开始介绍他们的工具，总共分为三个部分：</p><ol type="1"><li>元数据爬虫：接受一系列关键词，通过微信的api爬取小程序的信息</li><li>关键词生成器：使用NLP技术分析小程序的名称和描述，生成高质量的关键词</li><li>包下载器：根据appid下载小程序的包</li></ol><p>拿到包后，便可以统计小程序的信息，做出归纳推理，文中统计了小程序的大小、常用api、类型、rating(评分？)</p>]]></content>
     
@@ -177,8 +203,8 @@
   
   <entry>
     <title>vx小程序</title>
-    <link href="http://sh1k4ku.github.io/2023/07/10/vx%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
-    <id>http://sh1k4ku.github.io/2023/07/10/vx%E5%B0%8F%E7%A8%8B%E5%BA%8F/</id>
+    <link href="http://sh1k4ku.github.io/2023/07/10/2023/vx%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+    <id>http://sh1k4ku.github.io/2023/07/10/2023/vx%E5%B0%8F%E7%A8%8B%E5%BA%8F/</id>
     <published>2023-07-10T02:19:52.000Z</published>
     <updated>2023-08-22T11:05:05.634Z</updated>
     
@@ -198,8 +224,8 @@
   
   <entry>
     <title>Sequences of Games</title>
-    <link href="http://sh1k4ku.github.io/2023/07/09/Sequences-of-Games/"/>
-    <id>http://sh1k4ku.github.io/2023/07/09/Sequences-of-Games/</id>
+    <link href="http://sh1k4ku.github.io/2023/07/09/2023/Sequences-of-Games/"/>
+    <id>http://sh1k4ku.github.io/2023/07/09/2023/Sequences-of-Games/</id>
     <published>2023-07-09T06:54:18.000Z</published>
     <updated>2023-07-09T14:04:38.883Z</updated>
     
@@ -220,8 +246,8 @@ Proofs∗》的总结和疑问&lt;/p&gt;</summary>
   
   <entry>
     <title>算法刷题记录</title>
-    <link href="http://sh1k4ku.github.io/2023/06/08/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/"/>
-    <id>http://sh1k4ku.github.io/2023/06/08/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/</id>
+    <link href="http://sh1k4ku.github.io/2023/06/08/2023/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/"/>
+    <id>http://sh1k4ku.github.io/2023/06/08/2023/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/</id>
     <published>2023-06-08T09:12:48.000Z</published>
     <updated>2023-07-05T02:21:19.548Z</updated>
     
@@ -239,8 +265,8 @@ Proofs∗》的总结和疑问&lt;/p&gt;</summary>
   
   <entry>
     <title>智能合约</title>
-    <link href="http://sh1k4ku.github.io/2023/05/08/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/"/>
-    <id>http://sh1k4ku.github.io/2023/05/08/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/</id>
+    <link href="http://sh1k4ku.github.io/2023/05/08/2023/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/"/>
+    <id>http://sh1k4ku.github.io/2023/05/08/2023/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/</id>
     <published>2023-05-08T01:55:04.000Z</published>
     <updated>2023-05-22T14:22:35.379Z</updated>
     
@@ -263,8 +289,8 @@ Solidity中文文档 — 登链社区
   
   <entry>
     <title>docker常用命令</title>
-    <link href="http://sh1k4ku.github.io/2023/04/18/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
-    <id>http://sh1k4ku.github.io/2023/04/18/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</id>
+    <link href="http://sh1k4ku.github.io/2023/04/18/2023/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>http://sh1k4ku.github.io/2023/04/18/2023/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</id>
     <published>2023-04-18T08:02:28.000Z</published>
     <updated>2023-05-03T06:59:06.103Z</updated>
     
@@ -284,8 +310,8 @@ Solidity中文文档 — 登链社区
   
   <entry>
     <title>NumenCTF</title>
-    <link href="http://sh1k4ku.github.io/2023/04/04/NumenCTF/"/>
-    <id>http://sh1k4ku.github.io/2023/04/04/NumenCTF/</id>
+    <link href="http://sh1k4ku.github.io/2023/04/04/2023/NumenCTF/"/>
+    <id>http://sh1k4ku.github.io/2023/04/04/2023/NumenCTF/</id>
     <published>2023-04-04T06:52:52.000Z</published>
     <updated>2023-04-16T15:02:31.108Z</updated>
     
@@ -307,8 +333,8 @@ Solidity中文文档 — 登链社区
   
   <entry>
     <title>ethernaut</title>
-    <link href="http://sh1k4ku.github.io/2023/04/03/ethernaut/"/>
-    <id>http://sh1k4ku.github.io/2023/04/03/ethernaut/</id>
+    <link href="http://sh1k4ku.github.io/2023/04/03/2023/ethernaut/"/>
+    <id>http://sh1k4ku.github.io/2023/04/03/2023/ethernaut/</id>
     <published>2023-04-02T16:00:00.000Z</published>
     <updated>2023-04-17T02:43:58.420Z</updated>
     
@@ -328,8 +354,8 @@ Solidity中文文档 — 登链社区
   
   <entry>
     <title>Zero Knowledge Proofs</title>
-    <link href="http://sh1k4ku.github.io/2023/01/30/Zero-Knowledge-Proofs/"/>
-    <id>http://sh1k4ku.github.io/2023/01/30/Zero-Knowledge-Proofs/</id>
+    <link href="http://sh1k4ku.github.io/2023/01/30/2023/Zero-Knowledge-Proofs/"/>
+    <id>http://sh1k4ku.github.io/2023/01/30/2023/Zero-Knowledge-Proofs/</id>
     <published>2023-01-30T14:15:01.000Z</published>
     <updated>2023-08-07T12:56:19.818Z</updated>
     
@@ -428,31 +454,6 @@ Solidity中文文档 — 登链社区
     <category term="RSA" scheme="http://sh1k4ku.github.io/tags/RSA/"/>
     
     <category term="math" scheme="http://sh1k4ku.github.io/tags/math/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>DSCTF</title>
-    <link href="http://sh1k4ku.github.io/2022/07/17/2022/DSCTF/"/>
-    <id>http://sh1k4ku.github.io/2022/07/17/2022/DSCTF/</id>
-    <published>2022-07-17T03:01:56.000Z</published>
-    <updated>2022-07-17T08:54:20.612Z</updated>
-    
-    <content type="html"><![CDATA[<p>俺拉了</p><span id="more"></span><h1 id="picproblem">picproblem</h1><p>套娃，pell + 逆图片+已知dp</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> array, zeros, uint8</span><br><span class="line"><span class="keyword">import</span> gmpy2 <span class="keyword">as</span> gp</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"><span class="comment"># n =  85413323752199019806030766630760449394238054889872415531186815348349883843039718091361611175963675771467536496812507338620957273406076058263122453235926619595761737396698699834116678598534261542535530241537247151318756003375573850725841254167462648747492270335084402716816450008370008491069875351593380154253</span></span><br><span class="line"><span class="comment"># dp =  1576424214336939000475035870826282526256046059505538052583882122452307602095912733650442447289122473348318614749578285418144935611098423641334952097553125</span></span><br><span class="line"><span class="comment"># c =  53653254613997095145108444611576166902006080900281661447007750088487109015427510365774527924664116641019490904245926171500894236952984157500461367769566121581870986304353174732328118576440353500038670030097108081972287049673200783198844842527470746431369314585103203118824985764754487936404004696485346196488</span></span><br><span class="line"><span class="comment"># e = 65537</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># for x in range(1, e):</span></span><br><span class="line"><span class="comment"># if(e*dp%x==1):</span></span><br><span class="line"><span class="comment"># p=(e*dp-1)//x+1</span></span><br><span class="line"><span class="comment"># if(n%p!=0):</span></span><br><span class="line"><span class="comment"># continue</span></span><br><span class="line"><span class="comment"># q=n//p</span></span><br><span class="line"><span class="comment"># phin=(p-1)*(q-1)</span></span><br><span class="line"><span class="comment"># d = gp.invert(e, phin)</span></span><br><span class="line"><span class="comment"># print(long_to_bytes(pow(c, d, n)))</span></span><br><span class="line"><span class="comment"># m = b&#x27;*********** kn = 8 **************&#x27;</span></span><br><span class="line">image = cv2.imread(<span class="string">&quot;flag.jpg&quot;</span>)</span><br><span class="line">img_gray = cv2.cvtColor(image,cv2.COLOR_RGB2GRAY)</span><br><span class="line">imagearray = array(img_gray)</span><br><span class="line">h = <span class="built_in">len</span>(imagearray)</span><br><span class="line">w = <span class="built_in">len</span>(imagearray[<span class="number">0</span>])</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">solve_pell</span>(<span class="params">N, numTry = <span class="number">1000</span></span>):</span><br><span class="line">    cf= continued_fraction(sqrt(N))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(numTry):</span><br><span class="line">        denom = cf.denominator(i)</span><br><span class="line">        numer = cf.numerator(i)</span><br><span class="line">        <span class="keyword">if</span> numer^<span class="number">2</span>-N*denom^<span class="number">2</span> == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> numer,denom</span><br><span class="line">x, y = solve_pell(<span class="number">903751</span>, <span class="number">2000</span>)</span><br><span class="line">kn = <span class="number">8</span></span><br><span class="line">x = <span class="number">1524993807674193841904821512553946379967374698278296055158206699585083472817489721493862711615915407326315660670541801753616900039772802728925226091475860689682871555641241500183892397513037971186709123629077584204226084524811673794984687840178772052545441242927492902583547355565525538664836516589721942980577095421561886873928634330640979800040574060218872787212426630202508118484269553983399179155489583316400107655564222453437462724749097265122300644936717434151331633092585140183510349369422527440264746843972834927860065578557836150798690530172694679514231722613822246810010130005324032492360889531553803832398604563088256410481865243771216990603166993198935358471831328395618477974126824762560872337594997394218234427050399655270848385995088586420526886397320949350980406936200217112040971433660322179072288438842964957568719036794320203116263329623589339367497303140938070334557345834226085189140858264388063745189833584962825509843279678826240558480527560</span></span><br><span class="line">y = <span class="number">1604145232044543633656616254647708451166351104281510395737885491696385806407267633308545985473789119651681711082023113933085624628557168423578747544761597312012713558891523798820667618256495398479378172124019360339427592449217208805888502769358288779859969965560832505104388955091637704481336716722418336373334467787371085728212260231330510705797124224353810509272250940285165605853594811893804251478850270703294638335268305881655491870226553141286503109543313414279220480589704210363277523457948607498351377843904335637032510420141505975997452077477296326035048463179997347136990808017374750824810458605412236391952910679246288287664717533857743462935708681309073915761377477454479206054016260422865457862565353002789887917196437750618212918420129464330488021272187952177063175896447842395209693304502304253471733746765257510395226972224876277717457205220726240042035259947453816668460757995771018155703600926745905595162857982860955545877343914746294034180707</span></span><br><span class="line"><span class="keyword">assert</span> <span class="number">1301149798051259562945444365741194129602596348352064372203373</span>*<span class="built_in">pow</span>(x, <span class="number">2</span>) == <span class="number">1175915431138623881271508290982969935822476052419526528443170552123</span>*<span class="built_in">pow</span>(y, <span class="number">2</span>) + <span class="number">1301149798051259562945444365741194129602596348352064372203373</span></span><br><span class="line">x1 = <span class="built_in">round</span>(x/y*<span class="number">0.001</span>, <span class="number">16</span>)</span><br><span class="line">u1 = y*<span class="number">3650</span>/x</span><br><span class="line">x2 = <span class="built_in">round</span>(x/y*<span class="number">0.00101</span>, <span class="number">16</span>)</span><br><span class="line">u2 = y*<span class="number">3675</span>/x</span><br><span class="line">x3 = <span class="built_in">round</span>(x/y*<span class="number">0.00102</span>, <span class="number">16</span>)</span><br><span class="line">u3 = y*<span class="number">3680</span>/x</span><br><span class="line">kt = [x1, x2, x3]</span><br><span class="line"><span class="built_in">print</span>(kt)</span><br><span class="line"><span class="built_in">print</span>(h, w)</span><br><span class="line"></span><br><span class="line">temp_image = zeros(shape=[h, w, <span class="number">3</span>], dtype=uint8)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(temp_image))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(temp_image[<span class="number">0</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(temp_image[<span class="number">0</span>][<span class="number">1</span>]))</span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, kn):</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, h):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, w):</span><br><span class="line">            x1 = u1 * x1 * (<span class="number">1</span> - x1)</span><br><span class="line">            x2 = u2 * x2 * (<span class="number">1</span> - x2)</span><br><span class="line">            x3 = u3 * x3 * (<span class="number">1</span> - x3)</span><br><span class="line">            r1 = <span class="built_in">int</span>(x1 * <span class="number">255</span>)</span><br><span class="line">            r2 = <span class="built_in">int</span>(x2 * <span class="number">255</span>)</span><br><span class="line">            r3 = <span class="built_in">int</span>(x3 * <span class="number">255</span>)</span><br><span class="line">            <span class="keyword">for</span> t <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">3</span>):</span><br><span class="line">                temp_image[i][j][t] = (((r1 + r2) ^ r3) - imagearray[i][j]) % <span class="number">256</span></span><br><span class="line">    x1 = kt[<span class="number">0</span>]</span><br><span class="line">    x2 = kt[<span class="number">1</span>]</span><br><span class="line">    x3 = kt[<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">encflagarray = Image.fromarray(temp_image)</span><br><span class="line">encflagarray.show()</span><br></pre></td></tr></table></figure><h1 id="rsa330">RSA330</h1><p><a href="https://eprint.iacr.org/2022/271.pdf#:~:text=The%20point%20of%20approximate%20divisor%20multiples%20is%20that,we%20rely%20on%20a%20standard%20Coppersmith-%20type%20heuristic.">paper链接</a></p><p>哎本来能做出来的，最后一直copper不出来，也算督促自己了T-T</p><p>题目分三步，factor-用paper的方法求kl-copper</p><p>第二步和第三步不一定有解</p><p>copper最后得到的小范式单项式用基本方法、groebner都可以出解</p><h1 id="approximate">approximate</h1><p>RSA copper了一天，这题都没看。。复盘的时候发现不是很难 <span class="math display">\[x_1 = p * pp\\x_2 = q * qq\\n = (p+x)*(q+y)\\\because x、y\; is\;small\\\therefore x_1x_2/n + x \approx pp*qq \;|\;x_1x_2\]</span> 不过x的界要自己找</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;俺拉了&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="CTF" scheme="http://sh1k4ku.github.io/categories/CTF/"/>
-    
-    
-    <category term="coppersmith" scheme="http://sh1k4ku.github.io/tags/coppersmith/"/>
-    
-    <category term="Pell Equation" scheme="http://sh1k4ku.github.io/tags/Pell-Equation/"/>
-    
-    <category term="RSA" scheme="http://sh1k4ku.github.io/tags/RSA/"/>
     
   </entry>
   

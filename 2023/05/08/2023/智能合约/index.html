@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sh1k4ku.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="之前做审计的时候都是碰到什么学什么，这样的代价就是基础很差， 要一直搜重复的东西，所以决定好好读一遍Solidity 中文文档 — Solidity中文文档 — 登链社区 (learnblockchain.cn)，然后再搞别的，预期这个月以内">
+<meta property="og:type" content="article">
+<meta property="og:title" content="智能合约">
+<meta property="og:url" content="http://sh1k4ku.github.io/2023/05/08/2023/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/index.html">
+<meta property="og:site_name" content="sh1k4ku&#39;s blog">
+<meta property="og:description" content="之前做审计的时候都是碰到什么学什么，这样的代价就是基础很差， 要一直搜重复的东西，所以决定好好读一遍Solidity 中文文档 — Solidity中文文档 — 登链社区 (learnblockchain.cn)，然后再搞别的，预期这个月以内">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://sh1k4ku.github.io/2023/05/08/2023/images/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/image-20230517153400833.png">
+<meta property="article:published_time" content="2023-05-08T01:55:04.000Z">
+<meta property="article:modified_time" content="2023-05-22T14:22:35.379Z">
+<meta property="article:author" content="sh1k4ku">
+<meta property="article:tag" content="blockchain">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://sh1k4ku.github.io/2023/05/08/2023/images/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/image-20230517153400833.png">
+
+
+<link rel="canonical" href="http://sh1k4ku.github.io/2023/05/08/2023/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://sh1k4ku.github.io/2023/05/08/2023/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/","path":"2023/05/08/2023/智能合约/","title":"智能合约"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>智能合约 | sh1k4ku's blog</title>
+  
+
+
+
+
+
+
+
+<link rel="dns-prefetch" href="https://vercel-hdhnmm0j7-sh1k4ku.vercel.app/">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="sh1k4ku's blog" type="application/atom+xml">
+</head>
+
+  
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">sh1k4ku's blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录我的学习之路</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#solidity%E6%BA%90%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">Solidity源文件结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#spdx%E7%89%88%E6%9C%AC%E8%AE%B8%E5%8F%AF%E6%A0%87%E8%AF%86"><span class="nav-number">1.1.</span> <span class="nav-text">SPDX版本许可标识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E6%A0%87%E8%AF%86"><span class="nav-number">1.2.</span> <span class="nav-text">版本标识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5%E5%85%B6%E4%BB%96%E6%BA%90%E6%96%87%E4%BB%B6"><span class="nav-number">1.3.</span> <span class="nav-text">导入其他源文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E9%87%8A"><span class="nav-number">1.4.</span> <span class="nav-text">注释</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%88%E7%BA%A6%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">合约结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E5%8F%98%E9%87%8F"><span class="nav-number">2.1.</span> <span class="nav-text">状态变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0function"><span class="nav-number">2.2.</span> <span class="nav-text">函数（function）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E4%BF%AE%E9%A5%B0%E5%99%A8modifier"><span class="nav-number">2.3.</span> <span class="nav-text">函数修饰器（modifier）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6event"><span class="nav-number">2.4.</span> <span class="nav-text">事件（event）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%99%E8%AF%AFerror"><span class="nav-number">2.5.</span> <span class="nav-text">错误（error ）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E7%B1%BB%E5%9E%8Bstruct"><span class="nav-number">2.6.</span> <span class="nav-text">结构类型（struct）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8Benum"><span class="nav-number">2.7.</span> <span class="nav-text">枚举类型（enum）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%80%BC%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.1.</span> <span class="nav-text">值类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%83%E5%B0%94%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.1.1.</span> <span class="nav-text">布尔类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E5%9E%8B"><span class="nav-number">3.1.2.</span> <span class="nav-text">整型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%8D%E6%93%8D%E4%BD%9C"><span class="nav-number">3.1.3.</span> <span class="nav-text">位操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%BB%E4%BD%8D"><span class="nav-number">3.1.4.</span> <span class="nav-text">移位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E5%87%8F%E4%B9%98"><span class="nav-number">3.1.5.</span> <span class="nav-text">加减乘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%A4"><span class="nav-number">3.1.6.</span> <span class="nav-text">除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1"><span class="nav-number">3.1.7.</span> <span class="nav-text">模</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%82"><span class="nav-number">3.1.8.</span> <span class="nav-text">幂</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%B0%E5%9D%80"><span class="nav-number">3.1.9.</span> <span class="nav-text">地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%B0%E5%9D%80%E6%88%90%E5%91%98"><span class="nav-number">3.1.10.</span> <span class="nav-text">地址成员</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%88%E7%BA%A6%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.1.11.</span> <span class="nav-text">合约类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E9%95%BF%E5%AD%97%E8%8A%82%E6%95%B0%E7%BB%84"><span class="nav-number">3.1.12.</span> <span class="nav-text">定长字节数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E9%95%BF%E5%AD%97%E8%8A%82%E6%95%B0%E7%BB%84"><span class="nav-number">3.1.13.</span> <span class="nav-text">变长字节数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%B0%E5%9D%80%E5%AD%97%E9%9D%A2%E9%87%8F"><span class="nav-number">3.1.14.</span> <span class="nav-text">地址字面量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E7%90%86%E6%95%B0%E5%92%8C%E6%95%B4%E6%95%B0%E5%AD%97%E9%9D%A2%E9%87%8F"><span class="nav-number">3.1.15.</span> <span class="nav-text">有理数和整数字面量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E5%AD%97%E9%9D%A2%E9%87%8F%E5%92%8C%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.1.16.</span> <span class="nav-text">字符字面量和类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unicode%E5%AD%97%E9%9D%A2%E9%87%8F"><span class="nav-number">3.1.17.</span> <span class="nav-text">Unicode字面量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E5%AD%97%E9%9D%A2%E9%87%8F"><span class="nav-number">3.1.18.</span> <span class="nav-text">十六进制字面量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%9A%E4%B8%BE"><span class="nav-number">3.1.19.</span> <span class="nav-text">枚举</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="sh1k4ku"
+      src="/images/zed.jpg">
+  <p class="site-author-name" itemprop="name">sh1k4ku</p>
+  <div class="site-description" itemprop="description">会当凌绝顶</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sh1k4ku" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sh1k4ku" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:sh1k4k5@gmail.com" title="E-Mail → mailto:sh1k4k5@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+        <div class="sidebar-inner sidebar-post-related">
+          <div class="animated">
+              <div class="links-of-blogroll-title"><i class="fa fa-signs-post fa-fw"></i>
+    相关文章
+  </div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/2023/04/03/2023/ethernaut/" rel="bookmark">
+        <time class="popular-posts-time">2023-04-03</time>
+        <br>
+      ethernaut
+      </a>
+    </li>
+  </ul>
+
+          </div>
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://sh1k4ku.github.io/2023/05/08/2023/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/zed.jpg">
+      <meta itemprop="name" content="sh1k4ku">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sh1k4ku's blog">
+      <meta itemprop="description" content="会当凌绝顶">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="智能合约 | sh1k4ku's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          智能合约
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-05-08 09:55:04" itemprop="dateCreated datePublished" datetime="2023-05-08T09:55:04+08:00">2023-05-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-05-22 22:22:35" itemprop="dateModified" datetime="2023-05-22T22:22:35+08:00">2023-05-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/blockchain/" itemprop="url" rel="index"><span itemprop="name">blockchain</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2023/05/08/2023/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2023/05/08/2023/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>6.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>之前做审计的时候都是碰到什么学什么，这样的代价就是基础很差，
+要一直搜重复的东西，所以决定好好读一遍<a target="_blank" rel="noopener" href="https://learnblockchain.cn/docs/solidity/">Solidity 中文文档 —
+Solidity中文文档 — 登链社区
+(learnblockchain.cn)</a>，然后再搞别的，预期这个月以内</p>
+<span id="more"></span>
+<p>[toc]</p>
+<h1 id="solidity源文件结构">Solidity源文件结构</h1>
+<p>源文件中可以包含任意数量的 合约定义 , 源文件引入 , pragma 、 using
+for 指令和 struct , enum , function , error 以及常量定义。</p>
+<h2 id="spdx版本许可标识">SPDX版本许可标识</h2>
+<p>全称为“The Softwaere Package Data Exchange"，用来说明其版权许可证</p>
+<p><code>// SPDX-License-Identifier: MIT</code></p>
+<h2 id="版本标识">版本标识</h2>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">pragma</span></span><br></pre></td></tr></table></figure>
+<p>Pragma 是 pragmatic information
+的简称，启用编译检查功能，检查版本是否匹配，例如</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">pragma</span> solidity ^<span class="number">0</span>.<span class="number">5</span>.<span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+<p>表示可被大于等于0.5.2且小于0.6.0的版本编译。</p>
+<h2 id="导入其他源文件">导入其他源文件</h2>
+<p>solidity支持导入语句来模块化代码</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;filename&quot;</span></span><br></pre></td></tr></table></figure>
+<p><code>filename</code>被称为导入路径</p>
+<p>但不建议使用这种形式，它会把导入路径中的全局符号都导入到当前全局作用域，会无法预测的污染当前命名空间，可以使用如下形式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import * as symbolName from “filename”;</span><br><span class="line">//两种方式等价</span><br><span class="line">import &quot;filename&quot; as symbolName;</span><br></pre></td></tr></table></figure>
+<p>如果存在命名冲突，可以在导入时重命名符号。下面代码就创建了新的全局符号<code>alias</code>和<code>symbol2</code>，引用的<code>symbol1</code>和<code>symbol2</code>来自”filename“。</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;symbol1 <span class="keyword">as</span> <span class="keyword">alias</span>, symbol2&#125; <span class="keyword">from</span> &quot;filename&quot;;</span><br></pre></td></tr></table></figure>
+<h2 id="注释">注释</h2>
+<p>可以使用单行注释（ <code>//</code> ）和多行注释（
+<code>/*...*/</code> ）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//这是一个单行注释</span><br><span class="line">/*</span><br><span class="line">这是一个</span><br><span class="line">多行注释。</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+<p>此外，还有一种注释叫做 NatSpec 注释，用三斜线（ <code>///</code>
+）或双星号块（ <code>/** ... */</code> ）来写，
+它们应该直接用在函数声明或语句的上方。</p>
+<h1 id="合约结构">合约结构</h1>
+<p>在 Solidity 中，合约类似于面向对象编程语言中的类。 每个合约中可以包含
+状态变量， 函数， 函数修饰器， 事件， 错误， 结构类型 和 枚举类型
+的声明，且合约可以从其他合约继承。</p>
+<p>还有一些特殊种类的合同，叫做 库合约 和 接口合约。</p>
+<h2 id="状态变量">状态变量</h2>
+<p>状态变量是指其值被永久地存储在合约存储中的变量。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// SPDX-License-Identifier: GPL-3.0</span><br><span class="line">pragma solidity &gt;=0.4.0 &lt;0.9.0;</span><br><span class="line"></span><br><span class="line">contract SimpleStorage &#123;</span><br><span class="line">    uint storedData; // 状态变量</span><br><span class="line">    // ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="函数function">函数（function）</h2>
+<p>函数是代码的可执行单位。
+通常在合约内定义函数，但它们也可以被定义在合约之外。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// SPDX-License-Identifier: GPL-3.0</span><br><span class="line">pragma solidity &gt;=0.7.1 &lt;0.9.0;</span><br><span class="line"></span><br><span class="line">contract SimpleAuction &#123;</span><br><span class="line">    function bid() public payable &#123; // 函数</span><br><span class="line">        // ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 定义在合约之外的辅助函数</span><br><span class="line">function helper(uint x) pure returns (uint) &#123;</span><br><span class="line">    return x * 2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="函数修饰器modifier">函数修饰器（modifier）</h2>
+<p>函数修饰器可以被用来以声明的方式修改函数的语义</p>
+<p>具有同一个modifier的名字但参数不同是不可能的；但是modifier可以被重载/覆写</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// SPDX-License-Identifier: GPL-3.0</span><br><span class="line">pragma solidity &gt;=0.4.22 &lt;0.9.0;</span><br><span class="line"></span><br><span class="line">contract Purchase &#123;</span><br><span class="line">    address public seller;</span><br><span class="line"></span><br><span class="line">    modifier onlySeller() &#123; // 修饰器</span><br><span class="line">        require(</span><br><span class="line">            msg.sender == seller,</span><br><span class="line">            &quot;Only seller can call this.&quot;</span><br><span class="line">        );</span><br><span class="line">        _;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function abort() public view onlySeller &#123; // 修饰器的使用</span><br><span class="line">        // ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="事件event">事件（event）</h2>
+<p>事件是能方便地调用以太坊虚拟机日志功能的接口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// SPDX-License-Identifier: GPL-3.0</span><br><span class="line">pragma solidity &gt;=0.4.21 &lt;0.9.0;</span><br><span class="line"></span><br><span class="line">contract SimpleAuction &#123;</span><br><span class="line">    event HighestBidIncreased(address bidder, uint amount); // 事件</span><br><span class="line"></span><br><span class="line">    function bid() public payable &#123;</span><br><span class="line">        // ...</span><br><span class="line">        emit HighestBidIncreased(msg.sender, msg.value); // 触发事件</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="错误error">错误（error ）</h2>
+<p>error为失败情况定义描述性的名称和数据，可以在回滚（revert等）中使用。与字符串相比，error要便宜的多（消耗的gas少），并允许对额外的数据进行编码。可以使用
+NatSpec 格式来向用户描述错误。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// SPDX-License-Identifier: GPL-3.0</span></span><br><span class="line">pragma solidity ^<span class="number">0.8</span><span class="number">.4</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"><span class="doctag">///</span> 没有足够的资金用于转账。要求 `requested`。</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> 但只有 `available` 可用。</span></span><br><span class="line"><span class="function">error <span class="title">NotEnoughFunds</span>(<span class="params"><span class="built_in">uint</span> requested, <span class="built_in">uint</span> available</span>)</span>;</span><br><span class="line"></span><br><span class="line">contract Token &#123;</span><br><span class="line">    mapping(address =&gt; <span class="built_in">uint</span>) balances;</span><br><span class="line">    <span class="function">function <span class="title">transfer</span>(<span class="params">address to, <span class="built_in">uint</span> amount</span>) <span class="keyword">public</span></span> &#123;</span><br><span class="line">        <span class="built_in">uint</span> balance = balances[msg.sender];</span><br><span class="line">        <span class="keyword">if</span> (balance &lt; amount)</span><br><span class="line">            <span class="function">revert <span class="title">NotEnoughFunds</span>(<span class="params">amount, balance</span>)</span>; <span class="comment">//回滚 error</span></span><br><span class="line">        balances[msg.sender] -= amount;</span><br><span class="line">        balances[to] += amount;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="结构类型struct">结构类型（struct）</h2>
+<p>结构类型是可以将几个变量分组的自定义类型，和c语言一样的</p>
+<figure class="highlight d"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// SPDX-License-Identifier: GPL-3.0</span></span><br><span class="line"><span class="keyword">pragma</span> solidity &gt;=<span class="number">0.4</span><span class="number">.0</span> &lt;<span class="number">0.9</span><span class="number">.0</span>;</span><br><span class="line"></span><br><span class="line">contract Ballot &#123;</span><br><span class="line">    <span class="keyword">struct</span> Voter &#123; <span class="comment">// 结构</span></span><br><span class="line">        <span class="built_in">uint</span> weight;</span><br><span class="line">        <span class="built_in">bool</span> voted;</span><br><span class="line">        address <span class="built_in">delegate</span>;</span><br><span class="line">        <span class="built_in">uint</span> vote;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="枚举类型enum">枚举类型（enum）</h2>
+<p>enum可用来创建由一定数量的'常量值'构成的自定义类型</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span> SPDX-License-Identifier: GPL-<span class="number">3.0</span></span><br><span class="line">pragma solidity &gt;=<span class="number">0.4</span>.<span class="number">0</span> &lt;<span class="number">0.9</span>.<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">contract Purchase &#123;</span><br><span class="line">    enum State &#123; Created, Locked, Inactive &#125; <span class="regexp">//</span> 枚举</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="类型">类型</h1>
+<h2 id="值类型">值类型</h2>
+<p>以下类型也称为值类型，因为这些类型的变量将始终按值来传递。
+也就是说，当这些变量被用作函数参数或者用在赋值语句中时，总会进行值拷贝。</p>
+<h3 id="布尔类型">布尔类型</h3>
+<p><code>bool</code> ：可能的取值为字面常数值 <code>true</code> 和
+<code>false</code></p>
+<p>运算符：</p>
+<ul>
+<li><code>!</code> （逻辑非）</li>
+<li><code>&amp;&amp;</code> （逻辑与， "and" ）</li>
+<li><code>||</code> （逻辑或， "or" ）</li>
+<li><code>==</code> （等于）</li>
+<li><code>!=</code> （不等于）</li>
+</ul>
+<p>其中与和或都遵循短路原则</p>
+<h3 id="整型">整型</h3>
+<p><code>int</code> / <code>uint</code>
+：分别表示有符号和无符号的不同位数的整型变量。 支持关键字
+<code>uint8</code> 到 <code>uint256</code> （无符号，从 8 位到 256
+位）以及 <code>int8</code> 到 <code>int256</code>，以 <code>8</code>
+位为步长递增。 <code>uint</code> 和 <code>int</code> 分别是
+<code>uint256</code> 和 <code>int256</code> 的别名。</p>
+<p>运算符：</p>
+<ul>
+<li>比较运算符： <code>&lt;=</code> ， <code>&lt;</code> ，
+<code>==</code> ， <code>!=</code> ， <code>&gt;=</code> ，
+<code>&gt;</code> （返回布尔值）</li>
+<li>位运算符： <code>&amp;</code> ， <code>|</code> ， <code>^</code>
+（异或）， <code>~</code> （位取反）</li>
+<li>算数运算符： <code>+</code> ， <code>-</code> ， 一元运算
+<code>-</code> （仅针对有符号整数）， <code>*</code> ， <code>/</code>
+， <code>%</code> （取余） ， <code>**</code> （幂），
+<code>&lt;&lt;</code> （左移位） ， <code>&gt;&gt;</code>
+（右移位）</li>
+</ul>
+<p>对于一个整数类型X，你可以使用type(X).min和type(X).max来访问该类型可表示的最小和最大值。</p>
+<h3 id="位操作">位操作</h3>
+<p>位操作是在数字的补码进行的。这意味着，例如<code>~int256(0) == int256(-1)</code></p>
+<h3 id="移位">移位</h3>
+<p>移位操作的结果将截断成左操作数的类型；右操作数必须是无符号类型，否则会产生编译错误。</p>
+<ul>
+<li><p><code>x &lt;&lt; y</code> 等价于<code>x * 2**y</code>.</p></li>
+<li><p><code>x &gt;&gt; y</code>等价于<code>x / 2**y</code>，向负无穷取整</p></li>
+<li><p>在<code>0.5.0</code>版本之前，负数x的右移<code>x&gt;&gt;y</code>相当于数学表达式<code>x/2**y</code>向零舍入，即右移使用向上取整（向零）而不是向下取整（向负无穷）。</p></li>
+</ul>
+<p>ps：对移位操作从不进行溢出检查，就像对算术操作那样。相反，结果总是被截断的。</p>
+<h3 id="加减乘">加减乘</h3>
+<p>加法、减法和乘法具有通常的语义，在溢出和下溢方面有两种不同的模式：</p>
+<p>默认情况下，所有的算术都会被检查是否有下溢，但这可以通过unchecked块来禁用，从而导致包装算术。更多的细节可以在该部分找到。</p>
+<p>表达式-x相当于（T(0) -
+x），其中T是x的类型。如果x是负的，-x的值可以是正的。还有一个注意事项也是由补码引起的：</p>
+<p><code>如果你有int x = type(int).min;，那么-x就不符合正的范围。这意味着未经检查的&#123; assert(-x == x); &#125;是有效的，而表达式-x在检查模式下使用时将导致一个失败的断言。</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^0.8.1;</span><br><span class="line"></span><br><span class="line">contract test&#123;</span><br><span class="line">    int256 public a;</span><br><span class="line">    int256 public b;</span><br><span class="line"></span><br><span class="line">    constructor()&#123;</span><br><span class="line">        a = type(int256).min;</span><br><span class="line">        unchecked&#123;</span><br><span class="line">            b = -a;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function compare() public view returns(bool) &#123;</span><br><span class="line">        bool jdg = (a==b);</span><br><span class="line">        return jdg;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="../images/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/image-20230517153400833.png" alt="image-20230517153400833"></p>
+<h3 id="除">除</h3>
+<p>由于运算结果的类型总是操作数之一的类型，整数除法的结果总是一个整数。在Solidity中，除法是向零进位的。这意味着<code>int256(-5) / int256(2) == int256(-2)</code>。</p>
+<p>请注意，与此相反，在字面量（literals）上除法的结果是任意精度的小数值。</p>
+<p>除以0为导致报错，并且不能使用<code>unchecked&#123;&#125;</code>来禁用。</p>
+<p><code>type(int).min / (-1)</code>这个表达式是除法导致上溢的唯一情况</p>
+<h3 id="模">模</h3>
+<p>模操作<code>a % n</code>产生操作数<code>a</code>除以操作数<code>n</code>后的余数<code>r</code>，其中<code>q = int(a / n)，r = a - (n * q)</code>。这意味着模运算的结果与它的左边操作数（或零）相同，<code>a % n == -(-a % n)</code>对负数<code>a</code>成立：</p>
+<ul>
+<li><code>int256(5) % int256(2) == int256(1)</code></li>
+<li><code>int256(5) % int256(-2) == int256(1)</code></li>
+<li><code>int256(-5) % int256(2) == int256(-1)</code></li>
+<li><code>int256(-5) % int256(-2) == int256(-1)</code></li>
+</ul>
+<p>模0会导致报错，并且不能使用<code>unchecked&#123;&#125;</code>来禁用。</p>
+<h3 id="幂">幂</h3>
+<p>建议用<code>x*x*x</code>来代替<code>x**3</code>来减少gas消耗</p>
+<p>EVM定义<code>0**0=1</code></p>
+<h3 id="地址">地址</h3>
+<p>地址有两种：</p>
+<ul>
+<li><p><code>address</code>:
+保存一个20字节的值（以太坊地址的大小）。</p></li>
+<li><p><code>address payable</code>:
+与<code>address</code>相同，但有额外的方法<code>transfer</code>和<code>send</code>。</p>
+<p><code>payable address</code>到<code>address</code>是可以隐式转换的，但<code>address</code>到<code>payable address</code>必须通过显式转换：<code>payable(&lt;address&gt;)</code></p>
+<p><code>uint160</code>，整数字面量、<code>bytes20</code>和合约类型都可以和<code>address</code>进行显式转换</p>
+<p>只有<code>address</code>和合约类型可以通过<code>payable</code>转换成<code>address payable</code>。对于一个合约类型，只有它可以接收以太币或存在一个<code>payable fallback function</code>才可以完成转换。注意
+<code>payable(0)</code>是许可的。</p></li>
+</ul>
+<p>注意：</p>
+<ol type="1">
+<li>如果你需要一个<code>address</code>类型的变量，并计划向其发送以太币，那么请将其类型声明为<code>payable address</code></li>
+<li><code>address</code>和<code>address payable</code>的区别在<strong>0.5.0</strong>版本中引入的。同样从该版本开始，合约不能隐含地转换为<code>address</code>类型。但如果它们有一个接收或<code>payable fallback function</code>，仍然可以显式地转换为<code>address</code>或<code>address payable</code>。</li>
+</ol>
+<p>如果把一个较大的bytes转换成一个<code>address</code>，例如<code>bytes32</code>，那么<code>address</code>将被截断。例如，<code>b = '0x111122223333444455556666777788889999AAAABBBBCCCCDDDDEEEEFFFFCCCC'</code>:</p>
+<ul>
+<li><code>address(uint160(bytes20(b))) = 0x111122223333444455556666777788889999aAaa</code></li>
+<li><code>address(uint160(uint256(b))) = 0x777788889999AaAAbBbbCcccddDdeeeEfFFfCcCc</code></li>
+</ul>
+<h3 id="地址成员">地址成员</h3>
+<ul>
+<li><p><code>balance</code> 和 <code>transfer</code></p>
+<p>查询某个地址的余额使用balance，向某个payable
+address发送以太币（wei为单位）使用transfer：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">address payable x = payable(0x123);</span><br><span class="line">address myAddress = address(this);</span><br><span class="line">if (x.balance &lt; 10 &amp;&amp; myAddress.balance &gt;= 10) x.transfer(10);</span><br></pre></td></tr></table></figure>
+<p>如果x是一个合约地址，它的代码（实际上是接受以太坊的函数，或<code>Fallback</code>函数）会连同<code>transfer</code>一起执行。这是EVM的一个特性，无法被阻止。如果这段执行将gas消耗完或其他原因失败，<code>transfer</code>就会被回退</p></li>
+<li><p><code>send</code></p>
+<p><code>send</code>是低级别的<code>transfer</code>，如果执行失败则会返回<code>false</code>而不是回退</p>
+<p>使用<code>send</code>有一些危险：
+如果调用堆栈深度为1024，转账就会失败（这可以由调用者强制执行），如果接收者没有<code>gas</code>了，也会失败。因此，为了安全地进行以太币转账，一定要检查<code>send</code>的返回值、使用<code>transfer</code>，甚至更好的是：使用收款人取款的模式</p></li>
+<li><p><code>call</code>, <code>delegatecall</code> 和
+<code>staticcall</code></p>
+<p>为了与不遵守ABI的合约交互，或者为了更直接地控制编码，我们提供了函数<code>call</code>、<code>delegatecall</code>和<code>staticcall</code>。它们都接受一个字节的内存参数，并返回成功条件（作为一个<code>bool</code>）和返回的数据（字节内存）。函数<code>abi.encode</code>,
+<code>abi.encodePacked</code>,
+<code>abi.encodeWithSelector</code>和<code>abi.encodeWithSignature</code>可用于编码结构化数据。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bytes memory payload = abi.encodeWithSignature(&quot;register(string)&quot;, &quot;MyName&quot;);</span><br><span class="line">(bool success, bytes memory returnData) = address(nameReg).call(payload);</span><br><span class="line">require(success);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>可以调节gas消耗量：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">address(nameReg).call&#123;gas: 1000000&#125;(abi.encodeWithSignature(&quot;register(string)&quot;, &quot;MyName&quot;));</span><br></pre></td></tr></table></figure></li>
+<li><p>以太币也可以调节：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">address(nameReg).call&#123;value: 1 ether&#125;(abi.encodeWithSignature(&quot;register(string)&quot;, &quot;MyName&quot;));</span><br></pre></td></tr></table></figure></li>
+<li><p>甚至是组合：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">address(nameReg).call&#123;gas: 1000000, value: 1 ether&#125;(abi.encodeWithSignature(&quot;register(string)&quot;, &quot;MyName&quot;));</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>同样的，<code>delegatecall</code>也可以被这样使用，但不同的点在于：执行环境为当前合约的环境，目标合约地址只是被调用，<code>delegatecall</code>的目的是为了使用在另一个合约中的库代码</p>
+<p><code>staticcall</code>与<code>call</code>相似，但它会在调用的函数改变状态后<code>revert</code></p>
+<p>所有这三个函数<code>call</code>, <code>delegatecall</code> 和
+<code>staticcall</code>都是非常低级的函数，只应该作为最后的手段使用，因为它们破坏了Solidity的类型安全。</p>
+<p><code>gas</code>选项在所有三种方法中都免费，而<code>value</code>选项只在<code>call</code>中免费。</p></li>
+<li><p><code>code</code> 和<code>codehash</code></p>
+<p>可以查询任何智能合约的部署代码。使用<code>.code</code>来获取<code>EVM</code>字节码，作为字节内存，它可能是空的。使用<code>.codehash</code>获得该代码的<code>Keccak-256</code>哈希值（作为<code>bytes32</code>）。注意，<code>addr.codehash</code>比使用<code>keccak256(addr.code)</code>更便宜。</p>
+<p>所有的合同都可以转换为<code>address</code>类型，所以可以用<code>address(this).balance</code>查询当前合同的余额。</p></li>
+</ul>
+<h3 id="合约类型">合约类型</h3>
+<p>每个合约都有自己的类型，它可以通过<code>adress(x)</code>显式地转化成<code>address</code>类型；如果合约中存在<code>receive</code>或<code>payable fallback</code>函数，则能转换成<code>payable address</code>类型；否则需要用<code>payable(address(x))</code>来转换。</p>
+<p>注意：在<code>0.5.0</code>版本以前，<code>address</code>和<code>payable address</code>没有区别。</p>
+<p>合约的数据表示与地址类型相同，这种类型也在<code>ABI</code>中使用。</p>
+<p>合约不支持任何操作符。</p>
+<p>合约的成员包括合约的<code>public</code>函数和任何标记<code>public</code>的状态变量。</p>
+<p>对于一个合约<code>c</code>，你可以使用<code>type(c)</code>来访问合同的类型信息。</p>
+<h3 id="定长字节数组">定长字节数组</h3>
+<p><code>bytes1, bytes2, bytes3, ..., bytes32</code>保存一串从1到32的字节。</p>
+<p>操作符：</p>
+<ul>
+<li>比较： <code>&lt;=</code>, <code>&lt;</code>, <code>==</code>,
+<code>!=</code>, <code>&gt;=</code>, <code>&gt;</code> (评估为bool)</li>
+<li>比特运算符：<code>&amp;</code>, <code>|</code>, <code>^</code>
+(bit异或), <code>~</code> (比特取反)</li>
+<li>移位运算符：
+<code>&lt;&lt;</code>（左移），<code>&gt;&gt;</code>（右移）</li>
+<li>索引访问：
+如果<code>x</code>是<code>bytesI</code>类型的，那么<code>x[k]</code>对于<code>0 &lt;= k &lt; I</code>返回第<code>k</code>个字节（只读）。</li>
+</ul>
+<p>成员：</p>
+<ul>
+<li><code>.length</code> 返回定长数组的长度（只读）</li>
+</ul>
+<p>注意：<code>bytes1[]</code>类型是一个字节数组，但是由于填充规则，它为每个元素浪费了31个字节的空间（除了在存储中）。最好使用<code>bytes</code>类型来代替。</p>
+<p>注意：在<code>0.8.0</code>版本之前，<code>byte</code>曾经是<code>bytes1</code>的别名。</p>
+<h3 id="变长字节数组">变长字节数组</h3>
+<p><code>bytes</code>和<code>string</code></p>
+<h3 id="地址字面量">地址字面量</h3>
+<p>以<a target="_blank" rel="noopener" href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md">EIP-55</a>.为标准，不通过校验将无法成为地址</p>
+<h3 id="有理数和整数字面量">有理数和整数字面量</h3>
+<p>小数点字面量是由<code>.</code>与小数点后的至少一个数字组成。例子包括<code>.1</code>和<code>1.3</code>（但不能是<code>1.</code>）。也支持科学计数法，字面量MeE等价于<code>M*10**E</code>，指数部分必须是整数，尾数可以是小数。</p>
+<p>下划线可用来提高代码可读性，没有其他任何意义。例如，十进制123_000，十六进制0x2eff_abde，科学十进制符号1_2e345_678都是有效的。下划线只允许在两个数字之间，并且只允许一个连续的下划线。</p>
+<p>数字字面表达式保留了任意精度，直到被转换成其他非字面类型（即通过与数字字面表达式以外的其他东西一起使用（如布尔字面）或显式转换）。在数字字面表达式中，计算不会溢出，除法不会截断。例如，<code>2**800+1-2**800</code>在字面量中是允许的。<code>.5*8</code>的结果是整型的<code>4</code>。</p>
+<p>只要操作数是整数，任何可以应用于整数的操作符也可以应用于数字字面表达式。如果两者中的任何一个是小数，则不允许进行位操作，如果指数是小数，则不允许进行指数化（因为这可能导致非有理数）。</p>
+<p>以字面数为左（或基数）操作数，以整数类型为右（指数）操作数的移位和指数化，总是在<code>uint256</code>（对于非负的字面数字）或<code>int256</code>（对于负的字面数字）类型中进行，与右（指数）操作数的类型无关。</p>
+<p>在<code>0.4.0</code>之前，整数的字面量会被截断即<code>5/2=2</code>，之后是<code>2.5</code></p>
+<h3 id="字符字面量和类型">字符字面量和类型</h3>
+<p>字符字面量可以分开写，例如<code>“foo""bar"</code>等价于<code>”foobar"</code>；并且<code>"foo"</code>只占用3个字节而不是4个字节（对比C语言的字符串以<code>"\0"</code>结尾）；它们可以隐式地转换成<code>bytes1</code>,
+…,
+<code>bytes32</code>；也可以转换成<code>bytes</code>和<code>string</code>。</p>
+<p>字符字面量只能包含ASCII可打印字符，也就是0x20到0x7E；此外，也包括以下转义符：</p>
+<ul>
+<li><code>\&lt;newline&gt;</code> (转义实际换行)</li>
+<li><code>\\</code> (反斜杠)</li>
+<li><code>\'</code> (单引号)</li>
+<li><code>\"</code> (双引号)</li>
+<li><code>\n</code> (换行符)</li>
+<li><code>\r</code> (回车)</li>
+<li><code>\t</code> (标签 tab)</li>
+<li><code>\xNN</code> (十六进制转义，表示一个十六进制的值，)</li>
+<li><code>\uNNNN</code> (unicode 转义，转换成UTF-8的序列)</li>
+</ul>
+<p>注意：直到0.8.0才推出：<code>\b</code>（退格）、<code>\f</code>（换页）、<code>\v</code>（垂直标签）；但如果实在需要用到，可以通过十六进制转义插入，即分别为<code>\x08</code>、<code>\x0c</code>和<code>\x0b</code>。</p>
+<p>任何unicode行终结符（除了LF，VF，FF，CR，NEL，LS，PS）都可以当成字符串字面常量的终止符。
+只有当字符串字面常量前没有<code>\</code>时，换行符才能终止字符串字面常量。</p>
+<h3 id="unicode字面量">Unicode字面量</h3>
+<p>Unicode字面量—以<code>unicode</code>开头—可以包含所有有效的UTF-8字符，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">string memory a = unicode&quot;Hello 😃&quot;;</span><br></pre></td></tr></table></figure>
+<h3 id="十六进制字面量">十六进制字面量</h3>
+<p>以"hex"开头，紧跟单引号或双引号字符串： <code>hex"001122FF"</code>,
+<code>hex'0011_22_FF'</code>，可以使用下划线作为字符的分隔符。</p>
+<p>用空格分隔的十六进制字面量将表达成一个拼接起来的十六进制字面量：<code>hex"00112233" hex"44556677"</code>
+等价于 <code>hex"0011223344556677"</code></p>
+<p>十六进制字面量不能隐式转换成字符字面量</p>
+<h3 id="枚举">枚举</h3>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>sh1k4ku
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://sh1k4ku.github.io/2023/05/08/2023/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" title="智能合约">http://sh1k4ku.github.io/2023/05/08/2023/智能合约/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/blockchain/" rel="tag"># blockchain</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/04/18/2023/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" rel="prev" title="docker常用命令">
+                  <i class="fa fa-angle-left"></i> docker常用命令
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/06/08/2023/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" rel="next" title="算法刷题记录">
+                  算法刷题记录 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heartbeat"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">sh1k4ku</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">78k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:11</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        访问人数：<span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        访问次数：<span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="/js/busuanzi.js"></script>
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"https://vercel-hdhnmm0j7-sh1k4ku.vercel.app/","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"请文明评论呀","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":true,"requiredFields":["nick","mail"],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/2023/05/08/2023/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+
+
+  
+    <canvas class="fireworks" style="position: fixed; left: 0; top: 0; z-index: 1; pointer-events: none;"></canvas>
+    <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+    <script type="text/javascript" src="/js/fireworks.js"></script>
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":true},"log":false});</script></body>
+</html>
