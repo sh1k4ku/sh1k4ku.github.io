@@ -1,10 +1,10 @@
-<%@ page language="C#" autoeventwireup="true" codebehind="EmpWeekPlan.aspx.cs" inherits="Aepri.InfoDev.DPP.Web.PlanManage.EmpWeekPlan" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EmpWeekPlan.aspx.cs" Inherits="Aepri.InfoDev.DPP.Web.PlanManage.EmpWeekPlan" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>员工周计划</title>
     <style type="text/css">
         body
@@ -104,7 +104,7 @@
             color: #fff !important;
         }
     </style>
-    <script src="<%=ResolveClientUrl(" ~ js jquery-1.7.2.min.js") %>" type="text/javascript"></script>
+    <script src="<%=ResolveClientUrl("~/js/jquery-1.7.2.min.js") %>" type="text/javascript"></script>
     <script type="text/javascript">
         var data = {
             empCode: '101',
@@ -388,8 +388,8 @@
     <form id="form1" runat="server">
         <div style="padding: 5px;">
             <div style="padding: 10px;">
-                <input type="button" value="今天" onclick="gotoToday()">
-                <input type="button" value="<" onclick="preMonth()">
+                <input type="button" value="今天" onclick="gotoToday()" />
+                <input type="button" value="<" onclick="preMonth()" />
                 <select id="year" name="year">
                     <option value="2017">2017</option>
                     <option value="2016">2016</option>
@@ -412,7 +412,7 @@
                      <option value="12">12</option>
                  </select>
                 月
-                <input type="button" value=">" onclick="nextMonth()">
+                <input type="button" value=">" onclick="nextMonth()" />
             </div>
             <div style="margin-top: 5px;">
                 <table class="table-title" cellpadding="0" cellspacing="0">
@@ -485,4 +485,4 @@
         }
     </script>
 </body>
-</html></%@>
+</html>
