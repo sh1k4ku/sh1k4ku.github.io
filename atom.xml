@@ -6,7 +6,7 @@
   <link href="http://sh1k4ku.github.io/atom.xml" rel="self"/>
   
   <link href="http://sh1k4ku.github.io/"/>
-  <updated>2025-06-30T16:41:20.943Z</updated>
+  <updated>2025-07-24T09:59:52.419Z</updated>
   <id>http://sh1k4ku.github.io/</id>
   
   <author>
@@ -17,21 +17,23 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>2025-half</title>
-    <link href="http://sh1k4ku.github.io/2025/07/01/2025-half/"/>
-    <id>http://sh1k4ku.github.io/2025/07/01/2025-half/</id>
-    <published>2025-06-30T16:36:17.000Z</published>
-    <updated>2025-06-30T16:41:20.943Z</updated>
+    <title>lattice-sieve</title>
+    <link href="http://sh1k4ku.github.io/2025/07/24/lattice-sieve/"/>
+    <id>http://sh1k4ku.github.io/2025/07/24/lattice-sieve/</id>
+    <published>2025-07-24T09:58:32.000Z</published>
+    <updated>2025-07-24T09:59:52.419Z</updated>
     
-    <content type="html"><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">  <script id="hbeData" type="hbeData" data-hmacdigest="785a82b7820b37d2e01570bb9332d08e9729934e2944c53e6cd71a9489002115">8947c5b41705548aeeade96021e39d894fa143761590c498ab846e57ef8ab7edb736588e9faef6ee8b0468f23ac1800bd9c699bf59e615a83ba74b96296abca2</script>  <div class="hbe hbe-content">    <div class="hbe hbe-input hbe-input-default">      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">        <span class="hbe hbe-input-label-content hbe-input-label-content-default">2025过半，总结一下为什么这半年如此失败</span>      </label>    </div>  </div></div><script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+    <content type="html"><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">  <script id="hbeData" type="hbeData" data-hmacdigest="f50ad0bee5fb68bda1749676dc34daa3fbb3eb2cf87b68d074429fa4692f5be1">8947c5b41705548aeeade96021e39d89d039d0d53325c8dc80acf00d286e02e4a2d88d9a0d76b8c1b1ea4e1512fb19e9810ae21858cd2ad2e351947b7ff90fd379d71fa6669153b6d861458bb491ea40d8911b2bf1da7dc9142fbf66594fa1beb3840ded0bd37e0430b8e4826596a1194cf0479472708e91680b931a067bb325774c44d7c306894701a86bf5b3ff34bde267cdd70061fcc02e7d01af6e54cc7485f5702eaf1562e5986c75eb012192b0a8f21a56efd7344255c5d366189fb1a0037c690ee8ce3c72bf6053128e15f05b</script>  <div class="hbe hbe-content">    <div class="hbe hbe-input hbe-input-default">      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">        <span class="hbe hbe-input-label-content hbe-input-label-content-default">:)</span>      </label>    </div>  </div></div><script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
     
     
     <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
     
     
     
-    <category term="life" scheme="http://sh1k4ku.github.io/categories/life/"/>
+    <category term="Cryptoanalysis" scheme="http://sh1k4ku.github.io/categories/Cryptoanalysis/"/>
     
+    
+    <category term="Lattice" scheme="http://sh1k4ku.github.io/tags/Lattice/"/>
     
   </entry>
   
